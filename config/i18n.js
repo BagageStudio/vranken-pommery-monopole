@@ -3,8 +3,8 @@ import { routes } from '../app/crawler/routes';
 export const defaultLocale = 'en';
 
 export const locales = [
-    { code: 'en', iso: 'en_US', name: 'english' },
-    { code: 'fr', iso: 'fr_FR', name: 'français' }
+    { code: 'en', iso: 'en', name: 'english' },
+    { code: 'fr', iso: 'fr', name: 'français' }
 ];
 
 // 🚦 Specific routes
