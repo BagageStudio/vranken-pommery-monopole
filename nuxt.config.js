@@ -66,8 +66,14 @@ export default {
         '@nuxtjs/eslint-module',
         '@nuxtjs/style-resources',
         '@nuxtjs/robots',
-        'nuxt-i18n'
+        'nuxt-i18n',
+        '@nuxtjs/snipcart'
     ],
+
+    snipcart: {
+        key: process.env.SNIPCART_PUBLIC_API_KEY,
+        locales: {} /* not required */
+    },
 
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
