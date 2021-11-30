@@ -2,6 +2,15 @@
     <div class="container">
         <h1 class="h1">{{ data.title }}</h1>
         <img :src="data.image.url" alt="" />
+        <button
+            class="snipcart-add-item"
+            :data-item-id="data.id"
+            :data-item-price="data.price"
+            :data-item-image="data.image.url"
+            :data-item-name="data.title"
+        >
+            Add to cart
+        </button>
     </div>
 </template>
 <script>
