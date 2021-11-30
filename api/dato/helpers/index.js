@@ -30,6 +30,12 @@ export const getCodeFromIso = (i18n, locale) => {
     return code;
 };
 
+export const checkIfTaxonomiesMatch = (record, taxonomies) => {
+    return Object.entries(taxonomies).every(taxo => {
+        return record[taxo[0]].slug === taxo[1];
+    });
+};
+
 export const setRouteParams = async function (datoLocales) {
     if (!datoLocales) return;
     const { i18n, store } = getContextData.call(this);

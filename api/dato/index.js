@@ -4,6 +4,16 @@ import seo from './fields/seo';
 import img from './fields/img';
 import locales from './fields/locales';
 
+export const recordIdQuery = (model, variable) => {
+    return `
+        query Record($${variable}: String) {
+            ${model}(filter: { ${variable}: { eq: $${variable} } }){
+                id
+            }
+        }
+    `;
+};
+
 export const layoutQuery = `
     ${linkFragment}
     query Layout($lang: SiteLocale) {

@@ -10,7 +10,7 @@
     </div>
 </template>
 <script>
-import { getIso, getSlug, setRouteParams } from '~/api/dato/helpers';
+import { getIso, getSlug, setRouteParams, checkIfTaxonomiesMatch } from '~/api/dato/helpers';
 import { cuveeQuery, categoriesInCuveeQuery } from '~/api/dato';
 import handleSeo from '~/app/seo';
 export default {
@@ -24,9 +24,18 @@ export default {
         // Getting the slug
         const slug = getSlug.call(context);
 
+        // Getting the params
+        const { brand } = route.params;
+
+        const taxonomies = {
+            brand
+        };
+
+        let cuvee = {};
+
         try {
             const {
-                data: { cuvee }
+                data: { cuvee: data }
             } = await $dato.post('/', { query: cuveeQuery, variables: { lang, slug } }).then(({ data }) => data);
 
             const {
@@ -35,12 +44,21 @@ export default {
                 .post('/', { query: categoriesInCuveeQuery, variables: { lang, id: cuvee.id } })
                 .then(({ data }) => data);
 
-            finalData.data = { cuvee, categories };
-            finalData.seo = handleSeo({ route: route.fullPath, seo: finalData.data.cuvee.seo, lang });
+            cuvee = data;
+            finalData.data = { categories };
         } catch (e) {
             console.log(e);
             return error({ statusCode: 404 });
         }
+
+        console.log('taxo are matching: ', checkIfTaxonomiesMatch(cuvee, taxonomies));
+
+        if (!checkIfTaxonomiesMatch(cuvee, taxonomies)) {
+            return error({ statusCode: 404 });
+        }
+
+        finalData.data.cuvee = cuvee;
+        finalData.seo = handleSeo({ route: route.fullPath, seo: finalData.data.cuvee.seo, lang });
 
         // Getting raw slugs for the current page from Dato
         const datoLocales = finalData.data._allSlugLocales;

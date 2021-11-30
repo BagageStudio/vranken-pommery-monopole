@@ -10,8 +10,10 @@
     </div>
 </template>
 <script>
-import { getIso, getSlug, setRouteParams } from '~/api/dato/helpers';
+import { getIso, getSlug, setRouteParams, checkIfTaxonomiesMatch } from '~/api/dato/helpers';
 import { categoryQuery, productsInCategoryQuery } from '~/api/dato';
+import { handleCategory } from '~/api/dato/helpers/data';
+
 import handleSeo from '~/app/seo';
 export default {
     async asyncData(context) {
@@ -24,23 +26,42 @@ export default {
         // Getting the slug
         const slug = getSlug.call(context);
 
+        // Getting the params
+        const { brand, cuvee } = route.params;
+
+        const taxonomies = {
+            brand,
+            cuvee
+        };
+
+        let category = {};
+
         try {
             const {
-                data: { category }
+                data: { category: data }
             } = await $dato.post('/', { query: categoryQuery, variables: { lang, slug } }).then(({ data }) => data);
 
             const {
                 data: { allProducts: products }
             } = await $dato
-                .post('/', { query: productsInCategoryQuery, variables: { lang, id: category.id } })
+                .post('/', { query: productsInCategoryQuery, variables: { lang, id: data.id } })
                 .then(({ data }) => data);
 
-            finalData.data = { category, products };
-            finalData.seo = handleSeo({ route: route.fullPath, seo: finalData.data.category.seo, lang });
+            category = handleCategory(data);
+            finalData.data = { products };
         } catch (e) {
             console.log(e);
             return error({ statusCode: 404 });
         }
+
+        console.log('taxo are matching: ', checkIfTaxonomiesMatch(category, taxonomies));
+
+        if (!checkIfTaxonomiesMatch(category, taxonomies)) {
+            return error({ statusCode: 404 });
+        }
+
+        finalData.data.category = category;
+        finalData.seo = handleSeo({ route: route.fullPath, seo: finalData.data.category.seo, lang });
 
         // Getting raw slugs for the current page from Dato
         const datoLocales = finalData.data._allSlugLocales;

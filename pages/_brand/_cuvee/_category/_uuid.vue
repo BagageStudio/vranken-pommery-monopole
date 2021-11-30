@@ -5,7 +5,8 @@
     </div>
 </template>
 <script>
-import { getIso, getSlug, setRouteParams } from '~/api/dato/helpers';
+import { getIso, getSlug, setRouteParams, checkIfTaxonomiesMatch } from '~/api/dato/helpers';
+import { handleProduct } from '~/api/dato/helpers/data';
 import { productQuery } from '~/api/dato';
 import handleSeo from '~/app/seo';
 export default {
@@ -19,16 +20,37 @@ export default {
         // Getting the slug
         const slug = getSlug.call(context);
 
+        // Getting the params
+        const { brand, cuvee, category } = route.params;
+
+        const taxonomies = {
+            brand,
+            cuvee,
+            category
+        };
+
+        let product = {};
+
         try {
             const {
                 data: { product: data }
             } = await $dato.post('/', { query: productQuery, variables: { lang, slug } }).then(({ data }) => data);
-
-            finalData.data = data;
-            finalData.seo = handleSeo({ route: route.fullPath, seo: finalData.data.seo, lang });
+            product = handleProduct(data);
         } catch (e) {
             return error({ statusCode: 404 });
         }
+
+        console.log('taxo are matching: ', checkIfTaxonomiesMatch(product, taxonomies));
+
+        if (!checkIfTaxonomiesMatch(product, taxonomies)) {
+            return error({ statusCode: 404 });
+        }
+
+        // Setting product data
+        finalData.data = product;
+
+        // Handling SEO
+        finalData.seo = handleSeo({ route: route.fullPath, seo: finalData.data.seo, lang });
 
         // Getting raw slugs for the current page from Dato
         const datoLocales = finalData.data._allSlugLocales;

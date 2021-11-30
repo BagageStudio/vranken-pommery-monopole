@@ -1,5 +1,5 @@
 import { getIso } from '~/api/dato/helpers';
-import { errorQuery } from '~/api/dato';
+import { errorQuery, recordIdQuery } from '~/api/dato';
 
 export function getContextData(context) {
     return {
@@ -21,4 +21,39 @@ export async function getError404Data() {
     } = await $dato.post('/', { query: errorQuery, variables: { lang } }).then(({ data }) => data);
 
     return Object.freeze(error);
+}
+
+export async function getRecordId({ model, field, value }) {
+    const { $dato } = getContextData.call(this);
+
+    const variables = {};
+    variables[field] = value;
+
+    let data = {};
+
+    try {
+        const res = await $dato.post('/', { query: recordIdQuery(model, field), variables }).then(({ data }) => data);
+        data = res.data;
+    } catch (error) {
+        console.log(error);
+    }
+
+    return Object.freeze(data[model].id);
+}
+
+export function handleProduct(product) {
+    product.brand = product.category.cuvee.brand;
+    delete product.category.cuvee.brand;
+
+    product.cuvee = product.category.cuvee;
+    delete product.category.cuvee;
+
+    return product;
+}
+
+export function handleCategory(category) {
+    category.brand = category.cuvee.brand;
+    delete category.cuvee.brand;
+
+    return category;
 }
