@@ -167,6 +167,7 @@ export const productQuery = `
             title
             slug
             uuid
+            price
             image{
                 ${img}
             }
