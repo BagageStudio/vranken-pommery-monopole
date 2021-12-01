@@ -16,34 +16,13 @@ export const getPagesList = () => ({
     [routes.page.i18nFormat]: {
         en: '/:slug?'
     },
-    [routes.team.i18nFormat]: {
-        en: '/:slug?'
+    [routes.cuvee.i18nFormat]: {
+        en: '/:brand?/:cuvee?'
     },
-    [routes.fund.i18nFormat]: {
-        en: '/:slug?'
+    [routes.category.i18nFormat]: {
+        en: '/:brand?/:cuvee?/:category?'
     },
-    [routes.investorsPage.i18nFormat]: {
-        en: '/:slug?'
-    },
-    [routes.portfolio.i18nFormat]: {
-        en: '/portfolio'
-    },
-    [routes.portfolioSingle.i18nFormat]: {
-        en: '/portfolio/:slug?'
-    },
-    [routes.contact.i18nFormat]: {
-        en: '/:slug?'
-    },
-    [routes.useCasesPage.i18nFormat]: {
-        en: '/:slug?'
-    },
-    [routes.sustainableEngagement.i18nFormat]: {
-        en: '/:slug?'
-    },
-    [routes.ring2success.i18nFormat]: {
-        en: '/:slug?'
-    },
-    [routes.vision.i18nFormat]: {
-        en: '/:slug?'
+    [routes.product.i18nFormat]: {
+        en: '/:brand?/:cuvee?/:category?/:uuid?'
     }
 });

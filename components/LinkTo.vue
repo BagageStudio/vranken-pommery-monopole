@@ -1,7 +1,6 @@
 <template>
-    <nuxt-link v-if="data && data.internalLink" :to="data.url" :aria-label="data.title">
-        <div class="deco"></div>
-        <span v-if="!hideLabel" class="text">
+    <nuxt-link v-if="data && (data.internalLink || shop)" :to="data.url" :aria-label="data.title">
+        <span v-if="data.label && !hideLabel" class="text">
             <span class="btn-label">{{ data.label }}</span>
         </span>
         <slot />
@@ -13,8 +12,7 @@
         target="_blank"
         rel="noopener noreferrer"
     >
-        <div class="deco"></div>
-        <span v-if="!hideLabel" class="text">
+        <span v-if="data.label && !hideLabel" class="text">
             <span class="btn-label">{{ data.label }}</span>
         </span>
         <slot />
@@ -29,6 +27,11 @@ export default {
         link: {
             type: Object,
             required: true
+        },
+        shop: {
+            type: Boolean,
+            required: false,
+            default: false
         },
         hideLabel: {
             type: Boolean,
@@ -49,6 +52,13 @@ export default {
             return { name: routerFormat, params, hash };
         },
         linkResolver() {
+            if (this.shop) {
+                return this.shopLinkResolver();
+            } else {
+                return this.cmsLinkResolver();
+            }
+        },
+        cmsLinkResolver() {
             let resolvedLink = { url: '', ...this.link };
 
             if (resolvedLink.internalLink) {
@@ -60,6 +70,21 @@ export default {
                 );
                 resolvedLink = null;
             }
+
+            return resolvedLink;
+        },
+        shopLinkResolver() {
+            const resolvedLink = { url: '', title: this.link.title };
+            const { routerFormat } = routeByApiModels[this.link._modelApiKey];
+            const { brand, cuvee, category, slug } = this.link;
+            const params = {
+                brand: brand.slug,
+                cuvee: cuvee ? cuvee.slug : slug,
+                category: category ? category.slug : slug,
+                uuid: slug
+            };
+
+            resolvedLink.url = this.localePath({ name: routerFormat, params });
 
             return resolvedLink;
         }

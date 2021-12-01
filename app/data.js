@@ -1,8 +1,8 @@
 export const getHierarchyFromProducts = products => {
     return products.reduce((brands, product) => {
         const category = product.category;
-        const cuvee = category.cuvee;
-        const brand = cuvee.brand;
+        const cuvee = product.cuvee;
+        const brand = product.brand;
 
         // Only if brand does not exists yet
         if (brandDoesntExist(brands, brand)) {
@@ -11,12 +11,12 @@ export const getHierarchyFromProducts = products => {
 
         // Only if cuvee does not exists yet
         if (cuveeDoesntExist(brands[brand.id].cuvees, cuvee)) {
-            brands[brand.id].cuvees[cuvee.id] = { ...cuvee, categories: {} };
+            brands[brand.id].cuvees[cuvee.id] = { ...cuvee, brand, categories: {} };
         }
 
         // Only if category does not exists yet
         if (categoryDoesntExist(brands[brand.id].cuvees[cuvee.id].categories, category)) {
-            brands[brand.id].cuvees[cuvee.id].categories[category.id] = { ...category, products: [] };
+            brands[brand.id].cuvees[cuvee.id].categories[category.id] = { ...category, brand, cuvee, products: [] };
         }
 
         brands[brand.id].cuvees[cuvee.id].categories[category.id].products.push(product);

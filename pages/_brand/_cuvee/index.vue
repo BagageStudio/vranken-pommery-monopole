@@ -4,13 +4,16 @@
         <div>
             <h2 class="h2">Categories</h2>
             <div v-for="category in data.categories" :key="category.id">
-                <h3 class="h3">{{ category.title }}</h3>
+                <LinkTo shop :link="category">
+                    <h3 class="h3">{{ category.title }}</h3>
+                </LinkTo>
             </div>
         </div>
     </div>
 </template>
 <script>
 import { getIso, getSlug, setRouteParams, checkIfTaxonomiesMatch } from '~/api/dato/helpers';
+import { handleShopItem } from '~/api/dato/helpers/data';
 import { cuveeQuery, categoriesInCuveeQuery } from '~/api/dato';
 import handleSeo from '~/app/seo';
 export default {
@@ -45,13 +48,11 @@ export default {
                 .then(({ data }) => data);
 
             cuvee = data;
-            finalData.data = { categories };
+            finalData.data = { categories: handleShopItem(categories) };
         } catch (e) {
             console.log(e);
             return error({ statusCode: 404 });
         }
-
-        console.log('taxo are matching: ', checkIfTaxonomiesMatch(cuvee, taxonomies));
 
         if (!checkIfTaxonomiesMatch(cuvee, taxonomies)) {
             return error({ statusCode: 404 });

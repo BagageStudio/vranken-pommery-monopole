@@ -4,7 +4,9 @@
         <div>
             <h2 class="h2">Products</h2>
             <div v-for="product in data.products" :key="product.id">
-                <h3 class="h3">{{ product.title }}</h3>
+                <LinkTo shop :link="product">
+                    <h3 class="h3">{{ product.title }}</h3>
+                </LinkTo>
             </div>
         </div>
     </div>
@@ -12,7 +14,7 @@
 <script>
 import { getIso, getSlug, setRouteParams, checkIfTaxonomiesMatch } from '~/api/dato/helpers';
 import { categoryQuery, productsInCategoryQuery } from '~/api/dato';
-import { handleCategory } from '~/api/dato/helpers/data';
+import { handleShopItem } from '~/api/dato/helpers/data';
 
 import handleSeo from '~/app/seo';
 export default {
@@ -47,14 +49,12 @@ export default {
                 .post('/', { query: productsInCategoryQuery, variables: { lang, id: data.id } })
                 .then(({ data }) => data);
 
-            category = handleCategory(data);
-            finalData.data = { products };
+            category = handleShopItem(data);
+            finalData.data = { products: handleShopItem(products) };
         } catch (e) {
             console.log(e);
             return error({ statusCode: 404 });
         }
-
-        console.log('taxo are matching: ', checkIfTaxonomiesMatch(category, taxonomies));
 
         if (!checkIfTaxonomiesMatch(category, taxonomies)) {
             return error({ statusCode: 404 });

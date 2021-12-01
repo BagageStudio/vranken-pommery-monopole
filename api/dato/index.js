@@ -128,6 +128,7 @@ export const errorQuery = `
 export const homeQuery = `
     query Home($lang: SiteLocale) {
         allProducts(locale: $lang, first: 100) {
+            _modelApiKey
             ${seo}
             ${locales}
             id
@@ -138,16 +139,19 @@ export const homeQuery = `
                 ${img}
             }
             category{
+                _modelApiKey
                 ${locales}
                 id
                 slug
                 title
                 cuvee {
+                    _modelApiKey
                     ${locales}
                     id
                     slug
                     title
                     brand {
+                        _modelApiKey
                         ${locales}
                         id
                         slug
@@ -161,6 +165,7 @@ export const homeQuery = `
 export const productQuery = `
     query Product($lang: SiteLocale, $slug: String) {
         product(locale: $lang, filter: { slug: { eq: $slug } }) {
+            _modelApiKey
             ${seo}
             ${locales}
             id
@@ -174,16 +179,19 @@ export const productQuery = `
                 ${img}
             }
             category{
+                _modelApiKey
                 ${locales}
                 id
                 slug
                 title
                 cuvee {
+                    _modelApiKey
                     ${locales}
                     id
                     slug
                     title
                     brand {
+                        _modelApiKey
                         ${locales}
                         id
                         slug
@@ -197,17 +205,20 @@ export const productQuery = `
 export const categoryQuery = `
     query Category($lang: SiteLocale, $slug: String) {
         category(locale: $lang, filter: { slug: { eq: $slug } }) {
+            _modelApiKey
             ${seo}
             ${locales}
             id
             title
             slug
             cuvee {
+                _modelApiKey
                 ${locales}
                 id
                 slug
                 title
                 brand {
+                    _modelApiKey
                     ${locales}
                     id
                     slug
@@ -220,6 +231,7 @@ export const categoryQuery = `
 export const productsInCategoryQuery = `
     query Category($lang: SiteLocale, $id: ItemId) {
         allProducts(locale: $lang, filter: { category: { eq: $id } }) {
+            _modelApiKey
             ${seo}
             ${locales}
             id
@@ -230,16 +242,19 @@ export const productsInCategoryQuery = `
                 ${img}
             }
             category{
+                _modelApiKey
                 ${locales}
                 id
                 slug
                 title
                 cuvee {
+                    _modelApiKey
                     ${locales}
                     id
                     slug
                     title
                     brand {
+                        _modelApiKey
                         ${locales}
                         id
                         slug
@@ -253,12 +268,14 @@ export const productsInCategoryQuery = `
 export const cuveeQuery = `
     query Cuvee($lang: SiteLocale, $slug: String) {
         cuvee(locale: $lang, filter: { slug: { eq: $slug } }) {
+            _modelApiKey
             ${seo}
             ${locales}
             id
             title
             slug
             brand {
+                _modelApiKey
                 ${locales}
                 id
                 slug
@@ -270,17 +287,20 @@ export const cuveeQuery = `
 export const categoriesInCuveeQuery = `
     query Cuvee($lang: SiteLocale, $id: ItemId) {
         allCategories(locale: $lang, filter: { cuvee: { eq: $id } }) {
+            _modelApiKey
             ${seo}
             ${locales}
             id
             title
             slug
             cuvee {
+                _modelApiKey
                 ${locales}
                 id
                 slug
                 title
                 brand {
+                    _modelApiKey
                     ${locales}
                     id
                     slug

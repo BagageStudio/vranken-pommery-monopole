@@ -16,7 +16,7 @@
 </template>
 <script>
 import { getIso, getSlug, setRouteParams, checkIfTaxonomiesMatch } from '~/api/dato/helpers';
-import { handleProduct } from '~/api/dato/helpers/data';
+import { handleShopItem } from '~/api/dato/helpers/data';
 import { productQuery } from '~/api/dato';
 import handleSeo from '~/app/seo';
 export default {
@@ -45,12 +45,10 @@ export default {
             const {
                 data: { product: data }
             } = await $dato.post('/', { query: productQuery, variables: { lang, slug } }).then(({ data }) => data);
-            product = handleProduct(data);
+            product = handleShopItem(data);
         } catch (e) {
             return error({ statusCode: 404 });
         }
-
-        console.log('taxo are matching: ', checkIfTaxonomiesMatch(product, taxonomies));
 
         if (!checkIfTaxonomiesMatch(product, taxonomies)) {
             return error({ statusCode: 404 });

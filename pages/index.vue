@@ -6,11 +6,17 @@
             <div v-for="brand in brands" :key="brand.id">
                 <h2 class="h2">{{ brand.title }}</h2>
                 <div v-for="cuvee in brand.cuvees" :key="cuvee.id" class="cuvees">
-                    <h3 class="h3">{{ cuvee.title }}</h3>
+                    <LinkTo shop :link="cuvee">
+                        <h3 class="h3">{{ cuvee.title }}</h3>
+                    </LinkTo>
                     <div v-for="category in cuvee.categories" :key="category.id" class="categories">
-                        <h4 class="h4">{{ category.title }}</h4>
+                        <LinkTo shop :link="category">
+                            <h4 class="h4">{{ category.title }}</h4>
+                        </LinkTo>
                         <div v-for="product in category.products" :key="product.id" class="products">
-                            <h5>{{ product.title }}</h5>
+                            <LinkTo shop :link="product">
+                                <h5>{{ product.title }}</h5>
+                            </LinkTo>
                         </div>
                     </div>
                 </div>
@@ -22,6 +28,7 @@
 <script>
 import { getIso, getSlug, setRouteParams } from '~/api/dato/helpers';
 import { homeQuery } from '~/api/dato';
+import { handleShopItem } from '~/api/dato/helpers/data';
 import { getHierarchyFromProducts } from '~/app/data';
 export default {
     async asyncData(context) {
@@ -37,7 +44,7 @@ export default {
                 data: { allProducts }
             } = await $dato.post('/', { query: homeQuery, variables: { lang } }).then(({ data }) => data);
 
-            products = allProducts;
+            products = handleShopItem(allProducts);
             // finalData.seo = handleSeo({ route: route.fullPath, seo: finalData.data..seo, lang });
         } catch (e) {
             console.log(e);

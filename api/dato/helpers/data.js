@@ -41,19 +41,25 @@ export async function getRecordId({ model, field, value }) {
     return Object.freeze(data[model].id);
 }
 
-export function handleProduct(product) {
-    product.brand = product.category.cuvee.brand;
-    delete product.category.cuvee.brand;
+function handleSingleShopItem(item) {
+    if (item._modelApiKey === 'category') {
+        item.brand = item.cuvee.brand;
+        delete item.cuvee.brand;
+    } else if (item._modelApiKey === 'product') {
+        item.brand = item.category.cuvee.brand;
+        delete item.category.cuvee.brand;
 
-    product.cuvee = product.category.cuvee;
-    delete product.category.cuvee;
+        item.cuvee = item.category.cuvee;
+        delete item.category.cuvee;
+    }
 
-    return product;
+    return item;
 }
 
-export function handleCategory(category) {
-    category.brand = category.cuvee.brand;
-    delete category.cuvee.brand;
-
-    return category;
+export function handleShopItem(item) {
+    if (Array.isArray(item)) {
+        return item.map(p => handleSingleShopItem(p));
+    } else {
+        return handleSingleShopItem(item);
+    }
 }
