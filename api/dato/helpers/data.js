@@ -57,9 +57,10 @@ function handleSingleShopItem(item) {
 }
 
 export function handleShopItem(item) {
-    if (Array.isArray(item)) {
-        return item.map(p => handleSingleShopItem(p));
+    const copy = JSON.parse(JSON.stringify(item));
+    if (Array.isArray(copy)) {
+        return copy.map(p => handleSingleShopItem(p));
     } else {
-        return handleSingleShopItem(item);
+        return handleSingleShopItem(copy);
     }
 }

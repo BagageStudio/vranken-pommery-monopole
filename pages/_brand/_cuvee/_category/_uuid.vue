@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <LayoutBreadcrumbs :start="data.brand.title" :end="data.title" :links="[cuvee, category]" />
         <h1 class="h1">{{ data.title }}</h1>
         <img :src="data.image.url" alt="" />
         <button
@@ -19,6 +20,7 @@ import { getIso, getSlug, setRouteParams, checkIfTaxonomiesMatch } from '~/api/d
 import { handleShopItem } from '~/api/dato/helpers/data';
 import { productQuery } from '~/api/dato';
 import handleSeo from '~/app/seo';
+
 export default {
     async asyncData(context) {
         const { $dato, error, route } = context;
@@ -40,13 +42,18 @@ export default {
         };
 
         let product = {};
+        let categoryData = {};
+        let cuveeData = {};
 
         try {
             const {
                 data: { product: data }
             } = await $dato.post('/', { query: productQuery, variables: { lang, slug } }).then(({ data }) => data);
             product = handleShopItem(data);
+            categoryData = handleShopItem(data.category);
+            cuveeData = handleShopItem(data.category.cuvee);
         } catch (e) {
+            console.log(e);
             return error({ statusCode: 404 });
         }
 
@@ -56,6 +63,8 @@ export default {
 
         // Setting product data
         finalData.data = product;
+        finalData.category = categoryData;
+        finalData.cuvee = cuveeData;
 
         // Handling SEO
         finalData.seo = handleSeo({ route: route.fullPath, seo: finalData.data.seo, lang });

@@ -1,9 +1,10 @@
 <template>
     <div class="container">
-        <h1 class="h1">{{ data.cuvee.title }}</h1>
+        <LayoutBreadcrumbs :start="data.brand.title" :end="data.title" />
+        <h1 class="h1">{{ data.title }}</h1>
         <div>
             <h2 class="h2">Categories</h2>
-            <div v-for="category in data.categories" :key="category.id">
+            <div v-for="category in categories" :key="category.id">
                 <LinkTo shop :link="category">
                     <h3 class="h3">{{ category.title }}</h3>
                 </LinkTo>
@@ -47,8 +48,8 @@ export default {
                 .post('/', { query: categoriesInCuveeQuery, variables: { lang, id: cuvee.id } })
                 .then(({ data }) => data);
 
-            cuvee = data;
-            finalData.data = { categories: handleShopItem(categories) };
+            cuvee = handleShopItem(data);
+            finalData.categories = handleShopItem(categories);
         } catch (e) {
             console.log(e);
             return error({ statusCode: 404 });
@@ -58,8 +59,8 @@ export default {
             return error({ statusCode: 404 });
         }
 
-        finalData.data.cuvee = cuvee;
-        finalData.seo = handleSeo({ route: route.fullPath, seo: finalData.data.cuvee.seo, lang });
+        finalData.data = cuvee;
+        finalData.seo = handleSeo({ route: route.fullPath, seo: finalData.data.seo, lang });
 
         // Getting raw slugs for the current page from Dato
         const datoLocales = finalData.data._allSlugLocales;

@@ -1,9 +1,10 @@
 <template>
     <div class="container">
-        <h1 class="h1">{{ data.category.title }}</h1>
+        <LayoutBreadcrumbs :start="data.brand.title" :end="data.title" :links="[cuvee]" />
+        <h1 class="h1">{{ data.title }}</h1>
         <div>
             <h2 class="h2">Products</h2>
-            <div v-for="product in data.products" :key="product.id">
+            <div v-for="product in products" :key="product.id">
                 <LinkTo shop :link="product">
                     <h3 class="h3">{{ product.title }}</h3>
                 </LinkTo>
@@ -37,6 +38,7 @@ export default {
         };
 
         let category = {};
+        let cuveeData = {};
 
         try {
             const {
@@ -50,7 +52,9 @@ export default {
                 .then(({ data }) => data);
 
             category = handleShopItem(data);
-            finalData.data = { products: handleShopItem(products) };
+            cuveeData = handleShopItem(data.cuvee);
+
+            finalData.products = handleShopItem(products);
         } catch (e) {
             console.log(e);
             return error({ statusCode: 404 });
@@ -60,8 +64,9 @@ export default {
             return error({ statusCode: 404 });
         }
 
-        finalData.data.category = category;
-        finalData.seo = handleSeo({ route: route.fullPath, seo: finalData.data.category.seo, lang });
+        finalData.data = category;
+        finalData.cuvee = cuveeData;
+        finalData.seo = handleSeo({ route: route.fullPath, seo: finalData.data.seo, lang });
 
         // Getting raw slugs for the current page from Dato
         const datoLocales = finalData.data._allSlugLocales;
