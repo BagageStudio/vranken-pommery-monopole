@@ -173,7 +173,6 @@ export const productQuery = `
             slug
             uuid
             price
-            shoppingCartTitle
             shoppingCartDescription
             image{
                 ${img}

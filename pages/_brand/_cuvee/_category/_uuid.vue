@@ -7,7 +7,7 @@
             :data-item-id="data.id"
             :data-item-price="data.price"
             :data-item-image="data.image.url"
-            :data-item-name="data.shoppingCartTitle"
+            :data-item-name="data.title"
             :data-item-description="data.shoppingCartDescription"
         >
             Add to cart
