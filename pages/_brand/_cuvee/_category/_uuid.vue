@@ -10,7 +10,7 @@
 
         <button
             class="snipcart-add-item"
-            :data-item-id="data.id"
+            :data-item-id="data.uuid"
             :data-item-price="data.price"
             :data-item-image="data.image.url"
             :data-item-name="data.title"
