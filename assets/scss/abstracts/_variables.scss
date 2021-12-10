@@ -1,38 +1,12 @@
 // Variables 🧮 //
 
 // Colors 🎨
-$black: #19232f;
-$dark: #19232f;
+$black: #000;
 $white: #fff;
-$txt: #000;
-$titan: #90f5ca;
-$neptune: #657da2;
-$orbit: #1f2c3c;
-$saturn: #f4f928;
-$grey: #f5f7fa;
-
-:root {
-    --primary: #f4f928;
-    --secondary: #fff;
-    --tertiary: #f4f928;
-    --bg: #19232f;
-}
-.lightmode {
-    --primary: #1f2c3c;
-    --secondary: #1f2c3c;
-    --tertiary: #657da2;
-    --bg: #fff;
-}
-.greymode {
-    --primary: #1f2c3c;
-    --secondary: #1f2c3c;
-    --tertiary: #657da2;
-    --bg: #f5f7fa;
-}
 
 // Fonts ✍
-$space: 'Space Mono', serif;
-$helvetica-neue: 'HelveticaNeueLTStd', sans-serif;
+$plex-serif: 'IBM Plex Serif', serif;
+$plex-sans: 'IBM Plex Sans', sans-serif;
 
 // Texts variables 🖌
 $text-size-mobile: 13;
