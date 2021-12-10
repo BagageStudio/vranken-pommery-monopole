@@ -126,7 +126,37 @@ export const errorQuery = `
     }`;
 
 export const homeQuery = `
+    ${linkFragment}
     query Home($lang: SiteLocale) {
+        home(locale: $lang) {
+            ${seo}
+            heroTitle
+            heroLink {
+                ...link
+            }
+            heroCover {
+                ${img}
+            }
+            discoverIntro
+            discoverBrands {
+                _modelApiKey
+                id
+                title
+                slug
+            }
+            experiencesLabel
+            experiencesTitle
+            experiences {
+                thumbnail {
+                    ${img}
+                }
+                title
+                label
+                link {
+                    ...link
+                }
+            }
+        }
         allProducts(locale: $lang, first: 100) {
             _modelApiKey
             ${seo}
