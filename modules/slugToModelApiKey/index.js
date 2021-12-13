@@ -1,14 +1,24 @@
 import path from 'path';
 import fs from 'fs-extra';
 import logger from 'consola';
-import dato from '../../api/axios';
+import axios from 'axios';
 import query from './query';
 
 export default function () {
     this.nuxt.hook('ready', async () => {
+        const { datoApiUrl } = this.nuxt.options.publicRuntimeConfig;
+
         const {
             data: { data }
-        } = await dato.post('/', { query });
+        } = await axios.post(
+            datoApiUrl,
+            { query },
+            {
+                headers: {
+                    Authorization: `Bearer ${process.env.DATOCMS_API_TOKEN}`
+                }
+            }
+        );
 
         const mapping = Object.entries(data).reduce((acc, model) => {
             const pages = model[1];
@@ -33,9 +43,9 @@ export default function () {
             return acc;
         }, {});
 
-        fs.ensureFileSync(path.join('api', 'helpers', 'slugToModelApiKey.json'));
+        fs.ensureFileSync(path.join('api', 'dato', 'helpers', 'slugToModelApiKey.json'));
         await fs
-            .writeJSON(path.join('api', 'helpers', 'slugToModelApiKey.json'), mapping)
+            .writeJSON(path.join('api', 'dato', 'helpers', 'slugToModelApiKey.json'), mapping)
             .then(() => {
                 logger.success('Slug to ModelApiKey mapping successfully extracted');
             })

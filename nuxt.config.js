@@ -75,7 +75,9 @@ export default {
         '@nuxtjs/style-resources',
         '@nuxtjs/robots',
         'nuxt-i18n',
-        '@nuxtjs/snipcart'
+        '@nuxtjs/snipcart',
+        '~/modules/slugToModelApiKey',
+        '~/modules/initLayoutData'
     ],
 
     snipcart: {
