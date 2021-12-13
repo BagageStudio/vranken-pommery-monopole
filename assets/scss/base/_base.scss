@@ -23,7 +23,7 @@ html {
 
 body {
     font: 1.6em / 1.63 $plex-sans;
-    color: $white;
+    color: $grey;
     font-kerning: normal;
     font-weight: 400;
     overflow-x: hidden;
@@ -32,35 +32,46 @@ body {
 }
 
 .wysiwyg h1,
+.h1,
+.wysiwyg h2,
+.h2,
+.wysiwyg h3,
+.h3 {
+    font-family: $plex-serif;
+    font-weight: 400;
+}
+
+.wysiwyg h1,
 .h1 {
-    font-size: 4.4rem;
-    line-height: 50px;
-    font-weight: 300;
-    margin: 0 0 40px;
+    font-size: 5.5rem;
+    line-height: 72px;
+    margin: 0 0 80px;
+    color: $gold;
 }
 
 .wysiwyg h2,
 .h2 {
-    font-size: 3.4rem;
-    line-height: 30px;
-    font-weight: 300;
-    margin: 100px 0 40px;
+    font-size: 4.2rem;
+    line-height: 55px;
+    margin: 80px 0;
+    color: $blue;
 }
 
 .wysiwyg h3,
 .h3 {
-    font-size: 2.2rem;
-    line-height: 28px;
-    font-weight: 400;
-    margin: 40px 0 20px;
+    font-size: 2.8rem;
+    line-height: 36px;
+    margin: 60px 0 30px;
+    color: $blue;
 }
 
 .wysiwyg h4,
 .h4 {
-    font-size: 1.8rem;
-    line-height: 26px;
+    font-size: 2.2rem;
+    line-height: 29px;
     font-weight: 400;
-    margin: 20px 0 10px;
+    margin: 30px 0 20px;
+    color: $blue;
 }
 
 .wysiwyg h5,
@@ -68,28 +79,40 @@ body {
 .wysiwyg h6,
 .h6 {
     font-size: 1.5rem;
-    line-height: 21px;
+    line-height: 19px;
     font-weight: 500;
     margin: 20px 0 10px;
+    color: $blue;
 }
 
 .wysiwyg ul {
-    margin: 40px 0;
+    margin: 20px 0;
     padding: 0;
     li {
         position: relative;
-        margin: 5px 0;
-        padding: 0 0 0 15px;
+        margin: 10px 0;
+        padding: 0 0 0 48px;
         &::before {
             content: '';
             position: absolute;
-            top: 0.5em;
-            left: 0;
+            top: 0.6em;
+            left: 20px;
             display: block;
-            width: 5px;
-            height: 5px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
-            background: $black;
+            background: $gold;
+        }
+    }
+    ul {
+        margin: 10px 0;
+        li {
+            padding-left: 20px;
+            &::before {
+                left: -8px;
+                background: none;
+                border: 1px solid $gold;
+            }
         }
     }
 }
@@ -110,81 +133,30 @@ body {
     }
 }
 
-.wysiwyg img {
-    margin: 40px auto;
-}
-
 .wysiwyg a {
-    font-weight: 500;
-}
-
-.basic-h1 {
-    font-size: 4rem;
-    font-weight: 300;
-    line-height: 50px;
-    margin: 0 0 30px;
-    p {
-        line-height: 1;
-    }
-    strong {
-        font-weight: 300;
-    }
-}
-
-.basic-h2 {
-    font-size: 4rem;
-    font-weight: 300;
-    line-height: 40px;
-    margin: 0 0 30px;
-    strong {
-        font-weight: 300;
-    }
-}
-
-.basic-h3 {
-    font-size: 3rem;
-    font-weight: 300;
-    line-height: 40px;
-    margin: 0 0 30px;
-    p {
-        line-height: 1;
-    }
-    strong {
-        font-weight: 300;
-    }
-}
-
-.basic-h4 {
-    font-size: 2.6rem;
     font-weight: 400;
-    line-height: 30px;
-    margin: 0 0 35px;
-}
-
-.basic-subtitle {
-    font-size: 2.2rem;
-    font-weight: 400;
-    line-height: 26px;
-    margin: 0 0 20px;
+    color: $gold;
 }
 
 p {
     margin: 10px 0;
-    line-height: 26px;
+    line-height: 25px;
 }
 
 strong {
-    font-weight: 500;
+    font-weight: 700;
 }
 
 blockquote {
+    font-family: $plex-serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 2.2rem;
+    line-height: 29px;
     margin: 40px 0;
     padding: 0 0 0 20px;
-    font-weight: 300;
-    font-size: 2.2rem;
-    line-height: 28px;
-    font-style: italic;
-    border-left: 1px solid currentColor;
+    border-left: 1px solid $gold;
+    color: $gold;
 }
 
 ol,
@@ -291,12 +263,8 @@ a {
 
 /******* CLASSES GENERALES  *******/
 
-.clearfix {
-    &::after {
-        content: '';
-        display: table;
-        clear: both;
-    }
+.wrapper-page {
+    padding: 50px 0;
 }
 
 .align-center {
@@ -357,69 +325,31 @@ a {
     }
 }
 
-@media (min-width: $phone) {
-    body {
-        font-size: #{$text-size-desktop * 0.1}rem;
-    }
-    .wysiwyg h1,
-    .h1 {
-        font-size: 4rem;
-    }
-    .wysiwyg h2,
-    .h2 {
-        font-size: 3.2rem;
-    }
-    .wysiwyg h3,
-    .h3 {
-        font-size: 2.8rem;
-    }
-    .wysiwyg h4,
-    .h4 {
-        font-size: 2.2rem;
-    }
-    .wysiwyg h5,
-    .h5 {
-        font-size: 2rem;
-    }
-    .wysiwyg h6,
-    .h6 {
-        font-size: 1.8rem;
-    }
-}
-
 @media (min-width: $desktop-small) {
-    .wysiwyg img {
-        width: percentage(math.div(8, 6));
-        max-width: none;
-        margin-left: -#{percentage(math.div(1, 6))};
-    }
-    .basic-h1 {
-        font-size: 6.8rem;
-        line-height: 70px;
-        margin-bottom: 40px;
-    }
-    .basic-h2 {
-        font-size: 5.2rem;
-        line-height: 62px;
-        margin-bottom: 40px;
-    }
-    .basic-h3 {
-        font-size: 4.4rem;
-        line-height: 50px;
-        margin-bottom: 50px;
+    .wrapper-page {
+        padding: 80px 0;
     }
 }
 
 @media (min-width: $desktop) {
-    .wysiwyg img {
-        width: percentage(math.div(10, 8));
-        margin-left: -#{percentage(math.div(1, 8))};
-    }
-}
-
-@media (min-width: $desktop-large) {
-    .wysiwyg img {
-        width: percentage(math.div(8, 6));
-        margin-left: -#{percentage(math.div(1, 6))};
+    .wysiwyg ul {
+        width: calc(100% + #{2 * $gutter});
+        margin-left: -$gutter;
+        li {
+            padding: 0 $gutter 0 #{calc(percentage(math.div(1, 8)) + $gutter + 28px)};
+            &::before {
+                left: calc(percentage(math.div(1, 8)) + $gutter);
+            }
+        }
+        ul {
+            width: calc(100% + #{2 * $gutter} + 28px);
+            margin-left: calc(#{-$gutter} - 28px);
+            li {
+                padding: 0 $gutter 0 #{calc(percentage(math.div(1, 7)) + $gutter + 28px)};
+                &::before {
+                    left: calc(percentage(math.div(1, 7)) + $gutter);
+                }
+            }
+        }
     }
 }
