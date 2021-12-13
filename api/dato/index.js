@@ -45,6 +45,49 @@ export const layoutQuery = `
                 linkUrl
             }
         }
+        header(locale: $lang) {
+            menu {
+                ... on SingleLinkRecord {
+                    id
+                    label
+                    link {
+                        ...link
+                    }
+                }
+                ... on SubmenuRecord {
+                    id
+                    label
+                    items {
+                        ... on SingleLinkRecord {
+                            id
+                            label
+                            link {
+                                ...link
+                            }
+                        }
+                        ... on SubsubmenuRecord {
+                            id
+                            label
+                            image {
+                                ${img}
+                            }
+                            items {
+                            label
+                                link {
+                                    ...link
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            socials {
+                icon {
+                    ${img}
+                }
+                linkUrl
+            }
+        }
     }
 `;
 
