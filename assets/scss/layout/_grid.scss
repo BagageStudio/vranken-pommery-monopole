@@ -17,7 +17,7 @@
 
 @media (min-width: $desktop-small) {
     .container-small {
-        width: percentage(math.div(6, 8));
+        width: percentage(math.div(4, 6));
         margin: 0 auto;
     }
 }
@@ -28,11 +28,5 @@
     }
     .container-small {
         width: percentage(math.div(8, 12));
-    }
-}
-
-@media (min-width: $desktop-large) {
-    .container-small {
-        width: percentage(math.div(6, 12));
     }
 }

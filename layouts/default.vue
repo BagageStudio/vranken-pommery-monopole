@@ -2,6 +2,7 @@
     <div class="main">
         <Nuxt />
         <LayoutSvgs />
+        <LayoutGrid v-if="$config.isDevEnv" />
     </div>
 </template>
 

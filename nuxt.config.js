@@ -49,7 +49,7 @@ export default {
     },
 
     publicRuntimeConfig: {
-        isDevEnv,
+        isDevEnv: process.env.NETLIFY_ENV === 'development',
         // On met le token qui si on est en local (pour pas qu'il soit injecté dans le JS en prod)
         datoApiToken: isDevEnv ? process.env.DATOCMS_API_TOKEN : '',
         datoApiUrl: process.env.GRAPHQL_ENDPOINT
