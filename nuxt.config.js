@@ -1,6 +1,6 @@
 import Sass from 'sass';
-
 import { defaultLocale, locales, getPagesList } from './config/i18n';
+import { layoutQuery } from './api/dato/index';
 
 import frTranslation from './locales/fr.json';
 import enTranslation from './locales/en.json';
@@ -70,6 +70,7 @@ export default {
 
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
     buildModules: [
+        '~/modules/crawler',
         // https://go.nuxtjs.dev/eslint
         '@nuxtjs/eslint-module',
         '@nuxtjs/style-resources',
@@ -152,6 +153,9 @@ export default {
          ** Transpiling es6 packages
          */
         transpile: [/@stereorepo/, 'gsap']
+    },
+    layoutData: {
+        layoutQuery
     },
     vue: {
         config: {

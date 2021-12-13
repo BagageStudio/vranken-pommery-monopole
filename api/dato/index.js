@@ -17,97 +17,32 @@ export const recordIdQuery = (model, variable) => {
 export const layoutQuery = `
     ${linkFragment}
     query Layout($lang: SiteLocale) {
-        header(locale: $lang) {
-            navigation {
-                ... on MegaRecord {
-                    _modelApiKey
-                    id
-                    megaMenu {
-                        title
-                        links {
-                            ...link
-                        }
-                        social {
-                            socialLinks {
-                            title
-                            iconName
-                            link
-                            }
-                        }
-                        newsTitle
-                        socialTitle
-                        news {
-                            title
-                            cover {
-                                ${img}
-                            }
-                            readingTime
-                            date
-                            linkUrl
-                        }
-                    }
-                }
-                ... on SingleLinkRecord {
-                    _modelApiKey
-                    id
-                    link {
-                        ...link
-                    }
-                }
-                ... on SubmenuGroupRecord {
-                    _modelApiKey
-                    id
-                    title
-                    submenus {
-                        id
-                        title
-                        links {
-                            ...link
-                        }
-                    }
-                }
-            }
-            contact {
-                ...link
-            }
-        }
         footer(locale: $lang) {
-            linksColumn {
+            title
+            benefitsTitle
+            benefits {
+                benefitIcon {
+                    ${img}
+                }
+                benefitTitle
+            }
+            newsletterTitle
+            newsletterIntro
+            emailPlaceholder
+            newsletterButtonLabel
+            footerMenu {
+                title
                 links {
-                    label
-                    title
                     ...link
                 }
             }
-            smallText
-            smallLinks {
-                __typename
-                ...link
-                ... on LinkFileRecord {
-                    label
-                    title
-                    file {
-                        url
-                    }
-                }
-            }
-            newsletter {
-                title
-            }
-            newsletterEmailError
-            newsletterEmailInvalid
-            newsletterSuccess
-            newsletterGdpr
-            newsletterTextBeforeLink
-            newsletterLink {
-                ...link
-            }
+            footerCopyright
+            footerWarning
             social {
-                socialLinks {
-                    title
-                    iconName
-                    link
+                icon {
+                    ${img}
                 }
+                linkUrl
             }
         }
     }

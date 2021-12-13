@@ -1,6 +1,7 @@
 <template>
     <div class="main">
         <Nuxt />
+        <LayoutFooter />
         <LayoutSvgs />
         <LayoutGrid v-if="$config.isDevEnv" />
     </div>
