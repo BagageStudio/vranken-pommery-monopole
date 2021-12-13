@@ -21,6 +21,7 @@ export const layoutQuery = `
             title
             benefitsTitle
             benefits {
+                id
                 benefitIcon {
                     ${img}
                 }

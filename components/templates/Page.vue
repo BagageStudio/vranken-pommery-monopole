@@ -1,7 +1,7 @@
 <template>
     <div v-if="data" class="wrapper-page">
         <div class="container">
-            <div class="container-small wysiwyg content-pad">
+            <div class="container-xs wysiwyg content-pad">
                 <h1>{{ data.title }}</h1>
                 <div v-if="data.content" v-html="data.content" />
             </div>

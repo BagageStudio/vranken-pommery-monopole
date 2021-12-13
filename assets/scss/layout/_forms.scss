@@ -33,12 +33,11 @@ textarea {
 input {
     display: block;
     position: relative;
-    font-size: 1.6rem;
-    line-height: 26px;
-    padding: 9px 0 15px;
+    font-size: 1.3rem;
+    line-height: 25px;
+    padding: 10px;
     border: 0;
-    border-bottom: 1px solid $black;
-    color: $white;
+    background: $beige;
     // hide the symbols of input search
     &[type='search'] {
         &::-webkit-search-cancel-button,
@@ -57,4 +56,57 @@ select {
 
 button {
     border: 0;
+}
+
+.wrapper-field {
+    position: relative;
+    width: 100%;
+    .label {
+        font-size: 1.3rem;
+        line-height: 25px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 10px;
+        color: $grey-1;
+        user-select: none;
+        pointer-events: none;
+    }
+    input,
+    textarea {
+        width: 100%;
+        &:focus,
+        &.on {
+            + .label {
+                opacity: 0;
+            }
+        }
+    }
+    &.error {
+        input {
+            border-color: #f74656;
+            color: #f74656;
+        }
+    }
+}
+.btn-next {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px 0 20px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $grey-2;
+    > span {
+        margin-right: 10px;
+    }
+    .icon {
+        flex: 0 0 auto;
+        width: 5px;
+        height: 9px;
+        fill: currentColor;
+    }
 }
