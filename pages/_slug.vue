@@ -1,6 +1,7 @@
 <template>
     <div>
-        <component :is="template" v-if="template" :data="data" />
+        <!-- <component :is="template" v-if="template" :data="data" /> -->
+        <TemplatesPage v-if="template === 'Page'" :data="data" />
     </div>
 </template>
 
@@ -12,12 +13,7 @@ import slugToModelApiKey from '~/api/dato/helpers/slugToModelApiKey.json';
 import { getQuery } from '~/api/dato';
 import handleSeo from '~/app/seo';
 
-import Page from '~/components/Templates/Page';
-
 export default {
-    components: {
-        Page
-    },
     async asyncData(context) {
         const { $dato, error, route } = context;
         const finalData = {};
@@ -35,7 +31,6 @@ export default {
             const { data } = await $dato
                 .post('/', { query: getQuery(finalData.template), variables: { lang, slug } })
                 .then(({ data }) => data);
-
             finalData.data = data[camalize(finalData.template)];
             finalData.seo = handleSeo({ route: route.fullPath, seo: finalData.data.seo, lang });
             finalData.template = pascalize(finalData.template);

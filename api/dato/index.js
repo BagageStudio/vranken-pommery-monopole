@@ -192,6 +192,16 @@ export const homeQuery = `
         }
     }`;
 
+export const pageQuery = `
+    query Page($lang: SiteLocale, $slug: String) {
+        page(locale: $lang, filter: { slug: { eq: $slug } }) {
+            ${seo}
+            ${locales}
+            title
+            content
+        }
+    }`;
+
 export const productQuery = `
     query Product($lang: SiteLocale, $slug: String) {
         product(locale: $lang, filter: { slug: { eq: $slug } }) {
@@ -343,7 +353,7 @@ export const categoriesInCuveeQuery = `
 // When adding a new model, we need to link its query and its _modelApiKey
 export const getQuery = _modelApiKey => {
     const mapping = {
-        // page: pageQuery,
+        page: pageQuery
         // contact: contactQuery,
         // team: teamQuery,
         // portfolio: portfolioQuery,
