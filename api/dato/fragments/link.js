@@ -9,6 +9,22 @@ export default `
             ... on HomeRecord {
                 _modelApiKey
             }
+            ... on ProductRecord {
+                slug
+                _modelApiKey
+            }
+            ... on BrandRecord {
+                slug
+                _modelApiKey
+            }
+            ... on CategoryRecord {
+                slug
+                _modelApiKey
+            }
+            ... on CuveeRecord {
+                slug
+                _modelApiKey
+            }
         }
         description
     }

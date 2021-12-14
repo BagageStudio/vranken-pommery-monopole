@@ -31,7 +31,11 @@ export const layoutQuery = `
             newsletterIntro
             emailPlaceholder
             newsletterButtonLabel
+            footerLogo {
+                ${img}
+            }
             footerMenu {
+                id
                 title
                 links {
                     ...link
@@ -40,6 +44,8 @@ export const layoutQuery = `
             footerCopyright
             footerWarning
             social {
+                id
+                title
                 icon {
                     ${img}
                 }
