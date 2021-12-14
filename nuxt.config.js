@@ -131,6 +131,10 @@ export default {
         vuex: { syncLocale: true }
     },
 
+    layoutData: {
+        layoutQuery
+    },
+
     robots: () => {
         return netlifyEnv === 'production'
             ? { UserAgent: '*', Disallow: ['/404'], Sitemap: `${websiteUrl}/sitemap.xml` }
@@ -153,9 +157,6 @@ export default {
          ** Transpiling es6 packages
          */
         transpile: [/@stereorepo/, 'gsap']
-    },
-    layoutData: {
-        layoutQuery
     },
     vue: {
         config: {
