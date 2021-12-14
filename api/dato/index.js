@@ -128,6 +128,9 @@ export const homeQuery = `
                 id
                 title
                 slug
+                logo {
+                    ${img}
+                }
             }
             experiencesLabel
             experiencesTitle
