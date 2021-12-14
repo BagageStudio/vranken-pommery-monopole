@@ -134,6 +134,9 @@ export const homeQuery = `
             }
             experiencesLabel
             experiencesTitle
+            experiencesLink {
+                ...link
+            }
             experiences {
                 thumbnail {
                     ${img}

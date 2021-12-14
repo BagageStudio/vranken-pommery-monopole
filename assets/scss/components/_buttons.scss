@@ -13,4 +13,8 @@
     text-decoration: none;
     border: 1px solid $white;
     color: $white;
+    &.grey {
+        border-color: $grey-1;
+        color: $grey-1;
+    }
 }
