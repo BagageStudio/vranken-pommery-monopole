@@ -1,1 +1,16 @@
 /* Buttons */
+.btn-block {
+    position: relative;
+    display: inline-flex;
+    padding: 14px 25px;
+    font-family: $plex-sans;
+    font-weight: 400;
+    font-size: 1.2rem;
+    line-height: 16px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid $white;
+    color: $white;
+}
