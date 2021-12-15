@@ -89,9 +89,7 @@ export default {
             return this.$i18n.locales.filter(i => i.code === this.$i18n.locale)[0];
         }
     },
-    mounted() {
-        console.log(this.$i18n);
-    },
+    mounted() {},
     methods: {
         toggleNav() {
             this.showNav = !this.showNav;
