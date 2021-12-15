@@ -11,6 +11,17 @@
     text-shadow: none;
 }
 
+:root {
+    --header-height: 155px;
+    --mobile-top-header-height: 82px;
+    --mobile-search-header-height: 82px;
+}
+@media (min-width: $desktop-small) {
+    :root {
+        --header-height: 155px;
+    }
+}
+
 html {
     font-size: 62.5%; /* sets the base font to 10px for easier math */
     background: var(--bg);
