@@ -94,6 +94,10 @@ export default {
         '@nuxtjs/pwa'
     ],
 
+    router: {
+        trailingSlash: true
+    },
+
     styleResources: {
         scss: [
             '~/assets/scss/abstracts/_variables.scss',

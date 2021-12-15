@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div class="mobile-nav-wrapper">
         <div class="container">
             <div class="content-pad mobile-bar">
-                <button class="burger" aria-label="Menu">
+                <button class="burger" aria-label="Menu" @click="toggleNav">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -29,7 +29,7 @@
                 <div v-for="item in data.menu" :key="item.id">{{ item.label }}</div>
             </div> -->
         </div>
-        <nav hidden>
+        <nav v-show="showNav" class="navigation">
             <div class="container">
                 <ul class="main-menu content-pad">
                     <li v-for="item in data.menu" :key="item.id" class="main-item">
@@ -41,9 +41,28 @@
                 </ul>
             </div>
             <div class="container misc-menu">
-                <div class="lang-switcher"></div>
-                <div class="socials">
-                    <a v-for="social in data.socials" :key="social.id" :href="social.linkUrl"></a>
+                <div class="content-pad">
+                    <ul class="lang">
+                        <li class="current">{{ `${currentLocale.name} (${currentLocale.code})` }}</li>
+                        <li v-for="locale in availableLocales" :key="locale.code">
+                            <a :href="switchLocalePath(locale.code)">
+                                <span>{{ `${locale.name} (${locale.code})` }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="socials content-pad">
+                    <a
+                        v-for="social in data.socials"
+                        :key="social.id"
+                        :href="social.linkUrl"
+                        :aria-label="social.title"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="social-link"
+                    >
+                        <FastImage :image="social.icon" contains />
+                    </a>
                 </div>
             </div>
         </nav>
@@ -58,10 +77,32 @@ export default {
             required: true,
             type: Object
         }
+    },
+    data: () => ({
+        showNav: false
+    }),
+    computed: {
+        availableLocales() {
+            return this.$i18n.locales.filter(i => i.code !== this.$i18n.locale);
+        },
+        currentLocale() {
+            return this.$i18n.locales.filter(i => i.code === this.$i18n.locale)[0];
+        }
+    },
+    mounted() {
+        console.log(this.$i18n);
+    },
+    methods: {
+        toggleNav() {
+            this.showNav = !this.showNav;
+        }
     }
 };
 </script>
 <style lang="scss" scoped>
+.mobile-nav-wrapper {
+    position: relative;
+}
 .burger {
     position: relative;
     width: 33px;
@@ -156,6 +197,16 @@ ul {
     margin: 0;
 }
 
+.navigation {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background-color: $white;
+    // transform: translateY(-100%);
+}
+
 .main-label {
     display: flex;
     align-items: center;
@@ -174,7 +225,51 @@ ul {
     }
 }
 
+.main-item {
+    &:last-child .main-label {
+        border-bottom: none;
+    }
+}
+
 .misc-menu {
     background-color: $beige;
+}
+
+.socials {
+    display: flex;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    a {
+        width: 22px;
+        height: 22px;
+        margin-right: 20px;
+    }
+}
+
+.lang {
+    display: flex;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 1.2rem;
+    border-bottom: 1px solid $white;
+    .current {
+        color: $blue;
+    }
+    a {
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+        text-decoration: none;
+        &::before {
+            content: '';
+            display: block;
+            height: 1px;
+            width: 8px;
+            margin-right: 10px;
+            background-color: $grey-1;
+        }
+    }
 }
 </style>
