@@ -124,6 +124,9 @@ export default {
     transform-origin: 50% 50%;
     transform: scale(0.95);
     transition: 0.2s ease-out;
+    .image {
+        display: block;
+    }
     &.loaded {
         opacity: 1;
         transform: scale(1);

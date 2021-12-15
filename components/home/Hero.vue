@@ -4,8 +4,10 @@
             <FastImage :image="data.heroCover" cover />
         </div>
         <div class="hero-content container">
-            <h1 class="h1">{{ data.heroTitle }}</h1>
-            <!-- <LinkTo :link="data.heroLink">aze</LinkTo> -->
+            <div class="content-pad">
+                <h1 class="hero-title h1">{{ data.heroTitle }}</h1>
+                <LinkTo class="btn-block" :link="data.heroLink" />
+            </div>
         </div>
     </div>
 </template>
@@ -52,5 +54,9 @@ export default {
 .hero-content {
     position: relative;
     width: 100%;
+}
+.hero-title {
+    margin-bottom: 35px;
+    color: $white;
 }
 </style>

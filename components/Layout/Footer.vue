@@ -33,6 +33,28 @@
                 </div>
             </div>
         </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="container-s">
+                    <FastImage :image="data.footerLogo" class="footer-logo" />
+                    <div class="footer-menu">
+                        <div v-for="col in data.footerMenu" :key="col.id" class="footer-col">
+                            <span class="footer-title">{{ col.title }}</span>
+                            <div v-for="link in col.links" :key="link.id" class="footer-link">
+                                <LinkTo :link="link" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wrapper-social-lang">
+                        <LayoutSocial :data="data.social" />
+                    </div>
+                    <div class="wrapper-copy-warning">
+                        <div class="copy" v-html="data.footerCopyright" />
+                        <div class="evin-warning" v-html="data.footerWarning" />
+                    </div>
+                </div>
+            </div>
+        </div>
     </footer>
 </template>
 
@@ -99,10 +121,100 @@ export default {
 .newsletter-form {
     margin-top: 20px;
 }
+.footer-bottom {
+    padding: 50px 0;
+    background: $blue;
+    color: $grey-2;
+    .footer-title {
+        padding: 0;
+        font-size: 1.4rem;
+        line-height: 18px;
+    }
+}
+.footer-logo {
+    width: 210px;
+    margin: 0 auto;
+}
+.footer-menu {
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+    text-align: center;
+}
+.footer-col {
+    margin-bottom: 40px;
+    padding: 0 $gutter;
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+.footer-link {
+    font-size: 1.4rem;
+    line-height: 18px;
+    margin-bottom: 15px;
+    &:last-child {
+        margin-bottom: 0;
+    }
+    a {
+        text-decoration: none;
+        color: $white;
+    }
+}
+.wrapper-social-lang {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 0 $gutter;
+}
+.wrapper-copy-warning {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    padding-top: 30px;
+    font-size: 1.2rem;
+    line-height: 15px;
+    text-align: center;
+    ::v-deep p {
+        margin: 0;
+    }
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: $gutter;
+        right: $gutter;
+        border-top: 1px solid $grey-2;
+    }
+    > div {
+        padding: 0 $gutter;
+    }
+}
+.evin-warning {
+    margin-top: 30px;
+}
 
 @media (min-width: $phone) {
     .benefit {
         width: percentage(math.div(1, 3));
+    }
+    .footer-menu {
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+    .footer-col {
+        width: 50%;
+    }
+}
+@media (min-width: $tablet) {
+    .footer-logo {
+        width: 380px;
+    }
+    .footer-menu {
+        width: percentage(math.div(4, 6));
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 @media (min-width: $desktop-small) {
@@ -117,6 +229,20 @@ export default {
     .benefits {
         margin-bottom: 0;
     }
+    .footer-bottom {
+        padding-top: 100px;
+    }
+    .wrapper-copy-warning {
+        flex-direction: row;
+        align-items: baseline;
+        justify-content: space-between;
+    }
+    .evin-warning {
+        margin-top: 0;
+    }
+    .wrapper-social-lang {
+        margin-top: 10px;
+    }
 }
 @media (min-width: $desktop) {
     .benefit {
@@ -124,6 +250,19 @@ export default {
     }
     .newsletter {
         width: percentage(math.div(4, 10));
+    }
+    .footer-bottom {
+        .footer-title {
+            margin-bottom: 25px;
+        }
+    }
+    .footer-menu {
+        width: 100%;
+        margin-top: 70px;
+        text-align: left;
+    }
+    .footer-col {
+        width: 25%;
     }
 }
 @media (min-width: $desktop-large) {
