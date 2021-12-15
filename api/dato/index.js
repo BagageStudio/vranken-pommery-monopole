@@ -83,6 +83,7 @@ export const layoutQuery = `
                 }
             }
             socials {
+                id
                 icon {
                     ${img}
                 }

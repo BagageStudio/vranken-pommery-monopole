@@ -1,10 +1,6 @@
 <template>
     <header>
-        <div class="container">
-            <div class="content-pad nav">
-                <div v-for="item in data.menu" :key="item.id">{{ item.label }}</div>
-            </div>
-        </div>
+        <LayoutMobileNav :data="data" />
     </header>
 </template>
 <script>
@@ -19,13 +15,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-header {
-    padding-top: 60px;
-    padding-bottom: 60px;
-}
-.nav {
-    display: flex;
-    justify-content: space-between;
-}
-</style>
+<style lang="scss" scoped></style>

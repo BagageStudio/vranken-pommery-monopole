@@ -325,6 +325,10 @@ a {
     }
 }
 
+.icon {
+    fill: currentColor;
+}
+
 @media (min-width: $desktop-small) {
     .wrapper-page {
         padding: 80px 0;
