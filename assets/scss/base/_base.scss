@@ -276,7 +276,7 @@ a {
 /******* CLASSES GENERALES  *******/
 
 .wrapper-page {
-    padding: 50px 0;
+    padding: calc(var(--header-height) + 50px) 0 50px;
 }
 
 .align-center {
@@ -343,7 +343,7 @@ a {
 
 @media (min-width: $desktop-small) {
     .wrapper-page {
-        padding: 80px 0;
+        padding: calc(var(--header-height) + 80px) 0 80px;
     }
 }
 
