@@ -133,10 +133,16 @@ export default {
     right: 0;
     left: 0;
     z-index: 1;
-    background-color: $white;
-}
-.mobile-bar-container {
-    background-color: $white;
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: $white;
+        z-index: -1;
+    }
 }
 .burger {
     position: relative;
@@ -209,7 +215,6 @@ export default {
     padding-bottom: 20px;
     border-top: 1px solid $grey-3;
     border-bottom: 1px solid $grey-3;
-    background-color: $white;
 }
 
 .search-bar {
