@@ -137,9 +137,9 @@ export default {
         content: '';
         position: absolute;
         top: 0;
+        height: var(--header-height);
         left: 0;
         right: 0;
-        bottom: 0;
         background-color: $white;
         z-index: -1;
     }
