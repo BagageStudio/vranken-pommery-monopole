@@ -4,43 +4,19 @@ export default `
             slug
             _modelApiKey
         }
-        contact(locale: $lang) {
+        allProducts(locale: $lang, first: $first, skip: $skip, filter: {slug: {neq: null}}) {
             slug
             _modelApiKey
         }
-        team(locale: $lang) {
+        allBrands(locale: $lang, first: $first, skip: $skip, filter: {slug: {neq: null}}) {
             slug
             _modelApiKey
         }
-        portfolio(locale: $lang) {
+        allCategories(locale: $lang, first: $first, skip: $skip, filter: {slug: {neq: null}}) {
             slug
             _modelApiKey
         }
-        investorsPage(locale: $lang) {
-            slug
-            _modelApiKey
-        }
-        ring2success(locale: $lang) {
-            slug
-            _modelApiKey
-        }
-        sustainableEngagement(locale: $lang) {
-            slug
-            _modelApiKey
-        }
-        vision(locale: $lang) {
-            slug
-            _modelApiKey
-        }
-        allFunds(locale: $lang, filter: {slug: {neq: null}}) {
-            slug
-            _modelApiKey
-        }
-        allCompanies(locale: $lang, filter: {slug: {neq: null}}) {
-            slug
-            _modelApiKey
-        },
-        useCasesPage(locale: $lang) {
+        allCuvees(locale: $lang, first: $first, skip: $skip, filter: {slug: {neq: null}}) {
             slug
             _modelApiKey
         }

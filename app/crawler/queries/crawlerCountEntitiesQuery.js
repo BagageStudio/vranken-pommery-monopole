@@ -3,11 +3,21 @@ export default `
         _allPagesMeta(locale: $lang) {
             count
         }
-        _allFundsMeta(locale: $lang, filter: {slug: {neq: null}}) {
-            count
+        allProducts(locale: $lang, filter: {slug: {neq: null}}) {
+            slug
+            _modelApiKey
         }
-        _allCompaniesMeta(locale: $lang, filter: {slug: {neq: null}}) {
-            count
+        allBrands(locale: $lang, filter: {slug: {neq: null}}) {
+            slug
+            _modelApiKey
+        }
+        allCategories(locale: $lang, filter: {slug: {neq: null}}) {
+            slug
+            _modelApiKey
+        }
+        allCuvees(locale: $lang, filter: {slug: {neq: null}}) {
+            slug
+            _modelApiKey
         }
     }
 `;
