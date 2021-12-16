@@ -11,10 +11,10 @@
                     <Icon name="logo-blue" />
                 </nuxt-link>
                 <div class="snip-buttons">
+                    <button class="snip-button snipcart-customer-signin"><Icon name="user" /></button>
                     <button class="snip-button snipcart-checkout">
-                        <Icon name="user" />
+                        <Icon name="cart" />
                     </button>
-                    <button class="snip-button snipcart-customer-signin"><Icon name="cart" /></button>
                 </div>
             </div>
         </div>
@@ -133,6 +133,7 @@ export default {
     right: 0;
     left: 0;
     z-index: 1;
+    background-color: $white;
 }
 .mobile-bar-container {
     background-color: $white;
