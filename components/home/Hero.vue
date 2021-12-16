@@ -1,12 +1,14 @@
 <template>
-    <div class="hero">
-        <div class="hero-cover">
-            <FastImage :image="data.heroCover" cover />
-        </div>
-        <div class="hero-content container">
-            <div class="content-pad">
-                <h1 class="hero-title h1">{{ data.heroTitle }}</h1>
-                <LinkTo class="btn-block" :link="data.heroLink" />
+    <div class="wrapper-hero">
+        <div class="hero">
+            <div class="hero-cover">
+                <FastImage :image="data.heroCover" cover />
+            </div>
+            <div class="hero-content container">
+                <div class="content-pad">
+                    <h1 class="hero-title h1">{{ data.heroTitle }}</h1>
+                    <LinkTo class="btn-block" :link="data.heroLink" />
+                </div>
             </div>
         </div>
     </div>
@@ -23,10 +25,13 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.wrapper-hero {
+    padding-top: var(--header-height);
+}
 .hero {
     position: relative;
     height: 630px;
-    padding: 40px 0;
+    padding: 40px 0 40px;
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
