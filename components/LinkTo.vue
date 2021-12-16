@@ -21,7 +21,9 @@
 
 <script>
 import { routeByApiModels } from '~/app/crawler/routes';
+import { handleShopItem } from '~/api/dato/helpers/data';
 
+const shopModels = ['product', 'cuvee', 'category'];
 export default {
     props: {
         link: {
@@ -51,6 +53,17 @@ export default {
 
             return { name: routerFormat, params, hash };
         },
+        getShopItemDatas({ _modelApiKey, brand, cuvee, category, slug }) {
+            const { routerFormat } = routeByApiModels[_modelApiKey];
+            const params = {
+                brand: brand.slug,
+                cuvee: cuvee ? cuvee.slug : slug,
+                category: category ? category.slug : slug,
+                uuid: slug
+            };
+
+            return { name: routerFormat, params };
+        },
         linkResolver() {
             if (this.shop) {
                 return this.shopLinkResolver();
@@ -62,7 +75,15 @@ export default {
             let resolvedLink = { url: '', ...this.link };
 
             if (resolvedLink.internalLink) {
-                resolvedLink.url = this.localePath(this.getInternalUrlDatas());
+                if (shopModels.includes(resolvedLink.internalLink._modelApiKey)) {
+                    const { _modelApiKey, brand, cuvee, category, slug } = handleShopItem(resolvedLink.internalLink);
+
+                    resolvedLink.url = this.localePath(
+                        this.getShopItemDatas({ _modelApiKey, brand, cuvee, category, slug })
+                    );
+                } else {
+                    resolvedLink.url = this.localePath(this.getInternalUrlDatas());
+                }
             } else if (!resolvedLink.externalLink) {
                 // If no links selected
                 console.warn(
@@ -75,16 +96,9 @@ export default {
         },
         shopLinkResolver() {
             const resolvedLink = { url: '', title: this.link.title };
-            const { routerFormat } = routeByApiModels[this.link._modelApiKey];
-            const { brand, cuvee, category, slug } = this.link;
-            const params = {
-                brand: brand.slug,
-                cuvee: cuvee ? cuvee.slug : slug,
-                category: category ? category.slug : slug,
-                uuid: slug
-            };
+            const { _modelApiKey, brand, cuvee, category, slug } = this.link;
 
-            resolvedLink.url = this.localePath({ name: routerFormat, params });
+            resolvedLink.url = this.localePath(this.getShopItemDatas({ _modelApiKey, brand, cuvee, category, slug }));
 
             return resolvedLink;
         }
