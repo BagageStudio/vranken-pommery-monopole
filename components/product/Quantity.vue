@@ -1,11 +1,11 @@
 <template>
     <div class="wrapper-quantity">
         <div class="quantity-select" :class="{ error }">
-            <button @click="substract">-</button>
+            <button class="btn-quantity substract" @click="substract"><Icon name="minus" /></button>
             <input :value="quantity" class="quantity" type="number" min="1" @input="checkInputValue" />
-            <button @click="add">+</button>
+            <button class="btn-quantity add" @click="add"><Icon name="plus" /></button>
         </div>
-        <div v-if="error">error mon poto</div>
+        <div v-if="error">Error</div>
     </div>
 </template>
 <script>
@@ -51,9 +51,14 @@ export default {
 <style lang="scss" scoped>
 .quantity-select {
     display: inline-flex;
-    font-size: 3rem;
-    border-left: 2px solid currentColor;
-    border-right: 2px solid currentColor;
+    align-items: stretch;
+    height: 45px;
+    font-family: $plex-sans;
+    font-weight: 400;
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+    border: 1px solid $grey-3;
+    color: $grey-1;
     &.error {
         .quantity {
             color: red;
@@ -63,9 +68,9 @@ export default {
 
 .quantity {
     text-align: center;
-    width: 100px;
-    padding: 20px;
-    border: 2px solid currentColor;
+    width: 30px;
+    padding: 0;
+    background: none;
     &::-webkit-inner-spin-button,
     &::-webkit-outer-spin-button {
         -webkit-appearance: none;
@@ -73,10 +78,19 @@ export default {
     }
 }
 
-button {
-    color: $white;
-    padding: 20px;
-    border-top: 2px solid currentColor;
-    border-bottom: 2px solid currentColor;
+.btn-quantity {
+    &.substract {
+        padding-left: 35px;
+        padding-right: 15px;
+    }
+    &.add {
+        padding-left: 15px;
+        padding-right: 35px;
+    }
+    .icon {
+        fill: currentColor;
+        width: 18px;
+        height: 18px;
+    }
 }
 </style>
