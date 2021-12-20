@@ -1,6 +1,7 @@
 <template>
     <header>
-        <LayoutMobileNav :data="data" />
+        <LayoutMobileNav v-if="isMobile" :data="data" />
+        <LayoutDesktopNav v-if="!isMobile" :data="data" />
     </header>
 </template>
 <script>
@@ -10,6 +11,12 @@ export default {
     computed: {
         data() {
             return layoutData[this.$store.state.i18n.locale].header;
+        },
+        isMobile() {
+            return this.ww <= this.$breakpoints.list.l;
+        },
+        ww() {
+            return this.$store.state.superWindow ? this.$store.state.superWindow.width : 320;
         }
     }
 };

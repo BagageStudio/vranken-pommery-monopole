@@ -65,11 +65,14 @@ export const layoutQuery = `
                     id
                     label
                     items {
-                        ... on SingleLinkRecord {
+                        ... on SingleLinkImageRecord {
                             id
                             label
                             link {
                                 ...link
+                            }
+                            image {
+                                ${img}
                             }
                         }
                         ... on SubsubmenuRecord {
@@ -79,9 +82,12 @@ export const layoutQuery = `
                                 ${img}
                             }
                             items {
-                            label
+                                label
                                 link {
                                     ...link
+                                }
+                                image {
+                                    ${img}
                                 }
                             }
                         }
