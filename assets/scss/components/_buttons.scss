@@ -2,6 +2,8 @@
 .btn-block {
     position: relative;
     display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 14px 25px;
     font-family: $plex-sans;
     font-weight: 400;
@@ -16,5 +18,14 @@
     &.grey {
         border-color: $grey-1;
         color: $grey-1;
+    }
+    &.bg-blue {
+        color: $white;
+        background: $blue;
+    }
+    .icon {
+        width: 18px;
+        height: 17px;
+        margin-left: 10px;
     }
 }

@@ -1,24 +1,7 @@
 <template>
-    <div class="container">
-        <LayoutBreadcrumbs :start="data.brand.title" :end="data.title" :links="[cuvee, category]" />
-        <h1 class="h1">{{ data.title }}</h1>
-        <div>
-            <img :src="data.image.url" alt="" />
-        </div>
-
-        <ProductQuantity v-model="quantity" />
-
-        <button
-            class="snipcart-add-item"
-            :data-item-id="data.uuid"
-            :data-item-price="data.price"
-            :data-item-image="data.image.url"
-            :data-item-name="data.title"
-            :data-item-description="data.shoppingCartDescription"
-            :data-item-quantity="quantity"
-        >
-            Add to cart
-        </button>
+    <div class="wrapper-page">
+        <!-- <LayoutBreadcrumbs :start="data.brand.title" :end="data.title" :links="[cuvee, category]" /> -->
+        <ProductHero :data="data" />
     </div>
 </template>
 <script>
@@ -80,31 +63,8 @@ export default {
         await setRouteParams.call(context, datoLocales);
 
         return finalData;
-    },
-    data: () => ({
-        quantity: 1
-    }),
-    methods: {
-        updateQuantity(quantity) {
-            this.quantity = quantity;
-        }
     }
 };
 </script>
 
-<style lang="scss" scoped>
-img {
-    height: 400px;
-}
-
-.wrapper-quantity {
-    margin-top: 40px;
-}
-.snipcart-add-item {
-    margin-top: 25px;
-    padding: 25px;
-    color: $white;
-    text-transform: uppercase;
-    border: 2px solid currentColor;
-}
-</style>
+<style lang="scss" scoped></style>
