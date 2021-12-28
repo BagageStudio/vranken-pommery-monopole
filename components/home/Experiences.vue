@@ -5,7 +5,6 @@
                 <div class="experiences-col content-pad">
                     <span class="label">{{ data.experiencesLabel }}</span>
                     <h3 class="experiences-title h2">{{ data.experiencesTitle }}</h3>
-                    <LinkTo class="btn-experiences btn-block grey" :link="data.experiencesLink" />
                     <HomeExperienceCard :data="data.experiences[0]" />
                 </div>
                 <div class="experiences-col content-pad">

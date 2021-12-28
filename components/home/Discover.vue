@@ -34,6 +34,7 @@ export default {
     margin: 0 auto;
     font-family: $plex-serif;
     font-size: 2.5rem;
+    font-style: italic;
     font-weight: 400;
     line-height: 40px;
     text-align: center;

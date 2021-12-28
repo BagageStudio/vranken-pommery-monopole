@@ -1,13 +1,12 @@
 <template>
-    <LinkTo :link="data.link" class="experience-card" hide-label>
+    <div class="experience-card">
         <span class="card-background">
             <FastImage :image="data.thumbnail" cover />
         </span>
         <span class="card-txt">
-            <span class="card-title">{{ data.title }}</span>
-            <span class="card-label">{{ data.label }}</span>
+            <LinkTo class="btn-block" :link="data.link" />
         </span>
-    </LinkTo>
+    </div>
 </template>
 
 <script>
@@ -54,19 +53,6 @@ export default {
     position: relative;
     display: flex;
     flex-direction: column;
-}
-.card-title {
-    font-size: 2.2rem;
-    line-height: 28px;
-    color: $white;
-}
-.card-label {
-    margin-top: 5px;
-    font-size: 1.2rem;
-    line-height: 16px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: $gold;
 }
 
 @media (min-width: $phone) {
