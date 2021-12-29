@@ -1,5 +1,10 @@
 {
     "global": {
         "orderLabel": "Commander"
+    },
+    "product": {
+        "eyeLabel": "Œil",
+        "noseLabel": "Nez",
+        "palateLabel": "Bouche"
     }
 }
