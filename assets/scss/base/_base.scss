@@ -310,6 +310,16 @@ a {
     }
 }
 
+.small-title {
+    font-family: $plex-sans;
+    font-size: 1.5rem;
+    font-style: normal;
+    line-height: 19px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: $gold;
+}
+
 .visually-hidden {
     width: 1px !important;
     height: 1px !important;

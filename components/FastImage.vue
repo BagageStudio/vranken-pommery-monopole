@@ -1,16 +1,19 @@
 <template>
     <figure class="fast-image" :class="{ loaded, cover, contains }">
-        <img
-            ref="fitImage"
-            :src="imgixParameters(image.url)"
-            :srcset="resolveSrcSet(image, fullWidth)"
-            :sizes="resolveSizes(image, fullWidth)"
-            :alt="resolveAlt(image)"
-            :loading="loading"
-            :width="image.width"
-            :height="image.height"
-            class="image"
-        />
+        <div class="container-image">
+            <img
+                ref="fitImage"
+                :src="imgixParameters(image.url)"
+                :srcset="resolveSrcSet(image, fullWidth)"
+                :sizes="resolveSizes(image, fullWidth)"
+                :alt="resolveAlt(image)"
+                :loading="loading"
+                :width="image.width"
+                :height="image.height"
+                class="image"
+            />
+        </div>
+        <figcaption v-if="caption">{{ caption }}</figcaption>
     </figure>
 </template>
 
@@ -39,6 +42,10 @@ export default {
         fullWidth: {
             type: Boolean,
             default: false
+        },
+        caption: {
+            type: String,
+            default: ''
         }
     },
     data() {
@@ -145,5 +152,18 @@ export default {
             object-fit: contain;
         }
     }
+}
+.container-image {
+    width: 100%;
+    height: 100%;
+}
+figcaption {
+    margin-top: 10px;
+    font-family: $plex-sans;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.4rem;
+    line-height: 18px;
+    color: $gold;
 }
 </style>

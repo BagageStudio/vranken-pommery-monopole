@@ -212,6 +212,13 @@ export const productQuery = `
             }
             productType
             description
+            tastingLabel
+            tastingTitle
+            tastingDescription
+            tastingImage{
+                ${img}
+            }
+            tastingImageCaption
             category{
                 _modelApiKey
                 ${locales}

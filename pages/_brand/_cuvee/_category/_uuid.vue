@@ -2,6 +2,7 @@
     <div class="wrapper-page">
         <!-- <LayoutBreadcrumbs :start="data.brand.title" :end="data.title" :links="[cuvee, category]" /> -->
         <ProductHero :data="data" />
+        <ProductTasting :data="data" />
     </div>
 </template>
 <script>
