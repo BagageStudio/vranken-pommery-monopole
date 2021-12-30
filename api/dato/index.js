@@ -289,6 +289,8 @@ export const productsInCategoryQuery = `
             image{
                 ${img}
             }
+            price
+            productType
             category{
                 _modelApiKey
                 ${locales}

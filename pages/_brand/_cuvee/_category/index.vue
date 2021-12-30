@@ -1,15 +1,8 @@
 <template>
-    <div class="container">
-        <LayoutBreadcrumbs :start="data.brand.title" :end="data.title" :links="[cuvee]" />
-        <h1 class="h1">{{ data.title }}</h1>
-        <div>
-            <h2 class="h2">Products</h2>
-            <div v-for="product in products" :key="product.id">
-                <LinkTo shop :link="product">
-                    <h3 class="h3">{{ product.title }}</h3>
-                </LinkTo>
-            </div>
-        </div>
+    <div class="wrapper-page">
+        <!-- <LayoutBreadcrumbs :start="data.brand.title" :end="data.title" :links="[cuvee]" /> -->
+        <listHero :data="data" />
+        <listProducts :products="products" />
     </div>
 </template>
 <script>
