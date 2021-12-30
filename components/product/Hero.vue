@@ -100,7 +100,7 @@ export default {
     flex: 1 1 auto;
 }
 .product-description {
-    margin: 50px 0;
+    margin: 50px 0 0;
     padding-top: 50px;
     border-top: 1px solid $grey-3;
 }
@@ -114,25 +114,41 @@ export default {
         width: 50%;
         &::before {
             width: 50vw;
-            right: 0;
+            right: $gutter;
             left: auto;
         }
     }
     .wrapper-product-description {
         flex: 0 0 auto;
         width: 50%;
+        padding-bottom: 0;
     }
 }
 @media (min-width: $desktop) {
     .wrapper-product-description {
-        width: percentage(math.div(5, 12));
-        margin-left: percentage(math.div(1, 12));
+        width: percentage(math.div(4, 12));
     }
 }
 @media (min-width: $desktop-large) {
     .wrapper-product-description {
         width: percentage(math.div(4, 12));
-        padding: 65px $gutter;
+        padding: 65px $gutter 0;
+    }
+    .wrapper-product-image {
+        width: percentage(math.div(7, 12));
+        justify-content: flex-start;
+        aspect-ratio: 1 / 1;
+        &::before {
+            width: 50vw;
+            right: percentage(math.div(1, 7));
+            left: auto;
+        }
+    }
+    .product-image {
+        aspect-ratio: auto;
+        max-width: none;
+        width: percentage(math.div(6, 7));
+        padding: 120px;
     }
 }
 </style>

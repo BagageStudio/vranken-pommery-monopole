@@ -137,6 +137,7 @@ export default {
     .wrapper-image {
         flex: 0 0 auto;
         width: 50%;
+        margin-top: 0;
         ::v-deep .container-image {
             aspect-ratio: 1 / 0.93;
         }
