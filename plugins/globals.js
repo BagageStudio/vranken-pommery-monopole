@@ -21,3 +21,11 @@ Vue.filter('noPAround', function (value) {
         return value;
     }
 });
+
+Vue.filter('formatNumber', (number, i18n) => {
+    const [{ iso }] = i18n.locales.filter(({ code }) => {
+        return code === i18n.locale;
+    });
+    const localeIso = iso.replace('_', '-');
+    return new Intl.NumberFormat(localeIso, { style: 'currency', currency: 'EUR' }).format(number);
+});

@@ -7,7 +7,7 @@
             <div class="product-details">
                 <span class="product-title">{{ product.title }}</span>
                 <span class="product-type">{{ product.productType }}</span>
-                <span class="product-price">{{ product.price }}€</span>
+                <span class="product-price">{{ $options.filters.formatNumber(product.price, $store.$i18n) }}</span>
             </div>
         </LinkTo>
     </div>
