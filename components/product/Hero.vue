@@ -108,15 +108,19 @@ export default {
 @media (min-width: $tablet) {
     .wrapper-product-top {
         display: flex;
+        justify-content: space-between;
         align-items: flex-start;
     }
     .wrapper-product-image {
-        width: 50%;
+        width: percentage(math.div(4, 10));
         &::before {
             width: 50vw;
             right: $gutter;
             left: auto;
         }
+    }
+    .product-image {
+        min-height: 450px;
     }
     .wrapper-product-description {
         flex: 0 0 auto;
@@ -125,30 +129,43 @@ export default {
     }
 }
 @media (min-width: $desktop) {
-    .wrapper-product-description {
-        width: percentage(math.div(4, 12));
-    }
-}
-@media (min-width: $desktop-large) {
-    .wrapper-product-description {
-        width: percentage(math.div(4, 12));
-        padding: 65px $gutter 0;
+    .wrapper-product-top {
+        width: 100%;
+        justify-content: flex-start;
     }
     .wrapper-product-image {
-        width: percentage(math.div(7, 12));
+        width: percentage(math.div(6, 12));
         justify-content: flex-start;
         aspect-ratio: 1 / 1;
         &::before {
             width: 50vw;
-            right: percentage(math.div(1, 7));
+            right: percentage(math.div(1, 6));
             left: auto;
         }
     }
     .product-image {
         aspect-ratio: auto;
         max-width: none;
+        width: percentage(math.div(5, 6));
+    }
+    .wrapper-product-description {
+        width: percentage(math.div(5, 12));
+        padding: 65px $gutter 0;
+    }
+}
+@media (min-width: $desktop-large) {
+    .wrapper-product-image {
+        width: percentage(math.div(7, 12));
+        &::before {
+            right: percentage(math.div(1, 7));
+        }
+    }
+    .product-image {
         width: percentage(math.div(6, 7));
         padding: 120px;
+    }
+    .wrapper-product-description {
+        width: percentage(math.div(4, 12));
     }
 }
 </style>

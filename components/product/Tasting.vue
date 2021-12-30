@@ -136,8 +136,9 @@ export default {
     }
     .wrapper-image {
         flex: 0 0 auto;
-        width: 50%;
+        width: percentage(math.div(4, 10));
         margin-top: 0;
+        margin-left: percentage(math.div(1, 10));
         ::v-deep .container-image {
             aspect-ratio: 1 / 0.93;
         }
@@ -159,6 +160,10 @@ export default {
     }
     .wrapper-txt {
         width: percentage(math.div(4, 10));
+    }
+    .wrapper-image {
+        width: 50%;
+        margin-left: 0;
     }
     .tasting-detail {
         margin-bottom: 100px;

@@ -43,6 +43,8 @@ export default {
         computeColumns() {
             if (this.windowWidth >= this.$breakpoints.list.xl) {
                 this.columnsNumber = 12;
+            } else if (this.windowWidth >= this.$breakpoints.list.m) {
+                this.columnsNumber = 10;
             } else if (this.windowWidth >= this.$breakpoints.list.s) {
                 this.columnsNumber = 6;
             } else {
