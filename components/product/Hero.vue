@@ -24,7 +24,7 @@
                         <Icon name="cart" />
                     </button>
                 </div>
-                <div class="product-description wysiwyg" v-html="data.description" />
+                <div class="product-description wysiwyg" v-html="data.description.description" />
             </div>
         </div>
     </div>

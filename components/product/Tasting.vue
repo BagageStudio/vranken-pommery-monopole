@@ -2,47 +2,43 @@
     <div>
         <div class="container">
             <div class="container-s">
-                <div class="product-tasting">
+                <div v-if="data.noteDescription" class="product-tasting">
                     <div class="wrapper-txt content-pad">
-                        <span v-if="data.tastingLabel" class="small-title">{{ data.tastingLabel }}</span>
-                        <h3 v-if="data.tastingTitle" class="tasting-title h3">{{ data.tastingTitle }}</h3>
-                        <div
-                            v-if="data.tastingDescription"
-                            class="tasting-description wysiwyg"
-                            v-html="data.tastingDescription"
-                        />
+                        <span v-if="data.noteLabel" class="small-title">{{ data.noteLabel }}</span>
+                        <h3 v-if="data.noteTitle" class="tasting-title h3">{{ data.noteTitle }}</h3>
+                        <div class="tasting-description wysiwyg" v-html="data.noteDescription" />
                     </div>
-                    <div v-if="data.tastingImage" class="wrapper-image content-pad">
+                    <div v-if="data.noteImage" class="wrapper-image content-pad">
                         <FastImage
-                            :image="data.tastingImage"
-                            :caption="data.tastingImageCaption ? data.tastingImageCaption : ''"
+                            :image="data.noteImage"
+                            :caption="data.noteImageCaption ? data.noteImageCaption : ''"
                             cover
                         />
                     </div>
                 </div>
-                <div v-if="data.tasting" class="tasting-detail">
-                    <span class="tasting-detail-description h3 content-pad">{{ data.tasting.description }}</span>
+                <div class="tasting-detail">
+                    <span class="tasting-detail-description h3 content-pad">{{ data.sensesTitle }}</span>
                     <div class="tasting-contents">
                         <div class="tasting-content content-pad">
                             <div class="tasting-visual">
                                 <Icon name="eye" />
                                 <span>{{ $t('product.eyeLabel') }}</span>
                             </div>
-                            <div v-html="data.tasting.eye" />
+                            <div v-html="data.eye" />
                         </div>
                         <div class="tasting-content content-pad">
                             <div class="tasting-visual">
                                 <Icon name="eye" />
                                 <span>{{ $t('product.noseLabel') }}</span>
                             </div>
-                            <div v-html="data.tasting.nose" />
+                            <div v-html="data.nose" />
                         </div>
                         <div class="tasting-content content-pad">
                             <div class="tasting-visual">
                                 <Icon name="eye" />
                                 <span>{{ $t('product.palateLabel') }}</span>
                             </div>
-                            <div v-html="data.tasting.palate" />
+                            <div v-html="data.palate" />
                         </div>
                     </div>
                 </div>

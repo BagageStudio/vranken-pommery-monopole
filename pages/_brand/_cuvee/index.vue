@@ -1,13 +1,15 @@
 <template>
-    <div class="container">
-        <LayoutBreadcrumbs :start="data.brand.title" :end="data.title" />
-        <h1 class="h1">{{ data.title }}</h1>
-        <div>
-            <h2 class="h2">Categories</h2>
-            <div v-for="category in categories" :key="category.id">
-                <LinkTo shop :link="category">
-                    <h3 class="h3">{{ category.title }}</h3>
-                </LinkTo>
+    <div class="wrapper-page">
+        <div class="container">
+            <LayoutBreadcrumbs :start="data.brand.title" :end="data.title" />
+            <h1 class="h1">{{ data.title }}</h1>
+            <div>
+                <h2 class="h2">Categories</h2>
+                <div v-for="category in categories" :key="category.id">
+                    <LinkTo shop :link="category">
+                        <h3 class="h3">{{ category.title }}</h3>
+                    </LinkTo>
+                </div>
             </div>
         </div>
     </div>

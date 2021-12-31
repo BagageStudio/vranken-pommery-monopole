@@ -211,17 +211,22 @@ export const productQuery = `
                 ${img}
             }
             productType
-            description
-            tastingLabel
-            tastingTitle
-            tastingDescription
-            tastingImage{
-                ${img}
-            }
-            tastingImageCaption
-            tasting{
+            description{
+                id
                 title
                 description
+            }
+            tasting{
+                id
+                title
+                noteLabel
+                noteTitle
+                noteDescription
+                noteImage{
+                    ${img}
+                }
+                noteImageCaption
+                sensesTitle
                 eye
                 nose
                 palate
@@ -284,6 +289,7 @@ export const productsInCategoryQuery = `
             ${locales}
             id
             title
+            listTitle
             slug
             uuid
             image{

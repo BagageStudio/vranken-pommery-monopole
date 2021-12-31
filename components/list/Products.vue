@@ -5,7 +5,7 @@
                 <FastImage :image="product.image" contains />
             </div>
             <div class="product-details">
-                <span class="product-title">{{ product.title }}</span>
+                <span class="product-title">{{ product.listTitle }}</span>
                 <span class="product-type">{{ product.productType }}</span>
                 <span class="product-price">{{ $options.filters.formatNumber(product.price, $store.$i18n) }}</span>
             </div>
