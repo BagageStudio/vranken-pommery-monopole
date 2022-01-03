@@ -102,6 +102,16 @@ export const layoutQuery = `
                 linkUrl
             }
         }
+        ageGate(locale: $lang) {
+            logo {
+                ${img}
+            }
+            title
+            introduction
+            checkboxLabel
+            buttonLabel
+            bottomText
+        }
     }
 `;
 

@@ -3,6 +3,7 @@
         <LayoutHeader />
         <Nuxt />
         <LayoutFooter />
+        <LayoutAgeGate />
         <LayoutSvgs />
         <LayoutGrid v-if="$config.isDevEnv" />
     </div>

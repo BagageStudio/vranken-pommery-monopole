@@ -1,15 +1,17 @@
 <template>
-    <div class="products-list container">
-        <LinkTo v-for="product in products" :key="product.id" class="product-card" shop :link="product">
-            <div class="product-image">
-                <FastImage :image="product.image" contains />
-            </div>
-            <div class="product-details">
-                <span class="product-title">{{ product.listTitle }}</span>
-                <span class="product-type">{{ product.productType }}</span>
-                <span class="product-price">{{ $options.filters.formatNumber(product.price, $store.$i18n) }}</span>
-            </div>
-        </LinkTo>
+    <div class="container">
+        <div class="products-list">
+            <LinkTo v-for="product in products" :key="product.id" class="product-card" shop :link="product">
+                <div class="product-image">
+                    <FastImage :image="product.image" contains />
+                </div>
+                <div class="product-details">
+                    <span class="product-title">{{ product.listTitle }}</span>
+                    <span class="product-type">{{ product.productType }}</span>
+                    <span class="product-price">{{ $options.filters.formatNumber(product.price, $store.$i18n) }}</span>
+                </div>
+            </LinkTo>
+        </div>
     </div>
 </template>
 
