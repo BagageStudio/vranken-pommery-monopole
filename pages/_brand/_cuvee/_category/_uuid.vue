@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper-page">
-        <!-- <LayoutBreadcrumbs :start="data.brand.title" :end="data.title" :links="[cuvee, category]" /> -->
-        <ProductHero :data="data" />
+        <LayoutBreadcrumbs :start="data.brand.title" :end="data.title" :links="[cuvee, category]" />
+        <ProductHero :data="data" :back-link="category" />
         <ProductTasting v-if="data.tasting" :data="data.tasting" />
     </div>
 </template>

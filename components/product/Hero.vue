@@ -2,6 +2,10 @@
     <div class="product-hero container">
         <div class="wrapper-product-top">
             <div class="wrapper-product-image">
+                <LinkTo shop class="btn-back" :link="backLink">
+                    <Icon name="arrow-left" />
+                    <span>{{ $t('global.backLabel') }}</span>
+                </LinkTo>
                 <div class="product-image">
                     <FastImage :image="data.image" contains />
                 </div>
@@ -36,6 +40,10 @@ export default {
         data: {
             type: Object,
             required: true
+        },
+        backLink: {
+            type: Object,
+            required: true
         }
     },
     data: () => ({
@@ -61,6 +69,27 @@ export default {
         bottom: 0;
         left: -#{$grid-gutter-s};
         background: $beige;
+    }
+}
+.btn-back {
+    position: absolute;
+    top: 0;
+    left: -$grid-gutter-s;
+    display: inline-flex;
+    align-items: center;
+    padding: 30px 20px 30px 25px;
+    font-size: 1.5rem;
+    line-height: 19px;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    color: $grey-2;
+    background: $white;
+    z-index: 1;
+    .icon {
+        width: 9px;
+        height: 6px;
+        margin-right: 9px;
     }
 }
 .product-image {
@@ -142,6 +171,10 @@ export default {
             right: percentage(math.div(1, 6));
             left: auto;
         }
+    }
+    .btn-back {
+        left: -$grid-gutter-l;
+        padding: 30px 30px 30px 95px;
     }
     .product-image {
         aspect-ratio: auto;

@@ -1,6 +1,7 @@
 {
     "global": {
-        "orderLabel": "Order"
+        "orderLabel": "Order",
+        "backLabel": "Back"
     },
     "product": {
         "eyeLabel": "Eye",

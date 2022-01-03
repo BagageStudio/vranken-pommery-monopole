@@ -34,6 +34,11 @@
                     d="M.646 8.854a.5.5 0 0 1 0-.708L4.293 4.5.646.854a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708 0Z"
                 />
             </symbol>
+            <symbol id="icon-arrow-left" viewBox="0 0 6 9">
+                <path
+                    d="M5.815.155a.471.471 0 0 1 0 .749L1.525 4.5l4.29 3.596a.471.471 0 0 1 0 .749.72.72 0 0 1-.893 0L.185 4.875A.49.49 0 0 1 0 4.5a.49.49 0 0 1 .185-.374L4.922.156a.72.72 0 0 1 .893 0Z"
+                />
+            </symbol>
             <symbol id="icon-logo-blue" fill="none" viewBox="0 0 291 76" xmlns="http://www.w3.org/2000/svg">
                 <path
                     fill-rule="evenodd"
