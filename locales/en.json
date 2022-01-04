@@ -3,6 +3,9 @@
         "orderLabel": "Order",
         "backLabel": "Back"
     },
+    "list": {
+        "moreLabel": "Find out more"
+    },
     "product": {
         "eyeLabel": "Eye",
         "noseLabel": "Nose",

@@ -23,6 +23,11 @@
                 </div>
             </LinkTo>
         </div>
+        <div class="load-more content-pad">
+            <button class="btn-block grey">
+                {{ $t('list.moreLabel') }}
+            </button>
+        </div>
     </div>
 </template>
 
@@ -103,6 +108,12 @@ export default {
     color: $grey-1;
 }
 
+.load-more {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
 @media (min-width: $phone) {
     .products-list {
         flex-direction: row;
@@ -113,6 +124,9 @@ export default {
     .product-card {
         width: calc(50% - #{2 * $gutter});
         margin-bottom: 60px;
+    }
+    .load-more {
+        margin-bottom: 80px;
     }
 }
 @media (min-width: $tablet) {

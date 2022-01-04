@@ -3,6 +3,9 @@
         "orderLabel": "Commander",
         "backLabel": "Retour"
     },
+    "list": {
+        "moreLabel": "Découvrez plus"
+    },
     "product": {
         "eyeLabel": "Œil",
         "noseLabel": "Nez",
