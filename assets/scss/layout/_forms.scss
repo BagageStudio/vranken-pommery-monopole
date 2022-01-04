@@ -84,8 +84,8 @@ button {
     }
     &.error {
         input {
-            border-color: #f74656;
-            color: #f74656;
+            border-color: $error;
+            color: $error;
         }
     }
 }

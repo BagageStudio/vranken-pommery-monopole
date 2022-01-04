@@ -1,19 +1,20 @@
 <template>
-    <div class="age-gate">
+    <div v-if="!formValid" class="age-gate">
         <div class="container-age-gate">
             <FastImage :image="data.logo" class="age-gate-logo" />
             <div>
                 <span class="age-gate-title">{{ data.title }}</span>
                 <div class="age-gate-introduction" v-html="data.introduction" />
-                <form class="age-gate-form">
-                    <div class="wrapper-checkbox">
-                        <input id="legal-age" type="checkbox" name="legal-age" />
+                <form class="age-gate-form" @submit.prevent="sendForm">
+                    <div :class="['wrapper-checkbox', { error: formError }]">
+                        <input id="legal-age" v-model="checkboxInput" type="checkbox" name="legal-age" />
                         <label class="label" for="legal-age">{{ data.checkboxLabel }}</label>
                     </div>
                     <button ref="submit" type="submit" class="age-gate-btn btn-block grey">
                         {{ data.buttonLabel }}
                     </button>
                 </form>
+                <p v-if="formError" class="form-error" v-html="data.ageIncorrect" />
             </div>
             <div class="age-gate-bottom" v-html="data.bottomText" />
         </div>
@@ -21,12 +22,35 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie';
+
 import layoutData from '~/cms/data/layout-data.json';
 
 export default {
+    data() {
+        return {
+            checkboxInput: '',
+            formError: false,
+            formValid: false
+        };
+    },
     computed: {
         data() {
             return layoutData[this.$store.state.i18n.locale].ageGate;
+        }
+    },
+    methods: {
+        sendForm() {
+            this.formError = '';
+
+            if (!this.checkboxInput) {
+                this.formError = true;
+            }
+
+            if (!this.formError) {
+                Cookies.set('agevalid', 'true');
+                this.formValid = true;
+            }
         }
     }
 };
@@ -85,6 +109,10 @@ export default {
 }
 .age-gate-btn {
     margin-top: 36px;
+}
+.form-error {
+    text-align: center;
+    color: $error;
 }
 .age-gate-bottom {
     text-align: center;

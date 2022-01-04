@@ -3,20 +3,29 @@
         <LayoutHeader />
         <Nuxt />
         <LayoutFooter />
-        <LayoutAgeGate />
+        <LayoutAgeGate v-if="!ageValid" />
         <LayoutSvgs />
         <LayoutGrid v-if="$config.isDevEnv" />
     </div>
 </template>
 
 <script>
+import Cookies from 'js-cookie';
 import { spotFF } from '@stereorepo/sac';
 
 export default {
+    data() {
+        return {
+            ageValid: false
+        };
+    },
     beforeMount() {
         spotFF();
     },
     mounted() {
+        this.ageValid = Cookies.get('agevalid');
+        console.log('agevalid cookie: ' + this.ageValid);
+
         // Init superWindow
         this.$stereorepo.superWindow.initializeWindow(this.$store);
 

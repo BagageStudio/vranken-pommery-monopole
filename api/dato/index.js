@@ -111,6 +111,7 @@ export const layoutQuery = `
             checkboxLabel
             buttonLabel
             bottomText
+            ageIncorrect
         }
     }
 `;
