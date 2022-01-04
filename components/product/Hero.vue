@@ -13,6 +13,10 @@
             <div class="wrapper-product-description">
                 <span class="product-type">{{ data.productType }}</span>
                 <h1 class="product-title h2">{{ data.title }}</h1>
+                <div class="wrapper-price-availability">
+                    <span class="product-price h3">{{ $options.filters.formatNumber(data.price, $store.$i18n) }}</span>
+                    <ProductAvailability :product-id="data.uuid" />
+                </div>
                 <div class="wrapper-quantity-order">
                     <ProductQuantity v-model="quantity" />
                     <button
@@ -114,6 +118,18 @@ export default {
 }
 .product-title {
     margin: 0;
+}
+.wrapper-price-availability {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+.product-price {
+    flex: 0 0 auto;
+    min-width: 168px;
+    margin: 0 20px 0 0;
 }
 .wrapper-quantity-order {
     display: flex;

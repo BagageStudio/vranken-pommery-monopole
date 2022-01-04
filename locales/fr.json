@@ -9,6 +9,8 @@
     "product": {
         "eyeLabel": "Œil",
         "noseLabel": "Nez",
-        "palateLabel": "Bouche"
+        "palateLabel": "Bouche",
+        "availableLabel": "Disponible",
+        "unavailableLabel": "Indisponible"
     }
 }

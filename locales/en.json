@@ -9,6 +9,8 @@
     "product": {
         "eyeLabel": "Eye",
         "noseLabel": "Nose",
-        "palateLabel": "Palate"
+        "palateLabel": "Palate",
+        "availableLabel": "Available",
+        "unavailableLabel": "Unavailable"
     }
 }

@@ -61,7 +61,7 @@ export default {
     color: $grey-1;
     &.error {
         .quantity {
-            color: red;
+            color: $error;
         }
     }
 }
