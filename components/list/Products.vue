@@ -4,6 +4,17 @@
             <LinkTo v-for="product in products" :key="product.id" class="product-card" shop :link="product">
                 <div class="product-image">
                     <FastImage :image="product.image" contains />
+                    <button
+                        class="quick-add snipcart-add-item"
+                        :data-item-id="product.uuid"
+                        :data-item-price="product.price"
+                        :data-item-image="product.image.url"
+                        :data-item-name="product.title"
+                        :data-item-description="product.shoppingCartDescription"
+                        :data-item-quantity="1"
+                    >
+                        <Icon name="cart" />
+                    </button>
                 </div>
                 <div class="product-details">
                     <span class="product-title">{{ product.listTitle }}</span>
@@ -33,14 +44,37 @@ export default {
 .product-card {
     margin: 0 $gutter 40px;
     text-decoration: none;
+    &:hover {
+        .quick-add {
+            opacity: 1;
+        }
+    }
 }
 .product-image {
+    position: relative;
     aspect-ratio: 1 / 1;
     padding: 35px;
     background: $beige;
     .fast-image {
         width: 100%;
         height: 100%;
+    }
+}
+.quick-add {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 90px;
+    color: $white;
+    background: $gold;
+    opacity: 0;
+    .icon {
+        width: 30px;
+        height: 30px;
     }
 }
 .product-details {
