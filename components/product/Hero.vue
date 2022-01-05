@@ -78,10 +78,10 @@ export default {
 .btn-back {
     position: absolute;
     top: 0;
-    left: -$grid-gutter-s;
+    left: -#{$grid-gutter-s};
     display: inline-flex;
     align-items: center;
-    padding: 30px 20px 30px 25px;
+    padding: 30px 20px;
     font-size: 1.5rem;
     line-height: 19px;
     text-transform: uppercase;
@@ -159,10 +159,12 @@ export default {
     .wrapper-product-image {
         width: percentage(math.div(4, 10));
         &::before {
-            width: 50vw;
             right: $gutter;
-            left: auto;
+            left: $gutter;
         }
+    }
+    .btn-back {
+        left: 0;
     }
     .product-image {
         min-height: 450px;
@@ -182,15 +184,9 @@ export default {
         width: percentage(math.div(6, 12));
         justify-content: flex-start;
         aspect-ratio: 1 / 1;
-        &::before {
-            width: 50vw;
-            right: percentage(math.div(1, 6));
-            left: auto;
-        }
     }
     .btn-back {
-        left: -$grid-gutter-l;
-        padding: 30px 30px 30px 95px;
+        padding: 30px;
     }
     .product-image {
         aspect-ratio: auto;
