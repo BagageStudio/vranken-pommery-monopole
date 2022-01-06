@@ -13,7 +13,7 @@
                         :data-item-description="product.shoppingCartDescription"
                         :data-item-quantity="1"
                     >
-                        <Icon name="cart" />
+                        <Icon name="cart-add" />
                     </button>
                 </div>
                 <div class="product-details">

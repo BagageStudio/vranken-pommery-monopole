@@ -15,7 +15,7 @@
                     d="M15.833 11.75a3.25 3.25 0 1 0 0 6.5 3.25 3.25 0 0 0 0-6.5ZM11.583 15a4.25 4.25 0 1 1 8.5 0 4.25 4.25 0 0 1-8.5 0Z"
                 />
             </symbol>
-            <symbol id="icon-cart" viewBox="0 0 17 16">
+            <symbol id="icon-cart-add" viewBox="0 0 17 16">
                 <path
                     fill-rule="evenodd"
                     clip-rule="evenodd"

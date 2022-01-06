@@ -29,7 +29,7 @@
                         :data-item-quantity="quantity"
                     >
                         <span>{{ $t('global.orderLabel') }}</span>
-                        <Icon name="cart" />
+                        <Icon name="cart-add" />
                     </button>
                 </div>
                 <div class="product-description wysiwyg" v-html="data.description.description" />
