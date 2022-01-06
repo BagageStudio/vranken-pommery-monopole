@@ -41,7 +41,13 @@
             <div class="container">
                 <div class="content-pad inner-bottom-bar">
                     <ul class="main-menu">
-                        <li v-for="topItem in data.menu" :key="topItem.id">{{ topItem.label }}</li>
+                        <LayoutDesktopTopLevel
+                            v-for="topItem in data.menu"
+                            :key="topItem.id"
+                            :bus="bus"
+                            :data="topItem"
+                            :levels="{ second: secondLevelId, third: thirdLevelId }"
+                        />
                     </ul>
                 </div>
             </div>
@@ -58,10 +64,26 @@ export default {
         }
     },
     data() {
-        return {};
+        return {
+            bus: new Vue(),
+            secondLevelId: null,
+            thirdLevelId: null
+        };
+    },
+    created() {
+        this.bus.$on('changeLevel', this.changeLevel);
     },
     mounted() {},
-    methods: {}
+    methods: {
+        changeLevel(level, id) {
+            if (level === 2) {
+                this.secondLevelId = id;
+                this.thirdLevelId = null;
+            } else if (level === 3) {
+                this.thirdLevelId = id;
+            }
+        }
+    }
 };
 </script>
 <style lang="scss" scoped>
@@ -185,13 +207,17 @@ ul {
     margin: 0;
 }
 
+.bottom-bar {
+    position: relative;
+    border-bottom: 1px solid $grey-3;
+}
+
 .inner-bottom-bar {
-    height: 80px;
+    height: 79px;
 }
 
 .main-menu {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     height: 100%;
 }
