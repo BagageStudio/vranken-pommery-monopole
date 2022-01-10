@@ -9,8 +9,8 @@
         >
             <span>{{ data.label }}</span>
         </button>
-        <div v-show="show" class="third-level">
-            <div class="third-menu-wrapper">
+        <div :class="{ show, ovv }" class="third-level">
+            <div ref="thirdLevel" class="third-menu-wrapper">
                 <ul class="third-menu content-pad">
                     <li v-for="thirdLevel in data.items" :key="thirdLevel.id" class="third-item">
                         <nuxt-link class="third-label" to="/">
@@ -23,6 +23,7 @@
     </li>
 </template>
 <script>
+import { wait } from '~/assets/js/utils';
 export default {
     props: {
         data: {
@@ -42,11 +43,32 @@ export default {
             required: true
         }
     },
-    data: () => ({}),
+    data: () => ({
+        show: false
+    }),
     computed: {
-        show() {
+        shouldShow() {
             return this.levels.third ? this.levels.third === this.data.id : this.firstItemId === this.data.id;
         }
+    },
+    watch: {
+        async shouldShow(show) {
+            if (show) {
+                this.$emit('changeHeight', this.$refs.thirdLevel.offsetHeight);
+                await wait(200);
+                this.show = true;
+            } else {
+                this.show = false;
+            }
+        }
+    },
+    mounted() {
+        this.$nextTick(() => {
+            if (this.firstItemId === this.data.id) {
+                this.$emit('changeHeight', this.$refs.thirdLevel.offsetHeight);
+                this.show = true;
+            }
+        });
     },
     methods: {}
 };
@@ -73,6 +95,25 @@ export default {
     bottom: 0;
     left: 100%;
     width: 100%;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transition: opacity 0s linear;
+    &.show {
+        opacity: 1;
+        overflow: visible;
+        pointer-events: all;
+        transition: opacity 0.2s ease-out;
+    }
+}
+
+@keyframes delay-overflow {
+    from {
+        overflow: hidden;
+    }
+}
+
+.third-menu-wrapper {
     padding: 60px;
 }
 .third-item {

@@ -52,6 +52,7 @@
                 </div>
             </div>
         </div>
+        <div :class="{ show: secondLevelId }" class="overlay" @click="changeLevel(2, null)"></div>
     </div>
 </template>
 <script>
@@ -67,16 +68,38 @@ export default {
         return {
             bus: new Vue(),
             secondLevelId: null,
-            thirdLevelId: null
+            thirdLevelId: null,
+            scrollOffset: 0
         };
+    },
+    computed: {
+        scrollTop() {
+            return this.$store.state.scroll.scrollTop;
+        }
+    },
+    watch: {
+        $route() {
+            this.changeLevel(2, null);
+        }
     },
     created() {
         this.bus.$on('changeLevel', this.changeLevel);
     },
     mounted() {},
     methods: {
+        updateNoScroll(id) {
+            if (!this.secondLevelId && id) {
+                this.scrollOffset = this.scrollTop;
+                document.documentElement.classList.add('no-scroll');
+                document.documentElement.style.setProperty('--scroll-top', this.scrollTop + 'px');
+            } else if (this.secondLevelId && !id) {
+                document.documentElement.classList.remove('no-scroll');
+                window.scrollTo(0, this.scrollOffset);
+            }
+        },
         changeLevel(level, id) {
             if (level === 2) {
+                this.updateNoScroll(id);
                 this.secondLevelId = id;
                 this.thirdLevelId = null;
             } else if (level === 3) {
@@ -220,5 +243,24 @@ ul {
     display: flex;
     justify-content: space-between;
     height: 100%;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 100vh;
+    background-color: red;
+    z-index: -2;
+    background-color: rgba($blue, 0.7);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(calc(-100% - 1px));
+    transition: opacity 0.2s ease-out, transform 0s linear 0.2s;
+    &.show {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.2s ease-out;
+    }
 }
 </style>

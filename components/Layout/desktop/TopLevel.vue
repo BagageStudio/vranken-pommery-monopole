@@ -9,22 +9,28 @@
         >
             <span>{{ data.label }}</span>
         </button>
-        <div v-show="levels.second === data.id" class="second-level">
-            <div class="container second-menu-wrapper">
-                <div class="second-menu">
-                    <ul class="content-pad">
-                        <LayoutDesktopSecondLevel
-                            v-for="secondLevel in data.items"
-                            :key="secondLevel.id"
-                            :data="secondLevel"
-                            :levels="levels"
-                            :bus="bus"
-                            :first-item-id="data.items[0].id"
-                        />
-                    </ul>
+        <div :class="{ show: levels.second === data.id }" class="second-level">
+            <div class="second-level-inner" :style="{ '--height': height }">
+                <div class="container second-menu-wrapper">
+                    <div class="second-menu-area">
+                        <div ref="secondLevel" class="second-menu">
+                            <ul class="content-pad">
+                                <LayoutDesktopSecondLevel
+                                    v-for="secondLevel in data.items"
+                                    :key="secondLevel.id"
+                                    ref="submenu"
+                                    :data="secondLevel"
+                                    :levels="levels"
+                                    :bus="bus"
+                                    :first-item-id="data.items[0].id"
+                                    @changeHeight="changeHeight"
+                                />
+                            </ul>
+                        </div>
+                        <div v-show="data.items[0].items" class="submenu-area"></div>
+                    </div>
+                    <div class="image-area"></div>
                 </div>
-                <div v-show="data.items[0].items" class="submenu-area"></div>
-                <div class="image-area"></div>
             </div>
         </div>
     </li>
@@ -46,9 +52,17 @@ export default {
         }
     },
     data: () => ({
-        show: false
+        show: false,
+        height: 'auto'
     }),
+    mounted() {},
     methods: {
+        changeHeight(h) {
+            const secondLevelHeight = this.$refs.secondLevel.offsetHeight;
+            const biggerHeight = secondLevelHeight > h ? secondLevelHeight + 'px' : h + 'px';
+            this.height = biggerHeight;
+        },
+
         changeTopLevel() {
             if (this.levels.second === this.data.id) {
                 this.bus.$emit('changeLevel', 2, null);
@@ -91,10 +105,32 @@ export default {
     // 1px for the bottom border
     top: calc(100% + 1px);
     background-color: $white;
+    max-height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+    overflow-x: hidden;
+    // 1px for the bottom border
+    transform: translateY(calc(-100% - 1px));
+    transition: transform 0.3s ease-in-out;
+    z-index: -1;
+    &.show {
+        transform: translateY(0);
+    }
 }
+
+.second-level-inner {
+    height: var(--height);
+    transition: height 0.2s ease-out;
+}
+
+.second-menu-area {
+    display: flex;
+    width: percentage(math.div(2, 3));
+}
+
 .second-menu {
     position: relative;
-    width: percentage(math.div(1, 3));
+    width: 50%;
+    align-self: flex-start;
     flex-shrink: 0;
     padding: 60px 0 60px $grid-gutter-l;
     > ul {
@@ -103,12 +139,13 @@ export default {
     }
 }
 .second-menu-wrapper {
-    padding: 0;
     position: relative;
     display: flex;
+    padding: 0;
+    height: 100%;
 }
 .submenu-area {
-    width: percentage(math.div(1, 3));
+    width: 50%;
     flex-shrink: 0;
     background-color: $beige;
 }

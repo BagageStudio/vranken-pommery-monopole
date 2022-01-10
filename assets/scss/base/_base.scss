@@ -1,5 +1,10 @@
 /******* GÉNÉRAL *******/
 
+// DEBUG
+// * {
+//     outline: 1px solid red;
+// }
+
 ::-moz-selection {
     background: rgba($black, 0.99);
     color: $white;
@@ -15,10 +20,11 @@
     --header-height: 164px;
     --mobile-top-header-height: 82px;
     --mobile-search-header-height: 82px;
+    --scroll-top: 0px;
 }
 @media (min-width: $desktop-small) {
     :root {
-        --header-height: 190px;
+        --header-height: 191px;
     }
 }
 
@@ -27,8 +33,11 @@ html {
     background: var(--bg);
     &.no-scroll {
         position: fixed;
+        overflow: hidden;
+        width: 100%;
         left: 0;
         right: 0;
+        top: calc(var(--scroll-top, 0px) * -1);
     }
 }
 
