@@ -9,7 +9,7 @@
         >
             <span>{{ data.label }}</span>
         </button>
-        <div :class="{ show, ovv }" class="third-level">
+        <div :class="{ show }" class="third-level">
             <div ref="thirdLevel" class="third-menu-wrapper">
                 <ul class="third-menu content-pad">
                     <li v-for="thirdLevel in data.items" :key="thirdLevel.id" class="third-item">
