@@ -242,6 +242,35 @@ export const productQuery = `
                 nose
                 palate
             }
+            relatedCategories {
+                _modelApiKey
+                id
+                title
+                categories {
+                    _modelApiKey
+                    ${locales}
+                    id
+                    slug
+                    title
+                    image {
+                        ${img}
+                    }
+                    cuvee {
+                        _modelApiKey
+                        ${locales}
+                        id
+                        slug
+                        title
+                        brand {
+                            _modelApiKey
+                            ${locales}
+                            id
+                            slug
+                            title
+                        }
+                    }
+                }
+            }
             category{
                 _modelApiKey
                 ${locales}
