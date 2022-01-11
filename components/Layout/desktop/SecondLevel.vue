@@ -12,7 +12,12 @@
         <div :class="{ show }" class="third-level">
             <div ref="thirdLevel" class="third-menu-wrapper">
                 <ul class="third-menu content-pad">
-                    <li v-for="thirdLevel in data.items" :key="thirdLevel.id" class="third-item">
+                    <li
+                        v-for="thirdLevel in data.items"
+                        :key="thirdLevel.id"
+                        class="third-item"
+                        @mouseenter="changeImage(thirdLevel)"
+                    >
                         <nuxt-link class="third-label" to="/">
                             <span>{{ thirdLevel.label }}</span>
                         </nuxt-link>
@@ -54,6 +59,7 @@ export default {
     watch: {
         async shouldShow(show) {
             if (show) {
+                this.$emit('changeImage', this.data.items[0].image);
                 this.$emit('changeHeight', this.$refs.thirdLevel.offsetHeight);
                 await wait(200);
                 this.show = true;
@@ -70,7 +76,11 @@ export default {
             }
         });
     },
-    methods: {}
+    methods: {
+        changeImage(item) {
+            this.$emit('changeImage', item.image);
+        }
+    }
 };
 </script>
 <style lang="scss" scoped>

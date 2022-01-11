@@ -2,14 +2,14 @@
     <li class="main-item">
         <button
             class="main-label"
-            :class="{ selected: levels.second === data.id }"
+            :class="{ selected: show }"
             aria-expanded="false"
             aria-hidden="false"
             @click="changeTopLevel"
         >
             <span>{{ data.label }}</span>
         </button>
-        <div :class="{ show: levels.second === data.id }" class="second-level">
+        <div :class="{ show }" class="second-level">
             <div class="second-level-inner" :style="{ '--height': height }">
                 <div class="container second-menu-wrapper">
                     <div class="second-menu-area">
@@ -24,12 +24,15 @@
                                     :bus="bus"
                                     :first-item-id="data.items[0].id"
                                     @changeHeight="changeHeight"
+                                    @changeImage="changeImage"
                                 />
                             </ul>
                         </div>
                         <div v-show="data.items[0].items" class="submenu-area"></div>
                     </div>
-                    <div class="image-area"></div>
+                    <div class="image-area">
+                        <FastImage v-if="image" :image="image" cover />
+                    </div>
                 </div>
             </div>
         </div>
@@ -52,23 +55,32 @@ export default {
         }
     },
     data: () => ({
-        show: false,
-        height: 'auto'
+        height: 'auto',
+        image: null
     }),
-    mounted() {},
+    computed: {
+        show() {
+            return this.levels.second === this.data.id;
+        }
+    },
+    created() {
+        this.image = this.data.items[0].items ? this.data.items[0].items[0].image : this.data.items[0].image;
+    },
     methods: {
         changeHeight(h) {
             const secondLevelHeight = this.$refs.secondLevel.offsetHeight;
             const biggerHeight = secondLevelHeight > h ? secondLevelHeight + 'px' : h + 'px';
             this.height = biggerHeight;
         },
-
         changeTopLevel() {
             if (this.levels.second === this.data.id) {
                 this.bus.$emit('changeLevel', 2, null);
             } else {
                 this.bus.$emit('changeLevel', 2, this.data.id);
             }
+        },
+        changeImage(image) {
+            this.image = image;
         }
     }
 };
@@ -154,7 +166,9 @@ export default {
     top: 0;
     bottom: 0;
     right: calc((100vw - #{$desktop-xxl}) / -2);
+    display: flex;
+    align-items: center;
     width: calc(33.333% + ((100vw - #{$desktop-xxl}) / 2));
-    background: linear-gradient(332deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+    overflow: hidden;
 }
 </style>
