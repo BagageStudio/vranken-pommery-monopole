@@ -47,6 +47,7 @@
                     </div>
                     <div class="wrapper-social-lang">
                         <LayoutSocial :data="data.social" />
+                        <LayoutLangSwitcher class="light" />
                     </div>
                     <div class="wrapper-copy-warning">
                         <div class="copy" v-html="data.footerCopyright" />

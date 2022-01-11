@@ -56,6 +56,11 @@ export default {
         margin-left: 9px;
         transition: transform 0.2s ease-in-out;
     }
+    &.light {
+        button {
+            color: $grey-2;
+        }
+    }
 }
 .current.open {
     .icon {
