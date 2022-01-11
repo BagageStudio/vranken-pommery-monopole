@@ -37,7 +37,7 @@ html {
         width: 100%;
         left: 0;
         right: 0;
-        top: calc(var(--scroll-top, 0px) * -1);
+        top: var(--scroll-top);
     }
 }
 
