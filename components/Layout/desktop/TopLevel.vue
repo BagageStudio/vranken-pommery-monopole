@@ -39,6 +39,7 @@
                     </div>
                 </div>
             </div>
+            <button aria-label="Close" class="close-btn" @click="$emit('changeLevel', null)"></button>
         </div>
     </li>
 </template>
@@ -192,6 +193,29 @@ export default {
     transition: opacity 0.2s ease-out;
     &.hide {
         opacity: 0;
+    }
+}
+.close-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 54px;
+    width: 54px;
+    background-color: $white;
+    &::after,
+    &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 1px;
+        background-color: $grey-1;
+        width: 14px;
+        transform-origin: 50% 50%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+    }
+    &::before {
+        transform: translate(-50%, -50%) rotate(45deg);
     }
 }
 </style>
