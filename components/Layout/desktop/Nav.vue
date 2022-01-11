@@ -82,11 +82,11 @@ export default {
     mounted() {},
     methods: {
         updateNoScroll(id) {
-            if (!this.secondLevelId && id) {
+            if (!this.selectedChild && id) {
                 this.scrollOffset = this.scrollTop;
                 document.documentElement.classList.add('no-scroll');
-                document.documentElement.style.setProperty('--scroll-top', this.scrollTop + 'px');
-            } else if (this.secondLevelId && !id) {
+                document.documentElement.style.setProperty('--scroll-top', this.scrollTop * -1 + 'px');
+            } else if (this.selectedChild && !id) {
                 document.documentElement.classList.remove('no-scroll');
                 window.scrollTo(0, this.scrollOffset);
             }
