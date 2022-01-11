@@ -72,6 +72,7 @@ export const layoutQuery = `
                                 ...link
                             }
                             image {
+                                id
                                 ${img}
                             }
                         }
@@ -79,6 +80,7 @@ export const layoutQuery = `
                             id
                             label
                             image {
+                                id
                                 ${img}
                             }
                             items {
@@ -87,6 +89,7 @@ export const layoutQuery = `
                                     ...link
                                 }
                                 image {
+                                    id
                                     ${img}
                                 }
                             }

@@ -10,7 +10,7 @@
         >
             <span>{{ data.label }}</span>
         </button>
-        <nuxt-link v-else to="/" class="second-label">
+        <nuxt-link v-else to="/" class="second-label" @mouseenter.native="changeImage(data)">
             <span>{{ data.label }}</span>
         </nuxt-link>
         <div v-if="data.items" :class="{ show }" class="third-level">

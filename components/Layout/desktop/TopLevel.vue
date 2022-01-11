@@ -31,8 +31,11 @@
                         </div>
                         <div v-show="data.items[0].items" class="submenu-area"></div>
                     </div>
-                    <div class="image-area">
-                        <FastImage v-if="image" :image="image" cover />
+                    <div v-if="oldImage" class="image-area">
+                        <FastImage class="menu-big-image old" :image="oldImage" cover />
+                    </div>
+                    <div v-if="image" class="image-area" :class="{ hide: hideImage }">
+                        <FastImage class="menu-big-image" :image="image" cover />
                     </div>
                 </div>
             </div>
@@ -40,6 +43,8 @@
     </li>
 </template>
 <script>
+import { wait } from '~/assets/js/utils';
+
 export default {
     props: {
         data: {
@@ -55,6 +60,8 @@ export default {
     data: () => ({
         height: 'auto',
         image: null,
+        oldImage: null,
+        hideImage: true,
         selectedChild: null
     }),
     computed: {
@@ -63,7 +70,7 @@ export default {
         }
     },
     created() {
-        this.image = this.data.items[0].items ? this.data.items[0].items[0].image : this.data.items[0].image;
+        this.oldImage = this.data.items[0].items ? this.data.items[0].items[0].image : this.data.items[0].image;
     },
     methods: {
         changeHeight(h) {
@@ -79,8 +86,14 @@ export default {
                 this.selectedChild = null;
             }
         },
-        changeImage(image) {
+        async changeImage(image) {
+            if (image.id === this.oldImage.id) return;
+
             this.image = image;
+            this.hideImage = false;
+            await wait(200);
+            this.oldImage = image;
+            this.hideImage = true;
         },
         changeLevel(id) {
             this.selectedChild = id;
@@ -173,5 +186,10 @@ export default {
     align-items: center;
     width: calc(33.333% + ((100vw - #{$desktop-xxl}) / 2));
     overflow: hidden;
+    opacity: 1;
+    transition: opacity 0.2s ease-out;
+    &.hide {
+        opacity: 0;
+    }
 }
 </style>
