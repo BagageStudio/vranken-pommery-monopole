@@ -1,15 +1,19 @@
 <template>
     <li class="second-item">
         <button
+            v-if="data.items"
             class="second-label"
             :class="{ selected: show }"
             aria-expanded="false"
             aria-hidden="false"
-            @click="bus.$emit('changeLevel', 3, data.id)"
+            @click="$emit('changeLevel', data.id)"
         >
             <span>{{ data.label }}</span>
         </button>
-        <div :class="{ show }" class="third-level">
+        <nuxt-link v-else to="/" class="second-label">
+            <span>{{ data.label }}</span>
+        </nuxt-link>
+        <div v-if="data.items" :class="{ show }" class="third-level">
             <div ref="thirdLevel" class="third-menu-wrapper">
                 <ul class="third-menu content-pad">
                     <li
@@ -35,48 +39,65 @@ export default {
             type: Object,
             required: true
         },
-        levels: {
-            type: Object,
-            required: true
-        },
-        bus: {
-            type: Object,
-            required: true
-        },
         firstItemId: {
             type: String,
             required: true
+        },
+        parentId: {
+            type: String,
+            required: true
+        },
+        selected: {
+            type: String,
+            required: false,
+            default: null
         }
     },
     data: () => ({
         show: false
     }),
-    computed: {
-        shouldShow() {
-            return this.levels.third ? this.levels.third === this.data.id : this.firstItemId === this.data.id;
-        }
-    },
+    computed: {},
     watch: {
-        async shouldShow(show) {
-            if (show) {
-                this.$emit('changeImage', this.data.items[0].image);
-                this.$emit('changeHeight', this.$refs.thirdLevel.offsetHeight);
-                await wait(200);
-                this.show = true;
-            } else {
-                this.show = false;
+        selected(selected) {
+            // if selected is null it's because the secondLevel was closed so we reset to the first item
+            if (!selected) {
+                if (this.firstItemId === this.data.id && !this.show) {
+                    this.showImmediate();
+                }
+                if (this.firstItemId !== this.data.id && this.show) {
+                    this.show = false;
+                }
+            }
+
+            if (selected) {
+                if (selected === this.data.id) {
+                    this.appear();
+                } else {
+                    this.show = false;
+                }
             }
         }
     },
     mounted() {
+        // We set the first item to show the first time
         this.$nextTick(() => {
-            if (this.firstItemId === this.data.id) {
-                this.$emit('changeHeight', this.$refs.thirdLevel.offsetHeight);
-                this.show = true;
+            if (this.firstItemId === this.data.id && this.data.items) {
+                this.showImmediate();
             }
         });
     },
     methods: {
+        showImmediate() {
+            if (!this.data.items) return;
+            this.$emit('changeHeight', this.$refs.thirdLevel.offsetHeight);
+            this.show = true;
+        },
+        async appear() {
+            this.$emit('changeImage', this.data.items[0].image);
+            this.$emit('changeHeight', this.$refs.thirdLevel.offsetHeight);
+            await wait(200);
+            this.show = true;
+        },
         changeImage(item) {
             this.$emit('changeImage', item.image);
         }
@@ -95,7 +116,11 @@ export default {
     font-family: $plex-serif;
     font-size: 2.8rem;
     text-align: left;
-    &.selected {
+    text-decoration: none;
+    transition: color 0.2s ease-out;
+    &.selected,
+    &:hover,
+    &:focus {
         color: $gold;
     }
 }
@@ -114,12 +139,6 @@ export default {
         overflow: visible;
         pointer-events: all;
         transition: opacity 0.2s ease-out;
-    }
-}
-
-@keyframes delay-overflow {
-    from {
-        overflow: hidden;
     }
 }
 

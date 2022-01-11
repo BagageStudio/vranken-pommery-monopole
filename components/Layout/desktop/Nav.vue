@@ -44,19 +44,18 @@
                         <LayoutDesktopTopLevel
                             v-for="topItem in data.menu"
                             :key="topItem.id"
-                            :bus="bus"
                             :data="topItem"
-                            :levels="{ second: secondLevelId, third: thirdLevelId }"
+                            :selected="selectedChild"
+                            @changeLevel="changeLevel"
                         />
                     </ul>
                 </div>
             </div>
         </div>
-        <div :class="{ show: secondLevelId }" class="overlay" @click="changeLevel(2, null)"></div>
+        <div :class="{ show: selectedChild }" class="overlay" @click="changeLevel(null)"></div>
     </div>
 </template>
 <script>
-import Vue from 'vue';
 export default {
     props: {
         data: {
@@ -66,9 +65,7 @@ export default {
     },
     data() {
         return {
-            bus: new Vue(),
-            secondLevelId: null,
-            thirdLevelId: null,
+            selectedChild: null,
             scrollOffset: 0
         };
     },
@@ -82,9 +79,6 @@ export default {
             this.changeLevel(2, null);
         }
     },
-    created() {
-        this.bus.$on('changeLevel', this.changeLevel);
-    },
     mounted() {},
     methods: {
         updateNoScroll(id) {
@@ -97,14 +91,9 @@ export default {
                 window.scrollTo(0, this.scrollOffset);
             }
         },
-        changeLevel(level, id) {
-            if (level === 2) {
-                this.updateNoScroll(id);
-                this.secondLevelId = id;
-                this.thirdLevelId = null;
-            } else if (level === 3) {
-                this.thirdLevelId = id;
-            }
+        changeLevel(id) {
+            this.updateNoScroll(id);
+            this.selectedChild = id;
         }
     }
 };

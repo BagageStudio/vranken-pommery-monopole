@@ -20,11 +20,12 @@
                                     :key="secondLevel.id"
                                     ref="submenu"
                                     :data="secondLevel"
-                                    :levels="levels"
-                                    :bus="bus"
                                     :first-item-id="data.items[0].id"
+                                    :parent-id="data.id"
+                                    :selected="selectedChild"
                                     @changeHeight="changeHeight"
                                     @changeImage="changeImage"
+                                    @changeLevel="changeLevel"
                                 />
                             </ul>
                         </div>
@@ -45,22 +46,20 @@ export default {
             type: Object,
             required: true
         },
-        bus: {
-            type: Object,
-            required: true
-        },
-        levels: {
-            type: Object,
-            required: true
+        selected: {
+            type: String,
+            required: false,
+            default: null
         }
     },
     data: () => ({
         height: 'auto',
-        image: null
+        image: null,
+        selectedChild: null
     }),
     computed: {
         show() {
-            return this.levels.second === this.data.id;
+            return this.selected === this.data.id;
         }
     },
     created() {
@@ -73,14 +72,18 @@ export default {
             this.height = biggerHeight;
         },
         changeTopLevel() {
-            if (this.levels.second === this.data.id) {
-                this.bus.$emit('changeLevel', 2, null);
+            if (this.selected === this.data.id) {
+                this.$emit('changeLevel', null);
             } else {
-                this.bus.$emit('changeLevel', 2, this.data.id);
+                this.$emit('changeLevel', this.data.id);
+                this.selectedChild = null;
             }
         },
         changeImage(image) {
             this.image = image;
+        },
+        changeLevel(id) {
+            this.selectedChild = id;
         }
     }
 };
