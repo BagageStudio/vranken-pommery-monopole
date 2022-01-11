@@ -10,9 +10,9 @@
         >
             <span>{{ data.label }}</span>
         </button>
-        <nuxt-link v-else to="/" class="second-label" @mouseenter.native="changeImage(data)">
+        <LinkTo v-else class="second-label" :link="data.link" hide-label @mouseenter.native="changeImage(data)">
             <span>{{ data.label }}</span>
-        </nuxt-link>
+        </LinkTo>
         <div v-if="data.items" :class="{ show }" class="third-level">
             <div ref="thirdLevel" class="third-menu-wrapper">
                 <ul class="third-menu content-pad">
@@ -22,9 +22,9 @@
                         class="third-item"
                         @mouseenter="changeImage(thirdLevel)"
                     >
-                        <nuxt-link class="third-label" to="/">
+                        <LinkTo class="third-label" :link="thirdLevel.link" hide-label>
                             <span>{{ thirdLevel.label }}</span>
-                        </nuxt-link>
+                        </LinkTo>
                     </li>
                 </ul>
             </div>
@@ -152,8 +152,26 @@ export default {
     }
 }
 .third-label {
+    position: relative;
     text-decoration: none;
     font-size: 1.5rem;
     color: $blue;
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        height: 1px;
+        width: 100%;
+        background-color: currentColor;
+        transform-origin: 0 0;
+        transform: scaleX(0);
+        transition: transform 0.2s ease-out;
+    }
+    &:hover {
+        &::after {
+            transform: scaleX(1);
+        }
+    }
 }
 </style>

@@ -87,7 +87,9 @@ export default {
             }
         },
         async changeImage(image) {
-            if (image.id === this.oldImage.id) return;
+            if (!image) return;
+
+            if (this.oldImage && image.id === this.oldImage.id) return;
 
             this.image = image;
             this.hideImage = false;
