@@ -1,6 +1,7 @@
 <template>
     <li class="second-item">
         <button
+            v-if="data.items"
             class="second-label"
             aria-expanded="false"
             aria-hidden="false"
@@ -9,7 +10,11 @@
             <span>{{ data.label }}</span>
             <Icon name="arrow-right" />
         </button>
-        <div v-show="levels.third === data.id" class="third-level">
+        <LinkTo v-else class="second-label" :link="data.link" hide-label>
+            <span>{{ data.label }}</span>
+        </LinkTo>
+
+        <div v-if="data.items" v-show="levels.third === data.id" class="third-level">
             <button class="back-button-wrapper" @click="bus.$emit('changeLevel', 2)">
                 <div class="container">
                     <div class="content-pad back-button">
@@ -21,9 +26,9 @@
             <div class="container third-menu-wrapper">
                 <ul class="third-menu content-pad">
                     <li v-for="thirdLevel in data.items" :key="thirdLevel.id" class="third-item">
-                        <nuxt-link class="third-label" to="/">
+                        <LinkTo class="third-label" hide-label :link="thirdLevel.link">
                             <span>{{ thirdLevel.label }}</span>
-                        </nuxt-link>
+                        </LinkTo>
                     </li>
                 </ul>
             </div>
@@ -68,6 +73,7 @@ export default {
     font-family: $plex-serif;
     font-size: 2rem;
     line-height: 22px;
+    text-decoration: none;
     .icon {
         height: 10px;
         width: 6px;
@@ -91,7 +97,6 @@ export default {
     position: absolute;
     left: 100%;
     width: 100%;
-    // top: calc(var(--mobile-search-header-height) * -1);
     top: 0;
     display: flex;
     flex-direction: column;

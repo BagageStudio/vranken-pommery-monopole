@@ -80,8 +80,7 @@ export default {
     position: absolute;
     left: 100%;
     width: 100%;
-    // top: calc(var(--mobile-search-header-height) * -1);
-    top: 0;
+    top: calc(var(--mobile-search-header-height) * -1);
     display: flex;
     flex-direction: column;
     background-color: $white;

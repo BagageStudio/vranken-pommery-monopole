@@ -32,7 +32,7 @@
                         </div>
                     </div>
                 </div>
-                <nav v-show="showNav" class="navigation">
+                <nav :class="{ show: showNav }" class="navigation">
                     <div class="container">
                         <ul class="main-menu content-pad">
                             <LayoutMobileTopLevel
@@ -72,7 +72,7 @@
                 </nav>
             </div>
         </div>
-        <div v-show="showNav" class="overlay"></div>
+        <div :class="{ show: showNav }" class="overlay" @click="toggleNav"></div>
     </div>
 </template>
 <script>
@@ -211,10 +211,13 @@ export default {
 }
 
 .mobile-search {
+    position: relative;
     padding-top: 20px;
     padding-bottom: 20px;
     border-top: 1px solid $grey-3;
     border-bottom: 1px solid $grey-3;
+    background-color: $white;
+    z-index: 2;
 }
 
 .search-bar {
@@ -240,12 +243,13 @@ ul {
 }
 
 .navigation {
-    // position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
     background-color: $white;
-    // transform: translateY(-100%);
+    // 1px for the border bottom
+    transform: translateY(calc(-100% - 1px));
+    transition: transform 0.3s ease-out;
+    &.show {
+        transform: translateY(0);
+    }
 }
 
 .misc-menu {
@@ -309,6 +313,14 @@ ul {
     left: 0;
     right: 0;
     background-color: rgba($blue, 0.7);
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: opacity 0.2s ease-out, transform 0s linear 0.2s;
     z-index: -1;
+    &.show {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.2s ease-out;
+    }
 }
 </style>
