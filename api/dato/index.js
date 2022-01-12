@@ -307,6 +307,9 @@ export const categoryQuery = `
             id
             title
             slug
+            moodImages {
+                ${img}
+            }
             cuvee {
                 _modelApiKey
                 ${locales}
