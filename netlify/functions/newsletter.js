@@ -2,9 +2,9 @@ const SibApiV3Sdk = require('sib-api-v3-sdk');
 
 require('dotenv').config();
 
-const createContact = (createContact, apiInstance) => {
+const createContact = (createDoiContact, apiInstance) => {
     return new Promise((resolve, reject) => {
-        apiInstance.createContact(createContact).then(
+        apiInstance.createDoiContact(createDoiContact).then(
             function () {
                 resolve('API called successfully.');
             },
@@ -39,15 +39,15 @@ exports.handler = async function (event, context) {
 
     const apiInstance = new SibApiV3Sdk.ContactsApi();
 
-    const createContact = new SibApiV3Sdk.CreateContact();
+    const createDoiContact = new SibApiV3Sdk.CreateDoiContact(); // CreateDoiContact | Values to create the Double opt-in (DOI) contact
 
-    createContact.email = datas.email;
-    createContact.includeListIds = [166];
-    // createContact.templateId = 37;
-    createContact.redirectionUrl = 'https://www.vrankenpommery.com/';
+    createDoiContact.email = datas.email;
+    createDoiContact.includeListIds = [166];
+    createDoiContact.templateId = 261;
+    createDoiContact.redirectionUrl = 'https://www.vrankenpommery.com/';
 
     try {
-        await createContact(createContact, apiInstance);
+        await createContact(createDoiContact, apiInstance);
     } catch (error) {
         console.log(error);
         return {
