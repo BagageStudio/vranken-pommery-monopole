@@ -76,7 +76,7 @@ export default {
     },
     watch: {
         $route() {
-            this.changeLevel(2, null);
+            this.changeLevel(null);
         }
     },
     mounted() {},
