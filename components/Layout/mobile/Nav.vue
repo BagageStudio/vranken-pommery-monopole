@@ -78,6 +78,8 @@
 </template>
 <script>
 import Vue from 'vue';
+import { wait } from '~/assets/js/utils';
+
 export default {
     props: {
         data: {
@@ -105,6 +107,11 @@ export default {
             return this.$i18n.locales.filter(i => i.code === this.$i18n.locale)[0];
         }
     },
+    watch: {
+        $route() {
+            if (this.showNav) this.toggleNav();
+        }
+    },
     created() {
         this.bus.$on('changeLevel', this.changeLevel);
     },
@@ -120,15 +127,17 @@ export default {
                 window.scrollTo(0, this.scrollOffset);
             }
         },
-        toggleNav() {
-            if (this.showNav) {
-                // Reset menu state when closing it
+        async toggleNav() {
+            this.showNav = !this.showNav;
+            this.updateNoScroll();
+
+            if (!this.showNav) {
+                // Reset menu state after closing it
+                await wait(300);
                 this.secondLevelId = null;
                 this.thirdLevelId = null;
                 this.level = 1;
             }
-            this.showNav = !this.showNav;
-            this.updateNoScroll();
         },
         changeLevel(level, id) {
             this.level = level;
