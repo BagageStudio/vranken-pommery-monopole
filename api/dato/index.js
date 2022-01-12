@@ -308,6 +308,7 @@ export const categoryQuery = `
             title
             slug
             moodImages {
+                id
                 ${img}
             }
             cuvee {

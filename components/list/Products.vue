@@ -1,27 +1,41 @@
 <template>
     <div class="container">
         <div class="products-list">
-            <LinkTo v-for="product in productsToShow" :key="product.id" class="product-card" shop :link="product">
-                <div class="product-image">
-                    <FastImage :image="product.image" contains />
-                    <button
-                        class="quick-add snipcart-add-item"
-                        :data-item-id="product.uuid"
-                        :data-item-price="product.price"
-                        :data-item-image="product.image.url"
-                        :data-item-name="product.title"
-                        :data-item-description="product.shoppingCartDescription"
-                        :data-item-quantity="1"
-                    >
-                        <Icon name="cart-add" />
-                    </button>
+            <div
+                v-for="product in productsToShow"
+                :key="product.id"
+                class="product-card"
+                :class="{ 'wrapper-mood-image': product._modelApiKey !== 'product' }"
+            >
+                <LinkTo v-if="product._modelApiKey === 'product'" shop :link="product">
+                    <div class="product-image">
+                        <FastImage :image="product.image" contains />
+                        <button
+                            class="quick-add snipcart-add-item"
+                            :data-item-id="product.uuid"
+                            :data-item-price="product.price"
+                            :data-item-image="product.image.url"
+                            :data-item-name="product.title"
+                            :data-item-description="product.shoppingCartDescription"
+                            :data-item-quantity="1"
+                        >
+                            <Icon name="cart-add" />
+                        </button>
+                    </div>
+                    <div class="product-details">
+                        <span class="product-title">{{ product.listTitle }}</span>
+                        <span class="product-type">{{ product.productType }}</span>
+                        <span class="product-price">{{
+                            $options.filters.formatNumber(product.price, $store.$i18n)
+                        }}</span>
+                    </div>
+                </LinkTo>
+                <div v-else>
+                    <div class="mood-image">
+                        <FastImage :image="product" cover />
+                    </div>
                 </div>
-                <div class="product-details">
-                    <span class="product-title">{{ product.listTitle }}</span>
-                    <span class="product-type">{{ product.productType }}</span>
-                    <span class="product-price">{{ $options.filters.formatNumber(product.price, $store.$i18n) }}</span>
-                </div>
-            </LinkTo>
+            </div>
         </div>
         <div v-if="canLoadMore" class="load-more content-pad">
             <button class="btn-block grey" @click="loadMore">
@@ -32,32 +46,94 @@
 </template>
 
 <script>
-const NUMBER_BY_LOAD = 3;
+const NUMBER_BY_LOAD = 6;
 export default {
     props: {
         products: {
             type: Array,
             required: true
+        },
+        data: {
+            type: Object,
+            required: true
         }
     },
     data: () => ({
-        productsToShow: []
+        productsToShow: [],
+        productsWithMoodImages: []
     }),
     computed: {
         canLoadMore() {
-            return this.products.length > this.productsToShow.length;
+            return this.productsWithMoodImages.length > this.productsToShow.length;
         }
     },
     created() {
-        this.productsToShow = this.products.slice(0, NUMBER_BY_LOAD);
+        this.productsWithMoodImages = this.createdProductsWithMoodImages();
+        this.productsToShow = this.productsWithMoodImages.slice(0, NUMBER_BY_LOAD);
     },
     methods: {
         loadMore() {
-            const productsLeft = this.products.length - this.productsToShow.length;
+            const productsLeft = this.productsWithMoodImages.length - this.productsToShow.length;
             const offset = this.productsToShow.length;
             const numberOfProductsToAdd = Math.min(productsLeft, NUMBER_BY_LOAD);
-            const productsToAdd = this.products.slice(offset, offset + numberOfProductsToAdd);
+            const productsToAdd = this.productsWithMoodImages.slice(offset, offset + numberOfProductsToAdd);
             this.productsToShow.push(...productsToAdd);
+        },
+        createdProductsWithMoodImages() {
+            const moodImages = this.data.moodImages;
+
+            // If no mood image we just return the products without them
+            if (!moodImages.length) return this.products;
+
+            // Interval is the distance we count before adding a mood image, sometimes it's 3 after the last mood image ans sometimes it's 7
+            const intervalFromStep = {
+                odd: 3,
+                even: 7
+            };
+
+            // The step needed to calculate the interval. Changing between "odd" and "even"
+            let step = 'odd';
+
+            // Init values needed in the loop
+            let currentInterval = 0;
+            let indexOfMoodImageToAdd = 0;
+
+            const productsWithMoodImages = this.products.reduce((acc, cur) => {
+                // Checking if we need to add a mood image
+                if (step === 'odd' && currentInterval === intervalFromStep.odd) {
+                    // We add the mood image if it's the moment
+                    acc.push(moodImages[indexOfMoodImageToAdd]);
+
+                    // Calculating the index of the next mood image to add
+                    indexOfMoodImageToAdd =
+                        indexOfMoodImageToAdd + 1 <= moodImages.length - 1 ? indexOfMoodImageToAdd + 1 : 0;
+
+                    // Changing the step and reseting the interval
+                    step = 'even';
+                    currentInterval = 0;
+                } else if (step === 'even' && currentInterval === intervalFromStep.even) {
+                    // We add the mood image if it's the moment
+                    acc.push(moodImages[indexOfMoodImageToAdd]);
+
+                    // Calculating the index of the next mood image to add
+                    indexOfMoodImageToAdd =
+                        indexOfMoodImageToAdd + 1 <= moodImages.length - 1 ? indexOfMoodImageToAdd + 1 : 0;
+
+                    // Changing the step and reseting the interval
+                    step = 'odd';
+                    currentInterval = 0;
+                }
+
+                // We add the current product after the potential mood image
+                acc.push(cur);
+
+                // We update the interval
+                currentInterval++;
+
+                return acc;
+            }, []);
+
+            return productsWithMoodImages;
         }
     }
 };
@@ -69,7 +145,9 @@ export default {
 }
 .product-card {
     margin: 0 $gutter 40px;
-    text-decoration: none;
+    > a {
+        text-decoration: none;
+    }
     &:hover {
         .quick-add {
             opacity: 1;
@@ -86,6 +164,11 @@ export default {
         height: 100%;
     }
 }
+
+.wrapper-mood-image {
+    display: none;
+}
+
 .quick-add {
     position: absolute;
     top: 0;
@@ -153,6 +236,16 @@ export default {
 @media (min-width: $tablet) {
     .product-card {
         width: calc(33.333% - #{2 * $gutter});
+    }
+    .wrapper-mood-image {
+        display: block;
+    }
+    .mood-image {
+        aspect-ratio: 1 / 1;
+        .fast-image {
+            width: 100%;
+            height: 100%;
+        }
     }
 }
 @media (min-width: $desktop) {

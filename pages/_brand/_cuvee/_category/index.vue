@@ -2,7 +2,7 @@
     <div class="wrapper-page">
         <!-- <LayoutBreadcrumbs :start="data.brand.title" :end="data.title" :links="[cuvee]" /> -->
         <listHero :data="data" />
-        <listProducts :products="products" />
+        <listProducts :products="products" :data="data" />
     </div>
 </template>
 <script>
