@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="products-list">
-            <LinkTo v-for="product in products" :key="product.id" class="product-card" shop :link="product">
+            <LinkTo v-for="product in productsToShow" :key="product.id" class="product-card" shop :link="product">
                 <div class="product-image">
                     <FastImage :image="product.image" contains />
                     <button
@@ -23,8 +23,8 @@
                 </div>
             </LinkTo>
         </div>
-        <div class="load-more content-pad">
-            <button class="btn-block grey">
+        <div v-if="canLoadMore" class="load-more content-pad">
+            <button class="btn-block grey" @click="loadMore">
                 {{ $t('list.moreLabel') }}
             </button>
         </div>
@@ -32,11 +32,32 @@
 </template>
 
 <script>
+const NUMBER_BY_LOAD = 3;
 export default {
     props: {
         products: {
             type: Array,
             required: true
+        }
+    },
+    data: () => ({
+        productsToShow: []
+    }),
+    computed: {
+        canLoadMore() {
+            return this.products.length > this.productsToShow.length;
+        }
+    },
+    created() {
+        this.productsToShow = this.products.slice(0, NUMBER_BY_LOAD);
+    },
+    methods: {
+        loadMore() {
+            const productsLeft = this.products.length - this.productsToShow.length;
+            const offset = this.productsToShow.length;
+            const numberOfProductsToAdd = Math.min(productsLeft, NUMBER_BY_LOAD);
+            const productsToAdd = this.products.slice(offset, offset + numberOfProductsToAdd);
+            this.productsToShow.push(...productsToAdd);
         }
     }
 };
