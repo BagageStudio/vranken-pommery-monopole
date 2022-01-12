@@ -22,7 +22,8 @@
     "@stereorepo/sac": "^3.2.5",
     "core-js": "^3.15.1",
     "gsap": "^3.8.0",
-    "nuxt": "^2.15.7"
+    "nuxt": "^2.15.7",
+    "sib-api-v3-sdk": "^8.2.1"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",

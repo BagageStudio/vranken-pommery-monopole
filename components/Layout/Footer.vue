@@ -16,11 +16,19 @@
                 <div class="newsletter">
                     <span class="footer-title">{{ data.newsletterTitle }}</span>
                     <div class="newsletter-content">
-                        <div class="newsletter-intro" v-html="data.newsletterIntro" />
-                        <form class="newsletter-form">
+                        <div v-if="!success" class="newsletter-intro" v-html="data.newsletterIntro" />
+                        <p v-if="formError" class="form-message" :class="{ error: emailError }">Error !</p>
+                        <form v-if="!success" class="newsletter-form" @submit.prevent="sendForm">
                             <div class="content-newsletter-form">
-                                <div class="wrapper-field">
-                                    <input id="newsletter-email" type="email" name="newsletter" required />
+                                <div :class="['wrapper-field', { error: emailError }]">
+                                    <input
+                                        id="newsletter-email"
+                                        v-model="emailInput"
+                                        type="email"
+                                        name="newsletter"
+                                        :class="{ on: emailInput !== '' }"
+                                        required
+                                    />
                                     <label class="label" for="newsletter-email">{{ data.emailPlaceholder }}</label>
                                 </div>
                                 <button ref="submit" type="submit" class="btn-next">
@@ -63,9 +71,53 @@
 import layoutData from '~/cms/data/layout-data.json';
 
 export default {
+    data() {
+        return {
+            emailInput: '',
+            emailError: '',
+            formError: '',
+            success: false
+        };
+    },
     computed: {
         data() {
             return layoutData[this.$store.state.i18n.locale].footer;
+        }
+    },
+    methods: {
+        sendForm() {
+            const regexEmail =
+                /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+            this.$refs.submit.setAttribute('disabled', true);
+
+            this.formError = '';
+            this.emailError = false;
+
+            if (!this.emailInput) {
+                this.formError += this.data.newsletterEmailError;
+                this.emailError = true;
+            } else if (!regexEmail.test(this.emailInput)) {
+                this.formError += this.data.newsletterEmailInvalid;
+                this.emailError = true;
+            }
+
+            if (this.formError) {
+                this.$refs.submit.removeAttribute('disabled');
+            } else {
+                this.$axios
+                    .post('/.netlify/functions/newsletter', {
+                        email: this.emailInput
+                    })
+                    .then(res => {
+                        this.formError = this.data.newsletterSuccess;
+                        this.success = true;
+                    })
+                    .catch(error => {
+                        this.$refs.submit.removeAttribute('disabled');
+                        this.formError = error.response.data;
+                    });
+            }
         }
     }
 };
