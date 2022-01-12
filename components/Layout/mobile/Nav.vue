@@ -2,7 +2,8 @@
     <div class="mobile-nav-wrapper">
         <div class="container mobile-bar-container">
             <div class="content-pad mobile-bar">
-                <button class="burger" aria-label="Menu" @click="toggleNav">
+                <button class="burger" :class="{ close: showNav }" aria-label="Menu" @click="toggleNav">
+                    <span></span>
                     <span></span>
                     <span></span>
                     <span></span>
@@ -77,6 +78,8 @@
 </template>
 <script>
 import Vue from 'vue';
+import { wait } from '~/assets/js/utils';
+
 export default {
     props: {
         data: {
@@ -94,6 +97,9 @@ export default {
         };
     },
     computed: {
+        scrollTop() {
+            return this.$store.state.scroll.scrollTop;
+        },
         availableLocales() {
             return this.$i18n.locales.filter(i => i.code !== this.$i18n.locale);
         },
@@ -101,19 +107,37 @@ export default {
             return this.$i18n.locales.filter(i => i.code === this.$i18n.locale)[0];
         }
     },
+    watch: {
+        $route() {
+            if (this.showNav) this.toggleNav();
+        }
+    },
     created() {
         this.bus.$on('changeLevel', this.changeLevel);
     },
     mounted() {},
     methods: {
-        toggleNav() {
+        updateNoScroll() {
             if (this.showNav) {
-                // Reset menu state when closing it
+                this.scrollOffset = this.scrollTop;
+                document.documentElement.classList.add('no-scroll');
+                document.documentElement.style.setProperty('--scroll-top', this.scrollTop * -1 + 'px');
+            } else {
+                document.documentElement.classList.remove('no-scroll');
+                window.scrollTo(0, this.scrollOffset);
+            }
+        },
+        async toggleNav() {
+            this.showNav = !this.showNav;
+            this.updateNoScroll();
+
+            if (!this.showNav) {
+                // Reset menu state after closing it
+                await wait(300);
                 this.secondLevelId = null;
                 this.thirdLevelId = null;
                 this.level = 1;
             }
-            this.showNav = !this.showNav;
         },
         changeLevel(level, id) {
             this.level = level;
@@ -152,16 +176,44 @@ export default {
 
     span {
         position: absolute;
-        top: 10px;
         left: 7px;
         height: 1px;
         background-color: $grey-1;
         width: 17px;
-        &:nth-child(2) {
+        &:nth-child(1) {
+            top: 10px;
+            transition: 0.2s ease-out 0.1s;
+        }
+        &:nth-child(2),
+        &:nth-child(4) {
             top: 16px;
+            transition: 0.2s ease-out;
         }
         &:nth-child(3) {
             top: 22px;
+            transition: 0.2s ease-out 0.1s;
+        }
+    }
+    &.close {
+        span {
+            &:nth-child(1) {
+                transform: translateY(-5px);
+                opacity: 0;
+                transition: 0.2s ease-out;
+            }
+            &:nth-child(2) {
+                transform: rotate(-45deg) scaleX(1.2);
+                transition: 0.2s ease-out 0.1s;
+            }
+            &:nth-child(3) {
+                transform: translateY(5px);
+                opacity: 0;
+                transition: 0.2s ease-out;
+            }
+            &:nth-child(4) {
+                transform: rotate(45deg) scaleX(1.2);
+                transition: 0.2s ease-out 0.1s;
+            }
         }
     }
 }
@@ -307,7 +359,7 @@ ul {
 }
 
 .overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     height: 100vh;
     left: 0;
