@@ -375,18 +375,18 @@ a {
         width: calc(100% + #{2 * $gutter});
         margin-left: -$gutter;
         li {
-            padding: 0 $gutter 0 #{calc(percentage(math.div(1, 8)) + $gutter + 28px)};
+            padding: 0 $gutter 0 calc(#{percentage(math.div(1, 8))} + #{$gutter} + 28px);
             &::before {
-                left: calc(percentage(math.div(1, 8)) + $gutter);
+                left: calc(#{percentage(math.div(1, 8))} + #{$gutter});
             }
         }
         ul {
             width: calc(100% + #{2 * $gutter} + 28px);
             margin-left: calc(#{-$gutter} - 28px);
             li {
-                padding: 0 $gutter 0 #{calc(percentage(math.div(1, 7)) + $gutter + 28px)};
+                padding: 0 $gutter 0 calc(#{percentage(math.div(1, 7))} + #{$gutter} + 28px);
                 &::before {
-                    left: calc(percentage(math.div(1, 7)) + $gutter);
+                    left: calc(#{percentage(math.div(1, 7))} + #{$gutter});
                 }
             }
         }
