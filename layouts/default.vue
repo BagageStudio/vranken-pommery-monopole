@@ -24,7 +24,6 @@ export default {
     },
     mounted() {
         this.ageValid = Cookies.get('agevalid');
-        console.log('agevalid cookie: ' + this.ageValid);
 
         // Init superWindow
         this.$stereorepo.superWindow.initializeWindow(this.$store);
