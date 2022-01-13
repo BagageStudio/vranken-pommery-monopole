@@ -23,7 +23,7 @@ export default {
 .experience-card {
     position: relative;
     height: 250px;
-    margin: 40px 0;
+    margin: 40px #{$gutter};
     padding: 20px 30px;
     display: flex;
     align-items: flex-end;
@@ -62,7 +62,7 @@ export default {
 }
 @media (min-width: $tablet) {
     .experience-card {
-        margin: 20px 0;
+        margin: 0 #{$gutter};
     }
 }
 @media (min-width: $desktop-large) {

@@ -1,15 +1,20 @@
 <template>
     <div class="wrapper-experiences">
         <div class="container">
-            <div class="experiences-cols container-s">
-                <div class="experiences-col content-pad">
+            <div class="container-s">
+                <div class="experiences-title content-pad">
                     <span class="label">{{ data.experiencesLabel }}</span>
                     <h3 class="experiences-title h2">{{ data.experiencesTitle }}</h3>
-                    <HomeExperienceCard :data="data.experiences[0]" />
                 </div>
-                <div class="experiences-col content-pad">
-                    <HomeExperienceCard :data="data.experiences[1]" />
-                    <HomeExperienceCard :data="data.experiences[2]" />
+                <div class="experiences">
+                    <!-- <HomeExperienceCard :data="data.experiences[1]" />
+                    <HomeExperienceCard :data="data.experiences[2]" /> -->
+                    <HomeExperienceCard
+                        v-for="experience in data.experiences"
+                        :key="experience.id"
+                        :data="experience"
+                        class="experience"
+                    />
                 </div>
             </div>
         </div>
@@ -28,7 +33,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .wrapper-experiences {
-    padding: 50px 0 10px;
+    padding: 50px 0;
     background: $beige;
 }
 .label {
@@ -40,27 +45,21 @@ export default {
     color: $gold;
 }
 .experiences-title {
-    margin: 20px 0;
+    margin: 20px 0 40px;
 }
 
 @media (min-width: $tablet) {
-    .wrapper-experiences {
-        padding: 30px 0;
-    }
-    .btn-experiences {
-        margin-bottom: 20px;
-    }
-    .experiences-cols {
+    .experiences {
         display: flex;
         align-items: center;
     }
-    .experiences-col {
+    .experience {
         width: 50%;
     }
 }
 @media (min-width: $desktop) {
     .wrapper-experiences {
-        padding: 80px 0;
+        padding: 100px 0;
     }
 }
 </style>
