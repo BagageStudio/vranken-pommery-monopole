@@ -17,7 +17,6 @@
                     <span class="footer-title">{{ data.newsletterTitle }}</span>
                     <div class="newsletter-content">
                         <div v-if="!success" class="newsletter-intro" v-html="data.newsletterIntro" />
-                        <p v-if="formError" class="form-message" :class="{ error: emailError }">Error !</p>
                         <form v-if="!success" class="newsletter-form" @submit.prevent="sendForm">
                             <div class="content-newsletter-form">
                                 <div :class="['wrapper-field', { error: emailError }]">
@@ -37,6 +36,8 @@
                                 </button>
                             </div>
                         </form>
+                        <div v-if="success" class="form-message" v-html="data.successMessage" />
+                        <div v-if="formError" class="form-message error-message" v-html="data.errorMessage" />
                     </div>
                 </div>
             </div>
@@ -173,6 +174,9 @@ export default {
 }
 .newsletter-form {
     margin-top: 20px;
+}
+.error-message {
+    color: $error;
 }
 .footer-bottom {
     padding: 50px 0;
