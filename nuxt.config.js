@@ -19,7 +19,7 @@ const customSass = {
  ** SEE: https://www.netlify.com/docs/continuous-deployment/#environment-variables
  */
 const host = process.env.HOST || 'localhost';
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8888;
 const netlifyEnv = process.env.NETLIFY_ENV;
 const websiteUrl = process.env.URL || `http://${host}:${port}`;
 const isDevEnv = process.env.NETLIFY_ENV === 'development';
@@ -110,7 +110,9 @@ export default {
 
     // Axios module configuration: https://go.nuxtjs.dev/config-axios
     axios: {
-        baseURL: process.env.URL || 'http://localhost:3000'
+        baseURL: process.env.URL || 'http://localhost:8888',
+        proxyHeaders: false,
+        credentials: false
     },
 
     // PWA module configuration: https://go.nuxtjs.dev/pwa
