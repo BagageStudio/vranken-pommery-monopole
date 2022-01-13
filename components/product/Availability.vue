@@ -1,6 +1,8 @@
 <template>
     <div class="wrapper-availability">
-        <span v-if="available" class="availability available">{{ $t('product.availableLabel') }}</span>
+        <span v-if="available && !forceUnavailable" class="availability available">{{
+            $t('product.availableLabel')
+        }}</span>
         <span v-else class="availability unavailable">{{ $t('product.unavailableLabel') }}</span>
     </div>
 </template>
@@ -9,6 +11,10 @@ export default {
     props: {
         productId: {
             type: String,
+            required: true
+        },
+        forceUnavailable: {
+            type: Boolean,
             required: true
         }
     },

@@ -276,6 +276,7 @@ export const productQuery = `
                     }
                 }
             }
+            forceUnavailable
             category{
                 _modelApiKey
                 ${locales}

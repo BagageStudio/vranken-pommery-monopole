@@ -15,9 +15,9 @@
                 <h1 class="product-title h2">{{ data.title }}</h1>
                 <div class="wrapper-price-availability">
                     <span class="product-price h3">{{ $options.filters.formatNumber(data.price, $store.$i18n) }}</span>
-                    <ProductAvailability :product-id="data.uuid" />
+                    <ProductAvailability :product-id="data.uuid" :force-unavailable="data.forceUnavailable" />
                 </div>
-                <div class="wrapper-quantity-order">
+                <div v-if="!data.forceUnavailable" class="wrapper-quantity-order">
                     <ProductQuantity v-model="quantity" />
                     <button
                         class="btn-block bg-blue btn-order snipcart-add-item"
