@@ -1,13 +1,13 @@
 <template>
     <div class="wrapper-page">
         <!-- <LayoutBreadcrumbs :start="data.brand.title" :end="data.title" :links="[cuvee]" /> -->
-        <listHero :data="data" />
+        <listHero :data="data" :siblings-categories="siblingsCategories" />
         <listProducts :products="products" :data="data" />
     </div>
 </template>
 <script>
 import { getIso, getSlug, setRouteParams, checkIfTaxonomiesMatch } from '~/api/dato/helpers';
-import { categoryQuery, productsInCategoryQuery } from '~/api/dato';
+import { categoryQuery, productsInCategoryQuery, siblingsCategoryQuery } from '~/api/dato';
 import { handleShopItem } from '~/api/dato/helpers/data';
 
 import handleSeo from '~/app/seo';
@@ -32,6 +32,7 @@ export default {
 
         let category = {};
         let cuveeData = {};
+        let siblingsCategories = [];
 
         try {
             const {
@@ -44,6 +45,13 @@ export default {
                 .post('/', { query: productsInCategoryQuery, variables: { lang, id: data.id } })
                 .then(({ data }) => data);
 
+            const {
+                data: { allCategories: categories }
+            } = await $dato
+                .post('/', { query: siblingsCategoryQuery, variables: { lang, id: data.cuvee.id } })
+                .then(({ data }) => data);
+
+            siblingsCategories = handleShopItem(categories);
             category = handleShopItem(data);
             cuveeData = handleShopItem(data.cuvee);
 
@@ -59,6 +67,7 @@ export default {
 
         finalData.data = category;
         finalData.cuvee = cuveeData;
+        finalData.siblingsCategories = siblingsCategories;
         finalData.seo = handleSeo({ route: route.fullPath, seo: finalData.data.seo, lang });
 
         // Getting raw slugs for the current page from Dato

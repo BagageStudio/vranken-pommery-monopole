@@ -298,6 +298,34 @@ export const productQuery = `
         }
     }`;
 
+export const siblingsCategoryQuery = `
+    query SiblingCategory($lang: SiteLocale, $cuvee: ItemId) {
+        allCategories(locale: $lang, filter: { cuvee: { eq: $cuvee } }){
+            _modelApiKey
+            ${seo}
+            ${locales}
+            id
+            title
+            slug
+            cuvee {
+                _modelApiKey
+                ${locales}
+                id
+                slug
+                title
+                brand {
+                    _modelApiKey
+                    ${locales}
+                    id
+                    slug
+                    title
+                }
+            }
+        }
+
+    }
+`;
+
 export const categoryQuery = `
     query Category($lang: SiteLocale, $slug: String) {
         category(locale: $lang, filter: { slug: { eq: $slug } }) {

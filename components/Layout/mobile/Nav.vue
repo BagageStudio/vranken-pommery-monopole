@@ -151,6 +151,12 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.mobile-bar-container {
+    position: relative;
+    z-index: 2;
+    background-color: $white;
+}
+
 .mobile-nav-wrapper {
     position: absolute;
     top: 0;
@@ -295,6 +301,10 @@ ul {
 }
 
 .navigation {
+    position: absolute;
+    top: var(--mobile-search-header-height);
+    left: 0;
+    right: 0;
     background-color: $white;
     // 1px for the border bottom
     transform: translateY(calc(-100% - 1px));
@@ -347,7 +357,7 @@ ul {
 }
 
 .top-level-wrapper {
-    overflow: hidden;
+    // overflow: hidden;
 }
 
 .top-level {
