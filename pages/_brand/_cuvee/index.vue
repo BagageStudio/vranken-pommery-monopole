@@ -64,9 +64,7 @@ export default {
         finalData.data = cuvee;
         finalData.seo = handleSeo({ route: route.fullPath, seo: finalData.data.seo, lang });
 
-        // Getting raw slugs for the current page from Dato
-        const datoLocales = finalData.data._allSlugLocales;
-        await setRouteParams.call(context, datoLocales);
+        await setRouteParams.call(context, finalData.data, true);
 
         return finalData;
     }
