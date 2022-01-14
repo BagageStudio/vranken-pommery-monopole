@@ -46,7 +46,7 @@
 </template>
 
 <script>
-const NUMBER_BY_LOAD = 6;
+const NUMBER_BY_LOAD = 18;
 export default {
     props: {
         products: {
