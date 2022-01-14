@@ -28,14 +28,14 @@
                         </div>
                         <div class="tasting-content content-pad">
                             <div class="tasting-visual">
-                                <Icon name="eye" />
+                                <Icon name="nose" />
                                 <span>{{ $t('product.noseLabel') }}</span>
                             </div>
                             <div v-html="data.nose" />
                         </div>
                         <div class="tasting-content content-pad">
                             <div class="tasting-visual">
-                                <Icon name="eye" />
+                                <Icon name="palate" />
                                 <span>{{ $t('product.palateLabel') }}</span>
                             </div>
                             <div v-html="data.palate" />
@@ -84,6 +84,10 @@ export default {
 }
 .tasting-content {
     text-align: center;
+    margin-bottom: 30px;
+    &:last-child {
+        margin-bottom: 0;
+    }
 }
 .tasting-visual {
     width: 100px;
@@ -147,6 +151,7 @@ export default {
     .tasting-content {
         width: calc(percentage(math.div(1, 3)) - 30px);
         max-width: none;
+        margin-bottom: 0;
     }
 }
 @media (min-width: $desktop) {
