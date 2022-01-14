@@ -2,7 +2,7 @@
     <div>
         <div class="container">
             <div class="container-s">
-                <div v-if="data.noteDescription" class="product-tasting">
+                <!-- <div v-if="data.noteDescription" class="product-tasting">
                     <div class="wrapper-txt content-pad">
                         <span v-if="data.noteLabel" class="small-title">{{ data.noteLabel }}</span>
                         <h3 v-if="data.noteTitle" class="tasting-title h3">{{ data.noteTitle }}</h3>
@@ -15,7 +15,7 @@
                             cover
                         />
                     </div>
-                </div>
+                </div> -->
                 <div class="tasting-detail">
                     <span class="tasting-detail-description h3 content-pad">{{ data.sensesTitle }}</span>
                     <div class="tasting-contents">
@@ -76,6 +76,7 @@ export default {
 
 .tasting-detail {
     margin-bottom: 50px;
+    margin-top: 50px;
 }
 .tasting-contents {
     display: flex;
@@ -167,6 +168,7 @@ export default {
         margin-left: 0;
     }
     .tasting-detail {
+        margin-top: 100px;
         margin-bottom: 100px;
     }
 }
