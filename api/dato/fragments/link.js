@@ -55,6 +55,10 @@ export default `
                     slug
                 }
             }
+            ... on PageRecord {
+                slug
+                _modelApiKey
+            }
         }
         description
     }
