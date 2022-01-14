@@ -15,10 +15,10 @@
                 <h1 class="product-title h2">{{ data.title }}</h1>
                 <div class="wrapper-price-availability">
                     <span class="product-price h3">{{ $options.filters.formatNumber(data.price, $store.$i18n) }}</span>
-                    <ProductAvailability :product-id="data.uuid" :force-unavailable="data.forceUnavailable" />
+                    <ProductAvailability :available="available" />
                 </div>
-                <div v-if="!data.forceUnavailable" class="wrapper-quantity-order">
-                    <ProductQuantity v-model="quantity" />
+                <div v-if="available" class="wrapper-quantity-order">
+                    <ProductQuantity v-model="quantity" :max="maxStock" />
                     <button
                         class="btn-block bg-blue btn-order snipcart-add-item"
                         :data-item-id="data.uuid"
@@ -51,13 +51,38 @@ export default {
         }
     },
     data: () => ({
-        quantity: 1
+        quantity: 1,
+        availableInStock: true,
+        maxStock: 100
     }),
-    methods: {
-        updateQuantity(quantity) {
-            this.quantity = quantity;
+    computed: {
+        available() {
+            return this.availableInStock && !this.data.forceUnavailable;
         }
-    }
+    },
+    async created() {
+        if (!process.browser) return;
+
+        try {
+            const { product } = await this.$axios
+                .post('/.netlify/functions/getProduct', {
+                    id: this.data.uuid
+                })
+                .then(res => res.data)
+                .catch(e => {
+                    console.log('error');
+                });
+
+            const stock = product.stock;
+
+            if (stock === 0) this.availableInStock = false;
+
+            if (stock && stock < 100) this.maxStock = stock;
+        } catch (error) {
+            console.log('error');
+        }
+    },
+    methods: {}
 };
 </script>
 <style lang="scss" scoped>
@@ -133,7 +158,9 @@ export default {
 }
 .wrapper-quantity-order {
     display: flex;
-    align-items: center;
+    // align-items: center;
+    flex-direction: column;
+    // align-items: flex-start;
     justify-content: space-between;
     margin-top: 30px;
 }
@@ -148,6 +175,13 @@ export default {
     margin: 50px 0 0;
     padding-top: 50px;
     border-top: 1px solid $grey-3;
+}
+
+@media (min-width: $phone-small) {
+    .wrapper-quantity-order {
+        flex-direction: row;
+        align-items: flex-start;
+    }
 }
 
 @media (min-width: $tablet) {

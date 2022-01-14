@@ -11,6 +11,8 @@
         "noseLabel": "Nose",
         "palateLabel": "Palate",
         "availableLabel": "Available",
-        "unavailableLabel": "Unavailable"
+        "unavailableLabel": "Unavailable",
+        "quantityError": "Quantity not valid",
+        "quantityMax": "Maximum quantity exceeded"
     }
 }

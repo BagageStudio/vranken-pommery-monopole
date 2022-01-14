@@ -2,16 +2,29 @@
     <div class="wrapper-quantity">
         <div class="quantity-select" :class="{ error }">
             <button class="btn-quantity substract" @click="substract"><Icon name="minus" /></button>
-            <input :value="quantity" class="quantity" type="number" min="1" @input="checkInputValue" />
+            <input
+                v-model.number="quantity"
+                class="quantity"
+                type="number"
+                min="1"
+                :max="max"
+                @input="checkInputValue"
+            />
             <button class="btn-quantity add" @click="add"><Icon name="plus" /></button>
         </div>
-        <div v-if="error">Error</div>
+        <div v-if="error" class="quantity-error">
+            {{ error === 'invalid' ? $t('product.quantityError') : $t('product.quantityMax') }}
+        </div>
     </div>
 </template>
 <script>
 export default {
     props: {
         value: {
+            type: Number,
+            required: true
+        },
+        max: {
             type: Number,
             required: true
         }
@@ -21,6 +34,11 @@ export default {
             quantity: this.value,
             error: false
         };
+    },
+    watch: {
+        quantity(q) {
+            this.$emit('input', this.quantity);
+        }
     },
     methods: {
         add() {
@@ -32,6 +50,7 @@ export default {
             }
         },
         updateQuantity(quantity) {
+            if (quantity > this.max) return;
             this.error = false;
             this.quantity = parseInt(quantity);
             this.$emit('input', this.quantity);
@@ -39,9 +58,11 @@ export default {
         checkInputValue({ target }) {
             const value = parseInt(target.value);
             if (isNaN(value) || value < 1) {
-                this.error = true;
+                this.error = 'invalid';
+            } else if (value > this.max) {
+                this.error = 'max';
             } else {
-                this.updateQuantity(value);
+                this.error = false;
             }
         }
     }
@@ -49,10 +70,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.wrapper-quantity {
+    position: relative;
+    margin-bottom: 15px;
+}
 .quantity-select {
     display: inline-flex;
     align-items: stretch;
-    height: 45px;
+    height: 47px;
     font-family: $plex-sans;
     font-weight: 400;
     font-size: 1.2rem;
@@ -91,6 +116,24 @@ export default {
         fill: currentColor;
         width: 18px;
         height: 18px;
+    }
+}
+
+.quantity-error {
+    margin: 10px 0 0;
+    color: $error;
+}
+
+@media (min-width: $phone-small) {
+    .wrapper-quantity {
+        margin-bottom: 0;
+    }
+    .quantity-error {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        white-space: nowrap;
     }
 }
 </style>
