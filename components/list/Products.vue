@@ -9,7 +9,7 @@
             >
                 <LinkTo v-if="product._modelApiKey === 'product'" shop :link="product">
                     <div class="product-image">
-                        <FastImage :image="product.image" contains />
+                        <FastImage class="product-thumbnail" :image="product.image" contains />
                         <button
                             class="quick-add snipcart-add-item"
                             :data-item-id="product.uuid"
@@ -143,13 +143,18 @@ export default {
     display: flex;
     flex-direction: column;
 }
+
 .product-card {
     margin: 0 $gutter 40px;
     > a {
         text-decoration: none;
     }
     &:hover {
+        .product-thumbnail {
+            transform: scale(1.1);
+        }
         .quick-add {
+            transform: scale(1);
             opacity: 1;
         }
     }
@@ -181,6 +186,9 @@ export default {
     color: $white;
     background: $gold;
     opacity: 0;
+    transform-origin: 100% 0;
+    transition: 0.2s ease-out;
+    transform: scale(0.8);
     .icon {
         width: 30px;
         height: 30px;
