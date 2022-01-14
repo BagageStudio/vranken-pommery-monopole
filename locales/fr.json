@@ -11,6 +11,9 @@
         "noseLabel": "Nez",
         "palateLabel": "Bouche",
         "availableLabel": "Disponible",
-        "unavailableLabel": "Indisponible"
+        "unavailableLabel": "Indisponible",
+        "quantityError": "Quantité invalide",
+        "quantityMax": "Quantité maximum dépassée"
+
     }
 }
