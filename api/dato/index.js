@@ -444,20 +444,37 @@ export const categoriesInCuveeQuery = `
         }
     }`;
 
+export const flaconsExceptionQuery = `
+    query flaconsException($lang: SiteLocale) {
+        flaconsException(locale: $lang) {
+            _modelApiKey
+            ${seo}
+            ${locales}
+            id
+            title
+            slug
+            preTitle
+            content {
+                _modelApiKey
+                id
+                label
+                title
+                text
+                image {
+                    ${img}
+                }
+                imageCaption
+            }
+            collectionTitle
+        }
+    }`;
+
 // This is use by the `~/pages/_slug.vue` file to get the right query given a _modelApiKey
 // When adding a new model, we need to link its query and its _modelApiKey
 export const getQuery = _modelApiKey => {
     const mapping = {
-        page: pageQuery
-        // contact: contactQuery,
-        // team: teamQuery,
-        // portfolio: portfolioQuery,
-        // investors_page: investorsPageQuery,
-        // fund: fundQuery,
-        // use_cases_page: useCasesPageQuery,
-        // sustainable_engagement: sustainableEngagementQuery,
-        // ring2success: ring2successQuery,
-        // vision: visionQuery
+        page: pageQuery,
+        flacons_exception: flaconsExceptionQuery
     };
     return mapping[_modelApiKey];
 };

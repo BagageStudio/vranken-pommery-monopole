@@ -7,5 +7,12 @@ export default `
                 value
             }
         }
+        flaconsException{
+            _modelApiKey
+            _allSlugLocales{
+                locale
+                value
+            }
+        }
     }
 `;

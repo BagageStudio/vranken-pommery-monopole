@@ -1,5 +1,5 @@
 <template>
-    <div v-if="data" class="wrapper-basic">
+    <div v-if="data" class="wrapper-classic">
         <div class="container">
             <div class="container-xs wysiwyg content-pad">
                 <h1>{{ data.title }}</h1>

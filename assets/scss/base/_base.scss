@@ -288,7 +288,7 @@ a {
 .wrapper-page {
     padding-top: var(--header-height);
 }
-.wrapper-basic {
+.wrapper-classic {
     padding: calc(var(--header-height) + 50px) 0 50px;
 }
 
@@ -365,7 +365,7 @@ a {
 }
 
 @media (min-width: $desktop-small) {
-    .wrapper-basic {
+    .wrapper-classic {
         padding: calc(var(--header-height) + 80px) 0 80px;
     }
 }
