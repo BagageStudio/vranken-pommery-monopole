@@ -2,7 +2,7 @@
     <div class="wrapper-text-image">
         <div class="wrapper-txt content-pad">
             <span v-if="data.label" class="small-title">{{ data.label }}</span>
-            <h3 v-if="data.title" class="title h3">{{ data.title }}</h3>
+            <h2 v-if="data.title" class="title h3">{{ data.title }}</h2>
             <div class="text wysiwyg" v-html="data.text" />
         </div>
         <div v-if="data.image" class="wrapper-image content-pad">

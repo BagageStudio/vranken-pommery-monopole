@@ -7,6 +7,9 @@
                     <h1 class="h2 exception-title">{{ data.title }}</h1>
                 </div>
                 <ModuleTextImage v-for="module in data.content" :key="module.id" :data="module" />
+                <div class="collection">
+                    <h3 class="collection-title h3 content-pad">{{ data.collectionTitle }}</h3>
+                </div>
             </div>
         </div>
     </div>
@@ -40,6 +43,14 @@ export default {
     color: $gold;
 }
 
+.collection {
+    padding-top: 50px;
+}
+.collection-title {
+    text-align: center;
+    margin: 0 0 40px;
+}
+
 @media (min-width: $phone) {
     .exception-wrapper-title {
         text-align: center;
@@ -55,6 +66,9 @@ export default {
 @media (min-width: $desktop-small) {
     .exception-wrapper-title {
         padding-bottom: 40px;
+    }
+    .collection {
+        padding-top: 80px;
     }
 }
 </style>

@@ -469,6 +469,17 @@ export const flaconsExceptionQuery = `
         }
     }`;
 
+export const flaconExceptionQuery = `
+    query flaconException($lang: SiteLocale) {
+        flaconException(locale: $lang, filter: { slug: { eq: $slug } }) {
+            _modelApiKey
+            ${seo}
+            ${locales}
+            id
+            title
+        }
+    }`;
+
 // This is use by the `~/pages/_slug.vue` file to get the right query given a _modelApiKey
 // When adding a new model, we need to link its query and its _modelApiKey
 export const getQuery = _modelApiKey => {
