@@ -2,7 +2,6 @@
     <div>
         <!-- <component :is="template" v-if="template" :data="data" /> -->
         <TemplatesPage v-if="template === 'Page'" :data="data" />
-        <TemplatesFlaconsException v-else-if="template === 'FlaconsException'" :data="data" />
     </div>
 </template>
 

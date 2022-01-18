@@ -29,5 +29,9 @@ export const getPagesList = () => ({
     [routes.product.i18nFormat]: {
         fr: '/:brand?/:cuvee?/:category?/:uuid?',
         en: '/:brand?/:cuvee?/:category?/:uuid?'
+    },
+    [routes.flaconsException.i18nFormat]: {
+        fr: '/flacons-exception',
+        en: '/exceptional-flacons'
     }
 });

@@ -21,8 +21,8 @@ export const routes = {
         routerFormat: 'brand-cuvee-category-uuid'
     },
     flaconsException: {
-        i18nFormat: '_slug',
-        routerFormat: 'slug'
+        i18nFormat: 'flacons-exception/index',
+        routerFormat: 'flacons-exception'
     }
 };
 

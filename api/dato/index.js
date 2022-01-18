@@ -161,9 +161,6 @@ export const homeQuery = `
                 thumbnail {
                     ${img}
                 }
-                link {
-                    ...link
-                }
             }
         }
         allProducts(locale: $lang, first: 100) {
@@ -449,10 +446,8 @@ export const flaconsExceptionQuery = `
         flaconsException(locale: $lang) {
             _modelApiKey
             ${seo}
-            ${locales}
             id
             title
-            slug
             preTitle
             content {
                 _modelApiKey
@@ -467,11 +462,7 @@ export const flaconsExceptionQuery = `
             }
             collectionTitle
         }
-    }`;
-
-export const flaconExceptionQuery = `
-    query flaconException($lang: SiteLocale) {
-        flaconException(locale: $lang, filter: { slug: { eq: $slug } }) {
+        allFlaconExceptions(locale: $lang) {
             _modelApiKey
             ${seo}
             ${locales}
@@ -484,8 +475,7 @@ export const flaconExceptionQuery = `
 // When adding a new model, we need to link its query and its _modelApiKey
 export const getQuery = _modelApiKey => {
     const mapping = {
-        page: pageQuery,
-        flacons_exception: flaconsExceptionQuery
+        page: pageQuery
     };
     return mapping[_modelApiKey];
 };

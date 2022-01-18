@@ -60,7 +60,6 @@ export default `
                 _modelApiKey
             }
             ... on FlaconsExceptionRecord {
-                slug
                 _modelApiKey
             }
         }

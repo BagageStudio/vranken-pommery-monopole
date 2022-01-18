@@ -3,12 +3,14 @@
         <div class="container">
             <div class="container-s">
                 <div class="exception-wrapper-title content-pad">
-                    <span v-if="data.preTitle" class="pre-title">{{ data.preTitle }}</span>
-                    <h1 class="h2 exception-title">{{ data.title }}</h1>
+                    <span v-if="data.flaconsException.preTitle" class="pre-title">{{
+                        data.flaconsException.preTitle
+                    }}</span>
+                    <h1 class="h2 exception-title">{{ data.flaconsException.title }}</h1>
                 </div>
-                <ModuleTextImage v-for="module in data.content" :key="module.id" :data="module" />
+                <ModuleTextImage v-for="module in data.flaconsException.content" :key="module.id" :data="module" />
                 <div class="collection">
-                    <h3 class="collection-title h3 content-pad">{{ data.collectionTitle }}</h3>
+                    <h3 class="collection-title h3 content-pad">{{ data.flaconsException.collectionTitle }}</h3>
                 </div>
             </div>
         </div>

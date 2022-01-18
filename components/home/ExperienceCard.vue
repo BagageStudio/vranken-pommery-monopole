@@ -4,7 +4,7 @@
             <FastImage :image="data.thumbnail" cover />
         </span>
         <span class="card-txt">
-            <LinkTo class="btn-block" :link="data.link" />
+            <!-- <LinkTo class="btn-block" :link="data.link" /> -->
         </span>
     </div>
 </template>
