@@ -9,10 +9,15 @@
                     <h1 class="h2 exception-title">{{ data.flaconsException.title }}</h1>
                 </div>
                 <ModuleTextImage v-for="module in data.flaconsException.content" :key="module.id" :data="module" />
-                <div class="collection">
+            </div>
+        </div>
+        <div class="collection">
+            <div class="container">
+                <div class="container-s">
                     <h3 class="collection-title h3 content-pad">{{ data.flaconsException.collectionTitle }}</h3>
                 </div>
             </div>
+            <ListFlacons v-if="data.allFlaconExceptions" :flacons="data.allFlaconExceptions" />
         </div>
     </div>
 </template>

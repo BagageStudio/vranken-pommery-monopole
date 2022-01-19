@@ -468,6 +468,12 @@ export const flaconsExceptionQuery = `
             ${locales}
             id
             title
+            listTitle
+            year
+            image {
+                ${img}
+            }
+            unavailable
         }
     }`;
 
