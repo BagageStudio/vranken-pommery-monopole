@@ -469,6 +469,25 @@ export const flaconsExceptionQuery = `
             _modelApiKey
             ${seo}
             ${locales}
+            slug
+            id
+            title
+            listTitle
+            year
+            image {
+                ${img}
+            }
+            unavailable
+        }
+    }`;
+
+export const flaconExceptionSingleQuery = `
+    query flaconsException($lang: SiteLocale, $slug: String) {
+        flaconException(locale: $lang, filter: { slug: { eq: $slug } }) {
+            _modelApiKey
+            ${seo}
+            ${locales}
+            slug
             id
             title
             listTitle

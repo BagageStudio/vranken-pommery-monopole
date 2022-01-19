@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="flacons-list">
-            <div v-for="flacon in flacons" :key="flacon.id" class="flacon-card">
+            <nuxt-link v-for="flacon in flacons" :key="flacon.id" class="flacon-card" :to="getLink(flacon)">
                 <div class="flacon-image">
                     <!-- <FastImage :image="flacon.image" contains /> -->
                     <img
@@ -16,17 +16,27 @@
                 <div class="flacon-details">
                     <span class="flacon-title">{{ flacon.listTitle }}</span>
                 </div>
-            </div>
+            </nuxt-link>
         </div>
     </div>
 </template>
 
 <script>
+import { routeByApiModels } from '~/app/crawler/routes';
+
 export default {
     props: {
         flacons: {
             type: Array,
             required: true
+        }
+    },
+    methods: {
+        getLink(flacon) {
+            return this.localePath({
+                name: routeByApiModels[flacon._modelApiKey].routerFormat,
+                params: { slug: flacon.slug }
+            });
         }
     }
 };

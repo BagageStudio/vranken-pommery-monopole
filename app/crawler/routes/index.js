@@ -23,6 +23,10 @@ export const routes = {
     flaconsException: {
         i18nFormat: 'flacons-exception/index',
         routerFormat: 'flacons-exception'
+    },
+    flaconExceptionSingle: {
+        i18nFormat: 'flacons-exception/_slug',
+        routerFormat: 'flacons-exception-slug'
     }
 };
 
@@ -32,7 +36,8 @@ export const routeByApiModels = {
     cuvee: routes.cuvee,
     category: routes.category,
     product: routes.product,
-    flacons_exception: routes.flaconsException
+    flacons_exception: routes.flaconsException,
+    flacon_exception: routes.flaconExceptionSingle
 };
 
 // You can pass an array of regular expressions to exclude dynamic routes.
