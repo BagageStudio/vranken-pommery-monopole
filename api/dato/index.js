@@ -161,6 +161,9 @@ export const homeQuery = `
                 thumbnail {
                     ${img}
                 }
+                link {
+                    ...link
+                }
             }
         }
         allProducts(locale: $lang, first: 100) {
