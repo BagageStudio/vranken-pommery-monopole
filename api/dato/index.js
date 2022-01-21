@@ -496,6 +496,21 @@ export const flaconExceptionSingleQuery = `
                 ${img}
             }
             unavailable
+            description
+            about {
+                id
+                title
+                description
+            }
+            sliderDate {
+                id
+                date
+                title
+                description
+                image {
+                    ${img}
+                }
+            }
         }
     }`;
 

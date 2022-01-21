@@ -14,6 +14,8 @@
         "unavailableLabel": "Indisponible",
         "quantityError": "Quantité invalide",
         "quantityMax": "Quantité maximum dépassée"
-
+    },
+    "flacon": {
+        "price": "Tarif sur demande"
     }
 }

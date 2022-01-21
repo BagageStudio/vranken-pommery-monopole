@@ -14,5 +14,8 @@
         "unavailableLabel": "Unavailable",
         "quantityError": "Quantity not valid",
         "quantityMax": "Maximum quantity exceeded"
+    },
+    "flacon": {
+        "price": "Price on request"
     }
 }

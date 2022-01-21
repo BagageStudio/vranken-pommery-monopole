@@ -1,12 +1,15 @@
 <template>
     <div class="wrapper-page">
-        <div>oui</div>
+        <FlaconHero :data="data" :back-link="listLink" />
+        <FlaconAbout :data="data.about" :year="data.year" />
+        <FlaconSlider :data="data.sliderDate" />
     </div>
 </template>
 <script>
 import { getIso, getSlug, setRouteParams } from '~/api/dato/helpers';
 import { flaconExceptionSingleQuery } from '~/api/dato';
 import handleSeo from '~/app/seo';
+import { routeByApiModels } from '~/app/crawler/routes';
 
 export default {
     async asyncData(context) {
@@ -39,6 +42,13 @@ export default {
         await setRouteParams.call(context, datoLocales);
 
         return finalData;
+    },
+    data() {
+        return {
+            listLink: this.localePath({
+                name: routeByApiModels.flacons_exception.routerFormat
+            })
+        };
     }
 };
 </script>

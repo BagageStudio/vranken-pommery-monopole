@@ -2,37 +2,22 @@
     <div class="product-hero container">
         <div class="wrapper-product-top">
             <div class="wrapper-product-image">
-                <!-- <LinkTo shop class="btn-back" :link="backLink">
+                <nuxt-link class="btn-back" :to="backLink">
                     <Icon name="arrow-left" />
                     <span>{{ $t('global.backLabel') }}</span>
-                </LinkTo> -->
+                </nuxt-link>
                 <div class="product-image">
-                    <FastImage :image="data.image" contains />
+                    <FastImage :image="data.image" cover />
                 </div>
             </div>
             <div class="wrapper-product-description">
                 <span class="product-type">{{ data.productType }}</span>
                 <h1 class="product-title h2">{{ data.title }}</h1>
                 <div class="wrapper-price-availability">
-                    <span class="product-price h3">{{ $options.filters.formatNumber(data.price, $store.$i18n) }}</span>
-                    <ProductAvailability :available="available" />
+                    <span class="product-price">Tarif sur demande</span>
+                    <ProductAvailability :available="!data.unavaible" />
                 </div>
-                <div v-if="available" class="wrapper-quantity-order">
-                    <ProductQuantity v-model="quantity" :max="maxStock" />
-                    <button
-                        class="btn-block bg-blue btn-order snipcart-add-item"
-                        :data-item-id="data.uuid"
-                        :data-item-price="data.price"
-                        :data-item-image="data.image.url"
-                        :data-item-name="data.title"
-                        :data-item-description="data.shoppingCartDescription"
-                        :data-item-quantity="quantity"
-                    >
-                        <span>{{ $t('global.orderLabel') }}</span>
-                        <Icon name="cart-add" />
-                    </button>
-                </div>
-                <div class="product-description wysiwyg" v-html="data.description.description" />
+                <div class="product-description wysiwyg" v-html="data.description" />
             </div>
         </div>
     </div>
@@ -46,42 +31,11 @@ export default {
             required: true
         },
         backLink: {
-            type: Object,
+            type: String,
             required: true
         }
     },
-    data: () => ({
-        quantity: 1,
-        availableInStock: true,
-        maxStock: 100
-    }),
-    computed: {
-        available() {
-            return this.availableInStock && !this.data.forceUnavailable;
-        }
-    },
-    async created() {
-        if (!process.browser) return;
-
-        try {
-            const { product } = await this.$axios
-                .post('/.netlify/functions/getProduct', {
-                    id: this.data.uuid
-                })
-                .then(res => res.data)
-                .catch(e => {
-                    console.log('error');
-                });
-
-            const stock = product.stock;
-
-            if (stock === 0) this.availableInStock = false;
-
-            if (stock && stock < 100) this.maxStock = stock;
-        } catch (error) {
-            console.log('error');
-        }
-    },
+    data: () => ({}),
     methods: {}
 };
 </script>
@@ -97,7 +51,7 @@ export default {
         right: -#{$grid-gutter-s};
         bottom: 0;
         left: -#{$grid-gutter-s};
-        background: $beige;
+        // background: $beige;
     }
 }
 .btn-back {
@@ -122,10 +76,12 @@ export default {
     }
 }
 .product-image {
-    max-width: 500px;
-    width: 100%;
+    // max-width: 500px;
+    max-height: 500px;
+    width: calc(100% + #{$grid-gutter-s * 2});
+    margin-left: -#{$grid-gutter-s};
+    margin-right: -#{$grid-gutter-s};
     aspect-ratio: 1 / 1;
-    padding: 40px;
     .fast-image {
         width: 100%;
         height: 100%;
@@ -149,25 +105,13 @@ export default {
     align-items: baseline;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-top: 10px;
+    margin-top: 30px;
 }
 .product-price {
     flex: 0 0 auto;
-    min-width: 168px;
     margin: 0 20px 0 0;
 }
-.wrapper-quantity-order {
-    display: flex;
-    // align-items: center;
-    flex-direction: column;
-    // align-items: flex-start;
-    justify-content: space-between;
-    margin-top: 30px;
-}
-.wrapper-quantity {
-    flex: 0 0 auto;
-    margin-right: 20px;
-}
+
 .btn-order {
     flex: 1 1 auto;
 }
@@ -177,11 +121,11 @@ export default {
     border-top: 1px solid $grey-3;
 }
 
-@media (min-width: $phone-small) {
-    .wrapper-quantity-order {
-        flex-direction: row;
-        align-items: flex-start;
-    }
+@media (min-width: $phone) {
+    // .product-image {
+    //     height: 500px;
+    //     aspect-ratio: auto;
+    // }
 }
 
 @media (min-width: $tablet) {
@@ -201,7 +145,11 @@ export default {
         left: 0;
     }
     .product-image {
+        width: 100%;
         min-height: 450px;
+        max-height: none;
+        margin-left: 0;
+        margin-right: 0;
     }
     .wrapper-product-description {
         flex: 0 0 auto;
@@ -224,7 +172,6 @@ export default {
     }
     .product-image {
         aspect-ratio: auto;
-        max-width: none;
         width: percentage(math.div(5, 6));
     }
     .wrapper-product-description {
@@ -241,7 +188,6 @@ export default {
     }
     .product-image {
         width: percentage(math.div(6, 7));
-        padding: 120px;
     }
     .wrapper-product-description {
         width: percentage(math.div(4, 12));
