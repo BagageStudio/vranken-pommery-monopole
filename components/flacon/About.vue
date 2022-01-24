@@ -20,7 +20,7 @@ export default {
             required: true
         },
         year: {
-            type: String,
+            type: Number,
             required: true
         }
     }
