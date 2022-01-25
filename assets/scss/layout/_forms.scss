@@ -47,10 +47,42 @@ input {
     }
 }
 
+textarea {
+    min-height: 135px;
+    font-size: 1.3rem;
+    line-height: 25px;
+    padding: 10px;
+    border: 0;
+    background: $beige;
+}
+
 select {
     // hide the arrow on edge + ie
     &::-ms-expand {
         display: none;
+    }
+}
+.select {
+    position: relative;
+    select {
+        width: 100%;
+        padding: 10px;
+        border: 0;
+        font-size: 1.3rem;
+        line-height: 25px;
+        background: $beige;
+        color: $grey-1;
+        appearance: none;
+    }
+    .icon {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 15px;
+        width: 11px;
+        height: 6px;
+        margin: auto;
+        fill: $grey-1;
     }
 }
 
@@ -108,5 +140,28 @@ button {
         width: 5px;
         height: 9px;
         fill: currentColor;
+    }
+}
+
+.form-line {
+    margin-bottom: 20px;
+    &.split-half {
+        .wrapper-field {
+            margin-bottom: 20px;
+        }
+    }
+}
+
+@media (min-width: $phone) {
+    .form-line {
+        margin-bottom: 20px;
+        &.split-half {
+            display: flex;
+            width: calc(100% + #{$gutter * 2});
+            margin-left: -#{$gutter};
+            .wrapper-field {
+                margin: 0 #{$gutter};
+            }
+        }
     }
 }

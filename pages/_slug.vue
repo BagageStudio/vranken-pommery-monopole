@@ -1,7 +1,7 @@
 <template>
     <div>
-        <!-- <component :is="template" v-if="template" :data="data" /> -->
         <TemplatesPage v-if="template === 'Page'" :data="data" />
+        <TemplatesContact v-else-if="template === 'Contact'" :data="data" />
     </div>
 </template>
 
