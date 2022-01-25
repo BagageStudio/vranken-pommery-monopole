@@ -27,6 +27,10 @@ export const routes = {
     flaconExceptionSingle: {
         i18nFormat: 'flacons-exception/_slug',
         routerFormat: 'flacons-exception-slug'
+    },
+    contact: {
+        i18nFormat: '_slug',
+        routerFormat: 'slug'
     }
 };
 
@@ -37,7 +41,8 @@ export const routeByApiModels = {
     category: routes.category,
     product: routes.product,
     flacons_exception: routes.flaconsException,
-    flacon_exception: routes.flaconExceptionSingle
+    flacon_exception: routes.flaconExceptionSingle,
+    contact: routes.contact
 };
 
 // You can pass an array of regular expressions to exclude dynamic routes.
