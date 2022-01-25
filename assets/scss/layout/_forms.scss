@@ -1,15 +1,5 @@
 /* Forms */
 
-::-webkit-input-placeholder {
-}
-::-moz-placeholder {
-}
-:-ms-input-placeholder {
-}
-
-fieldset {
-}
-
 input,
 textarea,
 select,
@@ -34,10 +24,11 @@ input {
     display: block;
     position: relative;
     font-size: 1.3rem;
-    line-height: 25px;
-    padding: 10px;
+    line-height: 20px;
+    padding: 9px;
     border: 0;
     background: $beige;
+    border: 1px solid $beige;
     // hide the symbols of input search
     &[type='search'] {
         &::-webkit-search-cancel-button,
@@ -54,6 +45,7 @@ textarea {
     padding: 10px;
     border: 0;
     background: $beige;
+    border: 1px solid $beige;
 }
 
 select {
@@ -66,12 +58,13 @@ select {
     position: relative;
     select {
         width: 100%;
-        padding: 10px;
+        padding: 9px;
         border: 0;
         font-size: 1.3rem;
-        line-height: 25px;
+        line-height: 20px;
         background: $beige;
         color: $grey-1;
+        border: 1px solid $beige;
         appearance: none;
     }
     .icon {
@@ -95,11 +88,11 @@ button {
     width: 100%;
     .label {
         font-size: 1.3rem;
-        line-height: 25px;
+        line-height: 20px;
+        padding: 9px;
         position: absolute;
         top: 0;
         left: 0;
-        padding: 10px;
         color: $grey-1;
         user-select: none;
         pointer-events: none;
@@ -115,7 +108,15 @@ button {
         }
     }
     &.error {
-        input {
+        input,
+        textarea,
+        select {
+            border-color: $error;
+            + .label {
+                color: $error;
+            }
+        }
+        select {
             border-color: $error;
             color: $error;
         }
@@ -150,6 +151,10 @@ button {
             margin-bottom: 20px;
         }
     }
+}
+
+.error-message {
+    color: $error;
 }
 
 @media (min-width: $phone) {
