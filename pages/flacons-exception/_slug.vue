@@ -2,7 +2,8 @@
     <div class="wrapper-page">
         <FlaconHero :data="data" :back-link="listLink" />
         <FlaconAbout :data="data.about" :year="data.year" />
-        <FlaconSlider :data="data.sliderDate" />
+        <FlaconSlider v-if="data.sliderDate.length" :data="data.sliderDate" />
+        <FlaconRelated v-if="data.relatedFlacons" :data="data.relatedFlacons" />
     </div>
 </template>
 <script>

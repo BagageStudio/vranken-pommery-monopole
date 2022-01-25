@@ -511,6 +511,17 @@ export const flaconExceptionSingleQuery = `
                     ${img}
                 }
             }
+            relatedFlacons{
+                displayTitle
+                flacons{
+                    _modelApiKey
+                    id
+                    listTitle
+                    slug
+                    year
+                    
+                }
+            }
         }
     }`;
 

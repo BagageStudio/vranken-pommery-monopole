@@ -15,7 +15,7 @@
                 <h1 class="product-title h2">{{ data.title }}</h1>
                 <div class="wrapper-price-availability">
                     <span class="product-price">Tarif sur demande</span>
-                    <ProductAvailability :available="!data.unavaible" />
+                    <ProductAvailability :available="!data.unavailable" />
                 </div>
                 <div class="product-description wysiwyg" v-html="data.description" />
             </div>
