@@ -24,6 +24,7 @@
                                     v-model="subjectInput"
                                     name="contact-subject"
                                     :class="{ on: subjectInput !== '' }"
+                                    required
                                 >
                                     <option value="" selected disabled hidden>{{ data.subjectLabel }}</option>
                                     <option
@@ -44,6 +45,7 @@
                                     v-model="brandInput"
                                     name="contact-brand"
                                     :class="{ on: brandInput !== '' }"
+                                    required
                                 >
                                     <option value="" selected disabled hidden>{{ data.brandLabel }}</option>
                                     <option
@@ -65,6 +67,7 @@
                                     type="text"
                                     name="contact-first-name"
                                     :class="{ on: firstNameInput !== '' }"
+                                    required
                                 />
                                 <label class="label" for="contact-first-name">{{ data.firstNameLabel }}</label>
                             </div>
@@ -75,6 +78,7 @@
                                     type="text"
                                     name="contact-last-name"
                                     :class="{ on: lastNameInput !== '' }"
+                                    required
                                 />
                                 <label class="label" for="contact-last-name">{{ data.lastNameLabel }}</label>
                             </div>
@@ -87,6 +91,7 @@
                                     type="tel"
                                     name="contact-phone"
                                     :class="{ on: phoneInput !== '' }"
+                                    required
                                 />
                                 <label class="label" for="contact-phone">{{ data.phoneLabel }}</label>
                             </div>
@@ -97,6 +102,7 @@
                                     type="email"
                                     name="contact-email"
                                     :class="{ on: emailInput !== '' }"
+                                    required
                                 />
                                 <label class="label" for="contact-email">{{ data.emailLabel }}</label>
                             </div>
@@ -107,6 +113,7 @@
                                 v-model="messageInput"
                                 name="contact-message"
                                 :class="{ on: messageInput !== '' }"
+                                required
                             />
                             <label class="label" for="contact-message">{{ data.messageLabel }}</label>
                         </div>
