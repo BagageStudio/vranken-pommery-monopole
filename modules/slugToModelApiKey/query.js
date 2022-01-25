@@ -7,5 +7,12 @@ export default `
                 value
             }
         }
+        contact{
+            _modelApiKey
+            _allSlugLocales{
+                locale
+                value
+            }
+        }
     }
 `;

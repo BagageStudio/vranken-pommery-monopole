@@ -514,11 +514,45 @@ export const flaconExceptionSingleQuery = `
         }
     }`;
 
+export const contactQuery = `
+    query contact($lang: SiteLocale) {
+        contact(locale: $lang) {
+            _modelApiKey
+            slug
+            ${seo}
+            id
+            title
+            image {
+                ${img}
+            }
+            intro
+            subjectLabel
+            subjectOptions {
+                id
+                text
+                valueAttribute
+            }
+            brandLabel
+            brandOptions {
+                id
+                text
+                valueAttribute
+            }
+            firstNameLabel
+            lastNameLabel
+            phoneLabel
+            emailLabel
+            messageLabel
+            buttonLabel
+        }
+    }`;
+
 // This is use by the `~/pages/_slug.vue` file to get the right query given a _modelApiKey
 // When adding a new model, we need to link its query and its _modelApiKey
 export const getQuery = _modelApiKey => {
     const mapping = {
-        page: pageQuery
+        page: pageQuery,
+        contact: contactQuery
     };
     return mapping[_modelApiKey];
 };

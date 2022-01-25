@@ -2,10 +2,10 @@
     <div class="product-hero container">
         <div class="wrapper-product-top">
             <div class="wrapper-product-image">
-                <!-- <LinkTo shop class="btn-back" :link="backLink">
+                <LinkTo shop class="btn-back" :link="backLink">
                     <Icon name="arrow-left" />
                     <span>{{ $t('global.backLabel') }}</span>
-                </LinkTo> -->
+                </LinkTo>
                 <div class="product-image">
                     <FastImage :image="data.image" contains />
                 </div>
