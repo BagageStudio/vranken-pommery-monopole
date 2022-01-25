@@ -5,7 +5,8 @@
                 <div
                     v-for="(slide, index) in data"
                     :key="slide.id"
-                    :class="{ active: index === activeSlide }"
+                    ref="slide"
+                    :class="[{ active: index === activeSlide }, slideClasses[index]]"
                     class="slide"
                 >
                     <div class="content-pad image-wrapper">
@@ -47,11 +48,34 @@ export default {
         }
     },
     data: () => ({
-        activeSlide: 0
+        activeSlide: 0,
+        slideClasses: []
     }),
+    created() {
+        this.slideClasses = this.calculateSlidePosition(0);
+    },
     methods: {
-        changeSlide(index) {
-            this.activeSlide = index;
+        changeSlide(nextSlideIndex) {
+            if (nextSlideIndex === this.activeSlide) return;
+
+            this.slideClasses = this.calculateSlidePosition(nextSlideIndex);
+
+            this.activeSlide = nextSlideIndex;
+        },
+        calculateSlidePosition(index) {
+            return this.data.map((slide, slideIndex) => {
+                if (slideIndex === index) {
+                    if (this.activeSlide < index) {
+                        return 'front';
+                    } else {
+                        return 'back';
+                    }
+                } else if (slideIndex > index) {
+                    return 'front';
+                } else {
+                    return 'back';
+                }
+            });
         }
     }
 };
@@ -84,6 +108,7 @@ export default {
 .counter {
     color: $grey-2;
     margin-right: 30px;
+    user-select: none;
     strong {
         font-weight: normal;
         color: $gold;
@@ -118,11 +143,41 @@ export default {
     right: 0;
 }
 
+.text {
+    pointer-events: none;
+    user-select: none;
+}
+
 .slide {
-    opacity: 0;
-    transition: opacity 0.3s;
+    .text,
+    .image-wrapper {
+        opacity: 0;
+        transition: 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+        transition-property: opacity, transform;
+    }
+
+    &.back {
+        .image-wrapper {
+            transform: translateY(-100px) scale(0.8);
+        }
+        .text {
+            transform: translateY(-100px);
+        }
+    }
+    &.front {
+        .image-wrapper {
+            transform: translateY(100px) scale(1.1);
+        }
+        .text {
+            transform: translateY(100px);
+        }
+    }
     &.active {
-        opacity: 1;
+        .text,
+        .image-wrapper {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
     }
 }
 
