@@ -28,7 +28,7 @@
                                 <select
                                     id="contact-subject"
                                     v-model="subjectInput"
-                                    name="contact-subject"
+                                    name="contact-subject[]"
                                     :class="{ on: subjectInput !== '' }"
                                     required
                                 >
@@ -49,7 +49,7 @@
                                 <select
                                     id="contact-brand"
                                     v-model="brandInput"
-                                    name="contact-brand"
+                                    name="contact-brand[]"
                                     :class="{ on: brandInput !== '' }"
                                     required
                                 >
