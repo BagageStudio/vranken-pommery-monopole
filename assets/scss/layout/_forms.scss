@@ -69,12 +69,11 @@ select {
     }
     .icon {
         position: absolute;
-        top: 0;
-        bottom: 0;
+        top: 50%;
         right: 15px;
         width: 11px;
         height: 6px;
-        margin: auto;
+        margin-top: -1px;
         fill: $grey-1;
     }
 }
