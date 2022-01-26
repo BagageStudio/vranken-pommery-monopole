@@ -2,22 +2,7 @@
     <div>
         <div class="container">
             <div class="container-s">
-                <!-- <div v-if="data.noteDescription" class="product-tasting">
-                    <div class="wrapper-txt content-pad">
-                        <span v-if="data.noteLabel" class="small-title">{{ data.noteLabel }}</span>
-                        <h3 v-if="data.noteTitle" class="tasting-title h3">{{ data.noteTitle }}</h3>
-                        <div class="tasting-description wysiwyg" v-html="data.noteDescription" />
-                    </div>
-                    <div v-if="data.noteImage" class="wrapper-image content-pad">
-                        <FastImage
-                            :image="data.noteImage"
-                            :caption="data.noteImageCaption ? data.noteImageCaption : ''"
-                            cover
-                        />
-                    </div>
-                </div> -->
                 <div class="tasting-detail">
-                    <span class="tasting-detail-description h3 content-pad">{{ data.sensesTitle }}</span>
                     <div class="tasting-contents">
                         <div class="tasting-content content-pad">
                             <div class="tasting-visual">
@@ -58,22 +43,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.product-tasting {
-    display: flex;
-    flex-direction: column;
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-.tasting-title {
-    margin: 20px 0 40px;
-}
-.wrapper-image {
-    margin-top: 50px;
-    ::v-deep .container-image {
-        aspect-ratio: 1 / 1.15;
-    }
-}
-
 .tasting-detail {
     margin-bottom: 50px;
     margin-top: 50px;
@@ -122,28 +91,11 @@ export default {
 }
 
 @media (min-width: $phone) {
-    .wrapper-image {
-        width: percentage(math.div(4, 6));
-    }
     .tasting-content {
         width: percentage(math.div(4, 6));
     }
 }
 @media (min-width: $tablet) {
-    .product-tasting {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .wrapper-image {
-        flex: 0 0 auto;
-        width: percentage(math.div(4, 10));
-        margin-top: 0;
-        margin-left: percentage(math.div(1, 10));
-        ::v-deep .container-image {
-            aspect-ratio: 1 / 0.93;
-        }
-    }
     .tasting-contents {
         flex-direction: row;
         align-items: flex-start;
@@ -156,17 +108,6 @@ export default {
     }
 }
 @media (min-width: $desktop) {
-    .product-tasting {
-        margin-top: 100px;
-        margin-bottom: 100px;
-    }
-    .wrapper-txt {
-        width: percentage(math.div(4, 10));
-    }
-    .wrapper-image {
-        width: 50%;
-        margin-left: 0;
-    }
     .tasting-detail {
         margin-top: 100px;
         margin-bottom: 100px;
