@@ -2,10 +2,10 @@
     <div v-if="data" class="wrapper-page">
         <div class="wrapper-contact container">
             <div class="wrapper-contact-image">
-                <!-- <LinkTo shop class="btn-back" :link="backLink">
+                <nuxt-link :to="homeSlug" class="btn-back">
                     <Icon name="arrow-left" />
                     <span>{{ $t('global.backLabel') }}</span>
-                </LinkTo> -->
+                </nuxt-link>
                 <FastImage :image="data.image" cover />
             </div>
             <div class="wrapper-contact-content">
@@ -13,14 +13,16 @@
                     <h1 class="contact-title h2">{{ data.title }}</h1>
                     <div v-if="data.intro" class="contact-intro" v-html="data.intro" />
                 </div>
-                <form v-if="!success" class="contact-form" @submit.prevent="sendForm">
+                <!-- <form v-if="!success" class="contact-form" @submit.prevent="sendForm"> -->
+                <form class="contact-form" name="contact" method="POST" data-netlify="true">
+                    <input type="hidden" name="form-name" value="contact" />
                     <div class="content-contact-form">
                         <div :class="['wrapper-field form-line', { error: subjectError }]">
                             <label for="contact-subject" class="select">
                                 <select
                                     id="contact-subject"
                                     v-model="subjectInput"
-                                    name="contact"
+                                    name="contact-subject"
                                     :class="{ on: subjectInput !== '' }"
                                     required
                                 >
@@ -41,7 +43,7 @@
                                 <select
                                     id="contact-brand"
                                     v-model="brandInput"
-                                    name="contact"
+                                    name="contact-brand"
                                     :class="{ on: brandInput !== '' }"
                                     required
                                 >
@@ -63,7 +65,7 @@
                                     id="contact-first-name"
                                     v-model="firstNameInput"
                                     type="text"
-                                    name="contact"
+                                    name="contact-first-name"
                                     :class="{ on: firstNameInput !== '' }"
                                     required
                                 />
@@ -74,7 +76,7 @@
                                     id="contact-last-name"
                                     v-model="lastNameInput"
                                     type="text"
-                                    name="contact"
+                                    name="contact-last-name"
                                     :class="{ on: lastNameInput !== '' }"
                                     required
                                 />
@@ -87,7 +89,7 @@
                                     id="contact-phone"
                                     v-model="phoneInput"
                                     type="tel"
-                                    name="contact"
+                                    name="contact-phone"
                                     :class="{ on: phoneInput !== '' }"
                                     required
                                 />
@@ -98,7 +100,7 @@
                                     id="contact-email"
                                     v-model="emailInput"
                                     type="email"
-                                    name="contact"
+                                    name="contact-email"
                                     :class="{ on: emailInput !== '' }"
                                     required
                                 />
@@ -109,7 +111,7 @@
                             <textarea
                                 id="contact-message"
                                 v-model="messageInput"
-                                name="contact"
+                                name="contact-message"
                                 :class="{ on: messageInput !== '' }"
                                 required
                             />
@@ -148,51 +150,105 @@ export default {
             emailError: '',
             messageInput: '',
             messageError: '',
-            formError: '',
+            formError: false,
             success: false
         };
     },
-    methods: {
-        sendForm() {
-            const regexEmail =
-                /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-            this.$refs.submit.setAttribute('disabled', true);
-
-            this.formError = '';
-            this.emailError = false;
-
-            if (!this.emailInput) {
-                this.formError += this.data.contactEmailError;
-                this.emailError = true;
-            } else if (!regexEmail.test(this.emailInput)) {
-                this.formError += this.data.contactEmailInvalid;
-                this.emailError = true;
+    computed: {
+        homeSlug() {
+            let slug = '/';
+            if (this.$i18n.locale !== this.$i18n.defaultLocale) {
+                slug = this.localePath('/');
             }
-
-            if (this.formError) {
-                this.$refs.submit.removeAttribute('disabled');
-            } else {
-                // this.$axios
-                //     .post('/.netlify/functions/newsletter', {
-                //         email: this.emailInput
-                //     })
-                //     .then(res => {
-                //         this.formError = this.data.newsletterSuccess;
-                //         this.success = true;
-                //     })
-                //     .catch(error => {
-                //         this.$refs.submit.removeAttribute('disabled');
-                //         this.formError = error.response.data;
-                //     });
-            }
+            return slug;
         }
     }
+    // methods: {
+    //     sendForm() {
+    //         console.log();
+    //         const regexEmail =
+    //             /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    //         this.$refs.submit.setAttribute('disabled', true);
+
+    //         this.formError = false;
+
+    //         this.subjectError = false;
+    //         this.brandError = false;
+    //         this.firstNameError = false;
+    //         this.lastNameError = false;
+    //         this.phoneError = false;
+    //         this.emailError = false;
+    //         this.messageError = false;
+
+    //         console.log('subjectInput : ' + this.subjectInput);
+    //         console.log('brandInput : ' + this.brandInput);
+    //         console.log('firstNameInput : ' + this.firstNameInput);
+    //         console.log('lastNameInput : ' + this.lastNameInput);
+    //         console.log('phoneInput : ' + this.phoneInput);
+    //         console.log('emailInput : ' + this.emailInput);
+    //         console.log('messageInput : ' + this.messageInput);
+
+    //         if (this.subjectInput === '') {
+    //             this.subjectError = true;
+    //             this.formError = true;
+    //         }
+
+    //         if (this.brandInput === '') {
+    //             this.brandError = true;
+    //             this.formError = true;
+    //         }
+
+    //         if (!this.firstNameInput) {
+    //             this.firstNameError = true;
+    //             this.formError = true;
+    //         }
+
+    //         if (!this.lastNameInput) {
+    //             this.lastNameError = true;
+    //             this.formError = true;
+    //         }
+
+    //         if (!this.phoneInput) {
+    //             this.phoneError = true;
+    //             this.formError = true;
+    //         }
+
+    //         if (!this.emailInput || !regexEmail.test(this.emailInput)) {
+    //             this.emailError = true;
+    //             this.formError = true;
+    //         }
+
+    //         if (!this.messageInput) {
+    //             this.messageError = true;
+    //             this.formError = true;
+    //         }
+
+    //         if (this.formError) {
+    //             this.$refs.submit.removeAttribute('disabled');
+    //         } else {
+    //             this.$axios
+    //                 .post('/.netlify/functions/contact', {
+    //                     email: this.emailInput
+    //                 })
+    //                 .then(res => {
+    //                     // this.formError = this.data.newsletterSuccess;
+    //                     this.success = true;
+    //                 })
+    //                 .catch(error => {
+    //                     this.$refs.submit.removeAttribute('disabled');
+    //                     // this.formError = error.response.data;
+    //                     console.log(error.response.data);
+    //                 });
+    //         }
+    //     }
+    // }
 };
 </script>
 
 <style lang="scss" scoped>
 .wrapper-contact-image {
+    position: relative;
     padding: 0 #{$gutter};
     aspect-ratio: 1 / 1;
     .fast-image {

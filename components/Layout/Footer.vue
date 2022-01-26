@@ -28,7 +28,9 @@
                                         :class="{ on: emailInput !== '' }"
                                         required
                                     />
-                                    <label class="label" for="newsletter-email">{{ data.emailPlaceholder }}</label>
+                                    <label id="newsletter-label" class="label" for="newsletter-email">{{
+                                        data.emailPlaceholder
+                                    }}</label>
                                 </div>
                                 <button ref="submit" type="submit" class="btn-next">
                                     <span>{{ data.newsletterButtonLabel }}</span>
@@ -175,9 +177,6 @@ export default {
 .newsletter-form {
     margin-top: 20px;
 }
-.error-message {
-    color: $error;
-}
 .footer-bottom {
     padding: 50px 0;
     background: $blue;
@@ -250,6 +249,10 @@ export default {
 }
 .evin-warning {
     margin-top: 30px;
+}
+#newsletter-email,
+#newsletter-label {
+    line-height: 25px;
 }
 
 @media (min-width: $phone) {

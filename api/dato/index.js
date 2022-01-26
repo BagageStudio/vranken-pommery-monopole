@@ -555,6 +555,8 @@ export const contactQuery = `
             emailLabel
             messageLabel
             buttonLabel
+            successMessage
+            errorMessage
         }
     }`;
 

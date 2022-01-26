@@ -62,6 +62,10 @@ export default `
             ... on FlaconsExceptionRecord {
                 _modelApiKey
             }
+            ... on ContactRecord {
+                slug
+                _modelApiKey
+            }
         }
         description
     }
