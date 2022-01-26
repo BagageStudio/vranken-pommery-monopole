@@ -155,9 +155,10 @@ export const homeQuery = `
                     ${img}
                 }
             }
-            experiencesLabel
-            experiencesTitle
             experiences {
+                label
+                title
+                intro
                 thumbnail {
                     ${img}
                 }
