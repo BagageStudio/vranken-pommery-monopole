@@ -556,7 +556,6 @@ export const contactQuery = `
             messageLabel
             buttonLabel
             successMessage
-            errorMessage
         }
     }`;
 
