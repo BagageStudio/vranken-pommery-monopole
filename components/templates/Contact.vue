@@ -168,6 +168,21 @@ export default {
             if (this.$route.query.form === 'success') {
                 this.success = true;
             }
+            if (this.$route.query.subject && this.$route.query.flacon && this.$route.query.brand) this.setFlaconInfos();
+        },
+        setFlaconInfos() {
+            const subject = this.$route.query.subject;
+            const subjectExists = this.data.subjectOptions.some(s => s.valueAttribute === subject);
+            if (subjectExists) this.subjectInput = subject;
+
+            const brand = this.$route.query.brand;
+            const brandExists = this.data.brandOptions.some(s => s.valueAttribute === brand);
+            if (brandExists) this.brandInput = brand;
+
+            this.messageInput = `${this.$t('flacon.tarif')} - ${this.$route.query.flacon}\n\n[[${this.$t(
+                'flacon.message'
+            )}]]
+            `;
         }
     }
 };
