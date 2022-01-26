@@ -476,6 +476,10 @@ export const flaconsExceptionQuery = `
 
 export const flaconExceptionSingleQuery = `
     query flaconsException($lang: SiteLocale, $slug: String) {
+        flaconsException(locale: $lang) {
+            contactSubject
+            contactBrand
+        }
         flaconException(locale: $lang, filter: { slug: { eq: $slug } }) {
             _modelApiKey
             ${seo}

@@ -16,6 +16,9 @@
         "quantityMax": "Quantité maximum dépassée"
     },
     "flacon": {
-        "price": "Tarif sur demande"
+        "price": "Tarif sur demande",
+        "contact": "Nous contacter",
+        "tarif": "Demande de tarif",
+        "message": "votre message"
     }
 }

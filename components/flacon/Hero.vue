@@ -16,6 +16,9 @@
                 <div class="wrapper-price-availability">
                     <span class="product-price">Tarif sur demande</span>
                     <ProductAvailability :available="!data.unavailable" />
+                    <nuxt-link :to="contactLink" class="btn-block bg-blue contact-btn">
+                        {{ $t('flacon.contact') }}
+                    </nuxt-link>
                 </div>
                 <div class="product-description wysiwyg" v-html="data.description" />
             </div>
@@ -24,9 +27,15 @@
 </template>
 
 <script>
+import { routeByApiModels } from '~/app/crawler/routes';
+
 export default {
     props: {
         data: {
+            type: Object,
+            required: true
+        },
+        global: {
             type: Object,
             required: true
         },
@@ -36,6 +45,19 @@ export default {
         }
     },
     data: () => ({}),
+    computed: {
+        contactLink() {
+            return this.localePath({
+                name: routeByApiModels.contact.routerFormat,
+                params: { slug: 'contact' },
+                query: {
+                    subject: this.global.contactSubject,
+                    brand: this.global.contactBrand,
+                    flacon: this.data.title
+                }
+            });
+        }
+    },
     methods: {}
 };
 </script>
@@ -119,6 +141,11 @@ export default {
     margin: 50px 0 0;
     padding-top: 50px;
     border-top: 1px solid $grey-3;
+}
+
+.contact-btn {
+    width: 100%;
+    margin-top: 30px;
 }
 
 @media (min-width: $phone) {

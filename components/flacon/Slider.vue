@@ -5,7 +5,8 @@
                 <div
                     v-for="(slide, index) in data"
                     :key="slide.id"
-                    :class="{ active: index === activeSlide }"
+                    ref="slide"
+                    :class="[{ active: index === activeSlide }, slideClasses[index]]"
                     class="slide"
                 >
                     <div class="content-pad image-wrapper">
@@ -28,10 +29,11 @@
                                 :key="bullet.id"
                                 class="bullet"
                                 :class="{ active: indexBullet === activeSlide }"
-                                @click="changeSlide(indexBullet)"
+                                @click="clickBullet(indexBullet)"
                             ></button>
                         </div>
                     </div>
+                    <div v-show="autoplay" class="progress"><div ref="bar" class="bar"></div></div>
                 </div>
             </div>
         </div>
@@ -39,6 +41,7 @@
 </template>
 
 <script>
+import { gsap } from 'gsap';
 export default {
     props: {
         data: {
@@ -47,11 +50,64 @@ export default {
         }
     },
     data: () => ({
-        activeSlide: 0
+        activeSlide: 0,
+        slideClasses: [],
+        autoplay: true,
+        autoplayTween: null
     }),
+    created() {
+        this.slideClasses = this.calculateSlidePosition(0);
+    },
+    mounted() {
+        this.startAutoplay();
+    },
     methods: {
-        changeSlide(index) {
-            this.activeSlide = index;
+        startAutoplay() {
+            if (!this.autoplay) return;
+            gsap.set(this.$refs.bar, {
+                scaleX: 0
+            });
+            this.autoplayTween = gsap.to(this.$refs.bar, {
+                scaleX: 1,
+                duration: 10,
+                ease: 'linear',
+                onComplete: () => {
+                    const nextIndex = this.activeSlide + 1 > this.data.length - 1 ? 0 : this.activeSlide + 1;
+                    this.changeSlide(nextIndex);
+                    this.progress = 0;
+                    this.startAutoplay();
+                }
+            });
+        },
+        clickBullet(index) {
+            if (this.autoplay) {
+                this.autoplay = false;
+                this.autoplayTween.kill();
+                this.autoplayTween = null;
+            }
+            this.changeSlide(index);
+        },
+        changeSlide(nextSlideIndex) {
+            if (nextSlideIndex === this.activeSlide) return;
+
+            this.slideClasses = this.calculateSlidePosition(nextSlideIndex);
+
+            this.activeSlide = nextSlideIndex;
+        },
+        calculateSlidePosition(index) {
+            return this.data.map((slide, slideIndex) => {
+                if (slideIndex === index) {
+                    if (this.activeSlide < index) {
+                        return 'front';
+                    } else {
+                        return 'back';
+                    }
+                } else if (slideIndex > index) {
+                    return 'front';
+                } else {
+                    return 'back';
+                }
+            });
         }
     }
 };
@@ -78,12 +134,12 @@ export default {
 .controls {
     display: flex;
     align-items: center;
-    margin-top: 40px;
 }
 
 .counter {
     color: $grey-2;
     margin-right: 30px;
+    user-select: none;
     strong {
         font-weight: normal;
         color: $gold;
@@ -118,11 +174,66 @@ export default {
     right: 0;
 }
 
+.text {
+    pointer-events: none;
+    user-select: none;
+}
+
 .slide {
-    opacity: 0;
-    transition: opacity 0.3s;
+    .text,
+    .image-wrapper {
+        opacity: 0;
+        transition: 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+        transition-property: opacity, transform;
+    }
+
+    &.back {
+        .image-wrapper {
+            transform: translateY(-100px) scale(0.8);
+        }
+        .text {
+            transform: translateY(-100px);
+        }
+    }
+    &.front {
+        .image-wrapper {
+            transform: translateY(100px) scale(1.1);
+        }
+        .text {
+            transform: translateY(100px);
+        }
+    }
     &.active {
-        opacity: 1;
+        .text,
+        .image-wrapper {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+    }
+}
+
+.controls-wrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+}
+
+.progress {
+    flex-grow: 1;
+    height: 1px;
+    margin-left: 40px;
+    background-color: rgba($gold, 0.4);
+    .bar {
+        width: 100%;
+        height: 100%;
+        transform-origin: 0 0;
+        background-color: $gold;
+        transform: scaleX(0);
     }
 }
 
@@ -201,11 +312,11 @@ export default {
         margin-left: percentage(math.div(2, 12));
     }
     .text {
-        width: percentage(math.div(3.5, 12));
+        width: percentage(math.div(3, 12));
     }
     .controls-wrapper {
-        width: percentage(math.div(3.5, 12));
-        margin-right: percentage(math.div(0.5, 12));
+        width: percentage(math.div(3, 12));
+        margin-right: percentage(math.div(1, 12));
     }
 }
 </style>
