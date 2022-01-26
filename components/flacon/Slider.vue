@@ -29,10 +29,11 @@
                                 :key="bullet.id"
                                 class="bullet"
                                 :class="{ active: indexBullet === activeSlide }"
-                                @click="changeSlide(indexBullet)"
+                                @click="clickBullet(indexBullet)"
                             ></button>
                         </div>
                     </div>
+                    <div v-show="autoplay" class="progress"><div ref="bar" class="bar"></div></div>
                 </div>
             </div>
         </div>
@@ -40,6 +41,7 @@
 </template>
 
 <script>
+import { gsap } from 'gsap';
 export default {
     props: {
         data: {
@@ -49,12 +51,42 @@ export default {
     },
     data: () => ({
         activeSlide: 0,
-        slideClasses: []
+        slideClasses: [],
+        autoplay: true,
+        autoplayTween: null
     }),
     created() {
         this.slideClasses = this.calculateSlidePosition(0);
     },
+    mounted() {
+        this.startAutoplay();
+    },
     methods: {
+        startAutoplay() {
+            if (!this.autoplay) return;
+            gsap.set(this.$refs.bar, {
+                scaleX: 0
+            });
+            this.autoplayTween = gsap.to(this.$refs.bar, {
+                scaleX: 1,
+                duration: 10,
+                ease: 'linear',
+                onComplete: () => {
+                    const nextIndex = this.activeSlide + 1 > this.data.length - 1 ? 0 : this.activeSlide + 1;
+                    this.changeSlide(nextIndex);
+                    this.progress = 0;
+                    this.startAutoplay();
+                }
+            });
+        },
+        clickBullet(index) {
+            if (this.autoplay) {
+                this.autoplay = false;
+                this.autoplayTween.kill();
+                this.autoplayTween = null;
+            }
+            this.changeSlide(index);
+        },
         changeSlide(nextSlideIndex) {
             if (nextSlideIndex === this.activeSlide) return;
 
@@ -102,7 +134,6 @@ export default {
 .controls {
     display: flex;
     align-items: center;
-    margin-top: 40px;
 }
 
 .counter {
@@ -181,6 +212,31 @@ export default {
     }
 }
 
+.controls-wrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+}
+
+.progress {
+    flex-grow: 1;
+    height: 1px;
+    margin-left: 40px;
+    background-color: rgba($gold, 0.4);
+    .bar {
+        width: 100%;
+        height: 100%;
+        transform-origin: 0 0;
+        background-color: $gold;
+        transform: scaleX(0);
+    }
+}
+
 @media (min-width: $phone) {
     .fast-image {
         aspect-ratio: none;
@@ -256,11 +312,11 @@ export default {
         margin-left: percentage(math.div(2, 12));
     }
     .text {
-        width: percentage(math.div(3.5, 12));
+        width: percentage(math.div(3, 12));
     }
     .controls-wrapper {
-        width: percentage(math.div(3.5, 12));
-        margin-right: percentage(math.div(0.5, 12));
+        width: percentage(math.div(3, 12));
+        margin-right: percentage(math.div(1, 12));
     }
 }
 </style>
