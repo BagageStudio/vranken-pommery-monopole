@@ -235,14 +235,6 @@ export const productQuery = `
             tasting{
                 id
                 title
-                noteLabel
-                noteTitle
-                noteDescription
-                noteImage{
-                    ${img}
-                }
-                noteImageCaption
-                sensesTitle
                 eye
                 nose
                 palate
@@ -556,7 +548,6 @@ export const contactQuery = `
             messageLabel
             buttonLabel
             successMessage
-            errorMessage
         }
     }`;
 

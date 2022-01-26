@@ -13,11 +13,17 @@
                     <h1 class="contact-title h2">{{ data.title }}</h1>
                     <div v-if="data.intro" class="contact-intro" v-html="data.intro" />
                 </div>
-                <!-- <form v-if="!success" class="contact-form" @submit.prevent="sendForm"> -->
-                <form class="contact-form" name="contact" method="POST" data-netlify="true">
+                <form
+                    v-if="!success"
+                    class="contact-form"
+                    name="contact"
+                    method="POST"
+                    data-netlify="true"
+                    :action="$route.fullPath + '?form=success'"
+                >
                     <input type="hidden" name="form-name" value="contact" />
                     <div class="content-contact-form">
-                        <div :class="['wrapper-field form-line', { error: subjectError }]">
+                        <div class="wrapper-field form-line">
                             <label for="contact-subject" class="select">
                                 <select
                                     id="contact-subject"
@@ -38,7 +44,7 @@
                                 <Icon name="arrow-down" />
                             </label>
                         </div>
-                        <div :class="['wrapper-field form-line', { error: brandError }]">
+                        <div class="wrapper-field form-line">
                             <label for="contact-brand" class="select">
                                 <select
                                     id="contact-brand"
@@ -60,7 +66,7 @@
                             </label>
                         </div>
                         <div class="form-line split-half">
-                            <div :class="['wrapper-field', { error: firstNameError }]">
+                            <div class="wrapper-field">
                                 <input
                                     id="contact-first-name"
                                     v-model="firstNameInput"
@@ -71,7 +77,7 @@
                                 />
                                 <label class="label" for="contact-first-name">{{ data.firstNameLabel }}</label>
                             </div>
-                            <div :class="['wrapper-field', { error: lastNameError }]">
+                            <div class="wrapper-field">
                                 <input
                                     id="contact-last-name"
                                     v-model="lastNameInput"
@@ -84,7 +90,7 @@
                             </div>
                         </div>
                         <div class="form-line split-half">
-                            <div :class="['wrapper-field', { error: phoneError }]">
+                            <div class="wrapper-field">
                                 <input
                                     id="contact-phone"
                                     v-model="phoneInput"
@@ -95,7 +101,7 @@
                                 />
                                 <label class="label" for="contact-phone">{{ data.phoneLabel }}</label>
                             </div>
-                            <div :class="['wrapper-field', { error: emailError }]">
+                            <div class="wrapper-field">
                                 <input
                                     id="contact-email"
                                     v-model="emailInput"
@@ -107,7 +113,7 @@
                                 <label class="label" for="contact-email">{{ data.emailLabel }}</label>
                             </div>
                         </div>
-                        <div :class="['wrapper-field form-line', { error: messageError }]">
+                        <div class="wrapper-field form-line">
                             <textarea
                                 id="contact-message"
                                 v-model="messageInput"
@@ -123,7 +129,6 @@
                     </div>
                 </form>
                 <div v-if="success" class="form-message" v-html="data.successMessage" />
-                <div v-if="formError" class="form-message error-message" v-html="data.errorMessage" />
             </div>
         </div>
     </div>
@@ -137,20 +142,12 @@ export default {
     data() {
         return {
             subjectInput: '',
-            subjectError: '',
             brandInput: '',
-            brandError: '',
             firstNameInput: '',
-            firstNameError: '',
             lastNameInput: '',
-            lastNameError: '',
             phoneInput: '',
-            phoneError: '',
             emailInput: '',
-            emailError: '',
             messageInput: '',
-            messageError: '',
-            formError: false,
             success: false
         };
     },
@@ -162,87 +159,17 @@ export default {
             }
             return slug;
         }
+    },
+    mounted() {
+        this.initUrlParams();
+    },
+    methods: {
+        initUrlParams() {
+            if (this.$route.query.form === 'success') {
+                this.success = true;
+            }
+        }
     }
-    // methods: {
-    //     sendForm() {
-    //         console.log();
-    //         const regexEmail =
-    //             /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    //         this.$refs.submit.setAttribute('disabled', true);
-
-    //         this.formError = false;
-
-    //         this.subjectError = false;
-    //         this.brandError = false;
-    //         this.firstNameError = false;
-    //         this.lastNameError = false;
-    //         this.phoneError = false;
-    //         this.emailError = false;
-    //         this.messageError = false;
-
-    //         console.log('subjectInput : ' + this.subjectInput);
-    //         console.log('brandInput : ' + this.brandInput);
-    //         console.log('firstNameInput : ' + this.firstNameInput);
-    //         console.log('lastNameInput : ' + this.lastNameInput);
-    //         console.log('phoneInput : ' + this.phoneInput);
-    //         console.log('emailInput : ' + this.emailInput);
-    //         console.log('messageInput : ' + this.messageInput);
-
-    //         if (this.subjectInput === '') {
-    //             this.subjectError = true;
-    //             this.formError = true;
-    //         }
-
-    //         if (this.brandInput === '') {
-    //             this.brandError = true;
-    //             this.formError = true;
-    //         }
-
-    //         if (!this.firstNameInput) {
-    //             this.firstNameError = true;
-    //             this.formError = true;
-    //         }
-
-    //         if (!this.lastNameInput) {
-    //             this.lastNameError = true;
-    //             this.formError = true;
-    //         }
-
-    //         if (!this.phoneInput) {
-    //             this.phoneError = true;
-    //             this.formError = true;
-    //         }
-
-    //         if (!this.emailInput || !regexEmail.test(this.emailInput)) {
-    //             this.emailError = true;
-    //             this.formError = true;
-    //         }
-
-    //         if (!this.messageInput) {
-    //             this.messageError = true;
-    //             this.formError = true;
-    //         }
-
-    //         if (this.formError) {
-    //             this.$refs.submit.removeAttribute('disabled');
-    //         } else {
-    //             this.$axios
-    //                 .post('/.netlify/functions/contact', {
-    //                     email: this.emailInput
-    //                 })
-    //                 .then(res => {
-    //                     // this.formError = this.data.newsletterSuccess;
-    //                     this.success = true;
-    //                 })
-    //                 .catch(error => {
-    //                     this.$refs.submit.removeAttribute('disabled');
-    //                     // this.formError = error.response.data;
-    //                     console.log(error.response.data);
-    //                 });
-    //         }
-    //     }
-    // }
 };
 </script>
 
