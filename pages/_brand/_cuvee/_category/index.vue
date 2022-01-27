@@ -48,7 +48,7 @@ export default {
             const {
                 data: { allCategories: categories }
             } = await $dato
-                .post('/', { query: siblingsCategoryQuery, variables: { lang, id: data.cuvee.id } })
+                .post('/', { query: siblingsCategoryQuery, variables: { lang, cuvee: data.cuvee.id } })
                 .then(({ data }) => data);
 
             siblingsCategories = handleShopItem(categories);
