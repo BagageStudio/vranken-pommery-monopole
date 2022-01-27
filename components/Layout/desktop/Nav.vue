@@ -80,6 +80,9 @@ export default {
         }
     },
     mounted() {},
+    beforeDestroy() {
+        this.changeLevel(null);
+    },
     methods: {
         updateNoScroll(id) {
             if (!this.selectedChild && id) {

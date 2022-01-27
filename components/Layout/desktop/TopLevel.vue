@@ -184,10 +184,10 @@ export default {
     position: absolute;
     top: 0;
     bottom: 0;
-    right: calc((100vw - #{$desktop-xxl}) / -2);
+    right: 0;
+    width: 33.33%;
     display: flex;
     align-items: center;
-    width: calc(33.333% + ((100vw - #{$desktop-xxl}) / 2));
     overflow: hidden;
     opacity: 1;
     transition: opacity 0.2s ease-out;
@@ -216,6 +216,13 @@ export default {
     }
     &::before {
         transform: translate(-50%, -50%) rotate(45deg);
+    }
+}
+
+@media (min-width: $desktop-xxl) {
+    .image-area {
+        right: calc((100vw - #{$desktop-xxl}) / -2);
+        width: calc(33.333% + ((100vw - #{$desktop-xxl}) / 2));
     }
 }
 </style>
