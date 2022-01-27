@@ -157,9 +157,13 @@ export default {
     justify-content: flex-start;
 }
 .benefit {
-    width: 50%;
+    width: 100%;
     margin: 20px 0;
     padding: 0 $gutter;
+}
+.benefit-title {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 .benefit-icon {
     width: 25px;
@@ -257,7 +261,7 @@ export default {
 
 @media (min-width: $phone) {
     .benefit {
-        width: percentage(math.div(1, 3));
+        width: 50%;
     }
     .footer-menu {
         flex-wrap: wrap;
@@ -305,6 +309,9 @@ export default {
     }
 }
 @media (min-width: $desktop) {
+    .benefits {
+        width: percentage(math.div(6, 10));
+    }
     .benefit {
         width: 50%;
     }
@@ -326,6 +333,9 @@ export default {
     }
 }
 @media (min-width: $desktop-large) {
+    .newsletter-intro {
+        font-size: 1.5rem;
+    }
     .benefit {
         width: percentage(math.div(1, 3));
     }
