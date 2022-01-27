@@ -85,6 +85,8 @@ export default {
                 this.showImmediate();
             }
         });
+        // Just to trigger the min-height calculation
+        if (!this.data.items) this.$emit('changeHeight', 1);
     },
     methods: {
         showImmediate() {

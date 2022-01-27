@@ -76,8 +76,8 @@ export default {
     methods: {
         changeHeight(h) {
             const secondLevelHeight = this.$refs.secondLevel.offsetHeight;
-            const biggerHeight = secondLevelHeight > h ? secondLevelHeight + 'px' : h + 'px';
-            this.height = biggerHeight;
+            const biggerHeight = secondLevelHeight > h ? secondLevelHeight : h;
+            this.height = Math.max(biggerHeight, 500) + 'px';
         },
         changeTopLevel() {
             if (this.selected === this.data.id) {
