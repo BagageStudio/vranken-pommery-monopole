@@ -4,7 +4,8 @@
         "backLabel": "Retour"
     },
     "list": {
-        "moreLabel": "Découvrez plus"
+        "moreLabel": "Découvrez plus",
+        "allCategories": "Toute la gamme"
     },
     "product": {
         "eyeLabel": "Œil",

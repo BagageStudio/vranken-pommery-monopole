@@ -1,23 +1,13 @@
 <template>
     <div class="wrapper-page">
-        <div class="container">
-            <LayoutBreadcrumbs :start="data.brand.title" :end="data.title" />
-            <h1 class="h1">{{ data.title }}</h1>
-            <div>
-                <h2 class="h2">Categories</h2>
-                <div v-for="category in categories" :key="category.id">
-                    <LinkTo shop :link="category">
-                        <h3 class="h3">{{ category.title }}</h3>
-                    </LinkTo>
-                </div>
-            </div>
-        </div>
+        <listHero :data="data" :siblings-categories="categories" :all-link="data" />
+        <listProducts :products="products" :data="data" />
     </div>
 </template>
 <script>
 import { getIso, getSlug, setRouteParams, checkIfTaxonomiesMatch } from '~/api/dato/helpers';
 import { handleShopItem } from '~/api/dato/helpers/data';
-import { cuveeQuery, categoriesInCuveeQuery } from '~/api/dato';
+import { cuveeQuery, categoriesInCuveeQuery, productsInCuveeQuery } from '~/api/dato';
 import handleSeo from '~/app/seo';
 export default {
     async asyncData(context) {
@@ -37,8 +27,6 @@ export default {
             brand
         };
 
-        let cuvee = {};
-
         try {
             const {
                 data: { cuvee: data }
@@ -47,21 +35,29 @@ export default {
             const {
                 data: { allCategories: categories }
             } = await $dato
-                .post('/', { query: categoriesInCuveeQuery, variables: { lang, id: cuvee.id } })
+                .post('/', { query: categoriesInCuveeQuery, variables: { lang, id: data.id } })
                 .then(({ data }) => data);
 
-            cuvee = handleShopItem(data);
+            const categoriesId = categories.map(c => c.id);
+
+            const {
+                data: { allProducts: products }
+            } = await $dato
+                .post('/', { query: productsInCuveeQuery, variables: { lang, ids: categoriesId } })
+                .then(({ data }) => data);
+
+            finalData.data = handleShopItem(data);
             finalData.categories = handleShopItem(categories);
+            finalData.products = handleShopItem(products);
         } catch (e) {
             console.log(e);
             return error({ statusCode: 404 });
         }
 
-        if (!checkIfTaxonomiesMatch(cuvee, taxonomies)) {
+        if (!checkIfTaxonomiesMatch(finalData.data, taxonomies)) {
             return error({ statusCode: 404 });
         }
 
-        finalData.data = cuvee;
         finalData.seo = handleSeo({ route: route.fullPath, seo: finalData.data.seo, lang });
 
         await setRouteParams.call(context, finalData.data, true);

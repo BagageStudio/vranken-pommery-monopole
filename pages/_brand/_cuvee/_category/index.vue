@@ -1,7 +1,6 @@
 <template>
     <div class="wrapper-page">
-        <!-- <LayoutBreadcrumbs :start="data.brand.title" :end="data.title" :links="[cuvee]" /> -->
-        <listHero :data="data" :siblings-categories="siblingsCategories" />
+        <listHero :data="data" :siblings-categories="siblingsCategories" :all-link="cuvee" />
         <listProducts :products="products" :data="data" />
     </div>
 </template>

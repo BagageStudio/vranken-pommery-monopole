@@ -83,7 +83,7 @@ export default {
             const moodImages = this.data.moodImages;
 
             // If no mood image we just return the products without them
-            if (!moodImages.length) return this.products;
+            if (!moodImages || !moodImages.length) return this.products;
 
             // Interval is the distance we count before adding a mood image, sometimes it's 3 after the last mood image ans sometimes it's 7
             const intervalFromStep = {

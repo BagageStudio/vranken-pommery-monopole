@@ -392,6 +392,46 @@ export const productsInCategoryQuery = `
         }
     }`;
 
+export const productsInCuveeQuery = `
+    query Category($lang: SiteLocale, $ids: [ItemId]) {
+        allProducts(locale: $lang, filter: { category: { in: $ids } }) {
+            _modelApiKey
+            ${seo}
+            ${locales}
+            id
+            title
+            listTitle
+            slug
+            uuid
+            image{
+                ${img}
+            }
+            price
+            productType
+            category{
+                _modelApiKey
+                ${locales}
+                id
+                slug
+                title
+                cuvee {
+                    _modelApiKey
+                    ${locales}
+                    id
+                    slug
+                    title
+                    brand {
+                        _modelApiKey
+                        ${locales}
+                        id
+                        slug
+                        title
+                    }
+                }
+            }
+        }
+    }`;
+
 export const cuveeQuery = `
     query Cuvee($lang: SiteLocale, $slug: String) {
         cuvee(locale: $lang, filter: { slug: { eq: $slug } }) {

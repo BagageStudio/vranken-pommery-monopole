@@ -3,12 +3,19 @@
         <div class="container">
             <div class="content-pad">
                 <span class="hero-subtitle h5">{{ data.brand.title }}</span>
-                <h1 class="hero-title h1">{{ data.cuvee.title }}</h1>
+                <h1 class="hero-title h1">{{ data.cuvee ? data.cuvee.title : data.title }}</h1>
             </div>
         </div>
         <div class="container container-tabs">
             <div class="wrapper-hero-tabs content-pad">
                 <div class="hero-tabs">
+                    <LinkTo
+                        :class="{ selected: allLink.slug === $route.params.cuvee && !$route.params.category }"
+                        shop
+                        :link="allLink"
+                    >
+                        {{ $t('list.allCategories') }}
+                    </LinkTo>
                     <LinkTo
                         v-for="cat in siblingsCategories"
                         :key="cat.id"
@@ -33,6 +40,10 @@ export default {
         },
         siblingsCategories: {
             type: Array,
+            required: true
+        },
+        allLink: {
+            type: Object,
             required: true
         }
     }

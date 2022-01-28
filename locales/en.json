@@ -4,7 +4,8 @@
         "backLabel": "Back"
     },
     "list": {
-        "moreLabel": "Find out more"
+        "moreLabel": "Find out more",
+        "allCategories": "All"
     },
     "product": {
         "eyeLabel": "Eye",
