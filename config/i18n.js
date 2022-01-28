@@ -33,5 +33,13 @@ export const getPagesList = () => ({
     [routes.flaconsException.i18nFormat]: {
         fr: '/flacons-exception',
         en: '/exceptional-flacons'
+    },
+    [routes.flaconExceptionSingle.i18nFormat]: {
+        fr: '/flacons-exception/:slug?',
+        en: '/exceptional-flacons/:slug?'
+    },
+    [routes.search.i18nFormat]: {
+        fr: '/recherche',
+        en: '/search'
     }
 });

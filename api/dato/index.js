@@ -596,6 +596,46 @@ export const contactQuery = `
         }
     }`;
 
+export const allProductsQuery = `
+    query Category($lang: SiteLocale) {
+        allProducts(locale: $lang) {
+            _modelApiKey
+            ${seo}
+            ${locales}
+            id
+            title
+            listTitle
+            slug
+            uuid
+            image{
+                ${img}
+            }
+            price
+            productType
+            category{
+                _modelApiKey
+                ${locales}
+                id
+                slug
+                title
+                cuvee {
+                    _modelApiKey
+                    ${locales}
+                    id
+                    slug
+                    title
+                    brand {
+                        _modelApiKey
+                        ${locales}
+                        id
+                        slug
+                        title
+                    }
+                }
+            }
+        }
+    }`;
+
 // This is use by the `~/pages/_slug.vue` file to get the right query given a _modelApiKey
 // When adding a new model, we need to link its query and its _modelApiKey
 export const getQuery = _modelApiKey => {

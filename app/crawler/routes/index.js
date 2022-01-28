@@ -31,6 +31,10 @@ export const routes = {
     contact: {
         i18nFormat: '_slug',
         routerFormat: 'slug'
+    },
+    search: {
+        i18nFormat: 'search',
+        routerFormat: 'search'
     }
 };
 

@@ -23,10 +23,12 @@
                         <Icon name="logo-blue" />
                     </nuxt-link>
                     <div class="top-right">
-                        <div class="search-bar">
-                            <Icon name="search" />
-                            <input type="search" placeholder="Rechercher un produit" />
-                        </div>
+                        <form class="search-bar" @submit.prevent="submitSearch">
+                            <button type="submit" class="search-btn">
+                                <Icon name="search" />
+                            </button>
+                            <input v-model="searchInput" type="search" placeholder="Rechercher un produit" />
+                        </form>
                         <div class="snip-buttons">
                             <button class="snip-button snipcart-customer-signin"><Icon name="user" /></button>
                             <button class="snip-button snipcart-checkout">
@@ -66,7 +68,8 @@ export default {
     data() {
         return {
             selectedChild: null,
-            scrollOffset: 0
+            scrollOffset: 0,
+            searchInput: ''
         };
     },
     computed: {
@@ -84,6 +87,17 @@ export default {
         this.changeLevel(null);
     },
     methods: {
+        submitSearch() {
+            if (!this.searchInput) return;
+            this.$router.push(
+                this.localePath({
+                    name: 'search',
+                    query: {
+                        term: this.searchInput
+                    }
+                })
+            );
+        },
         updateNoScroll(id) {
             if (!this.selectedChild && id) {
                 this.scrollOffset = this.scrollTop;
@@ -208,13 +222,18 @@ export default {
         line-height: 20px;
         font-style: italic;
     }
+}
+.search-btn {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    z-index: 1;
     .icon {
-        position: absolute;
-        top: 12px;
-        left: 12px;
         width: 16px;
         height: 16px;
-        z-index: 1;
     }
 }
 
