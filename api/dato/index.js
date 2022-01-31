@@ -133,6 +133,14 @@ export const errorQuery = `
         }
     }`;
 
+export const homeSEOQuery = `
+    query Home($lang: SiteLocale) {
+        home(locale: $lang) {
+            ${seo}
+        }
+    }
+`;
+
 export const homeQuery = `
     ${linkFragment}
     query Home($lang: SiteLocale) {
@@ -596,9 +604,17 @@ export const contactQuery = `
         }
     }`;
 
+export const allProductsCountQuery = `
+    query Count($lang: SiteLocale) {
+        _allProductsMeta(locale: $lang) {
+            count
+        }
+    }
+`;
+
 export const allProductsQuery = `
-    query Category($lang: SiteLocale) {
-        allProducts(locale: $lang) {
+    query Category($lang: SiteLocale, $skip: IntType) {
+        allProducts(locale: $lang, skip: $skip, first: 100) {
             _modelApiKey
             ${seo}
             ${locales}

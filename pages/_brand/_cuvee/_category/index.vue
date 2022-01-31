@@ -73,6 +73,11 @@ export default {
         await setRouteParams.call(context, finalData.data, true);
 
         return finalData;
+    },
+    head() {
+        return {
+            ...this.seo
+        };
     }
 };
 </script>

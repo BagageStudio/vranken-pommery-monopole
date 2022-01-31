@@ -75,6 +75,11 @@ export default {
             data: {},
             seo: {}
         };
+    },
+    head() {
+        return {
+            ...this.seo
+        };
     }
 };
 </script>

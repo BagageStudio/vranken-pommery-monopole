@@ -67,6 +67,12 @@ export default {
             return this.productsWithMoodImages.length > this.productsToShow.length;
         }
     },
+    watch: {
+        products() {
+            this.productsWithMoodImages = this.createdProductsWithMoodImages();
+            this.productsToShow = this.productsWithMoodImages.slice(0, NUMBER_BY_LOAD);
+        }
+    },
     created() {
         this.productsWithMoodImages = this.createdProductsWithMoodImages();
         this.productsToShow = this.productsWithMoodImages.slice(0, NUMBER_BY_LOAD);

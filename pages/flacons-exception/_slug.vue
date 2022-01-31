@@ -51,6 +51,11 @@ export default {
                 name: routeByApiModels.flacons_exception.routerFormat
             })
         };
+    },
+    head() {
+        return {
+            ...this.seo
+        };
     }
 };
 </script>

@@ -33,6 +33,11 @@ export default {
     data: () => ({
         data: {},
         seo: {}
-    })
+    }),
+    head() {
+        return {
+            ...this.seo
+        };
+    }
 };
 </script>

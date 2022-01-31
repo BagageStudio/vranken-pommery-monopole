@@ -21,5 +21,8 @@
         "contact": "Contact us",
         "tarif": "Price request",
         "message": "your message"
+    },
+    "search": {
+        "title": "search results"
     }
 }
