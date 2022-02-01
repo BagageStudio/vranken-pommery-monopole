@@ -23,10 +23,16 @@ const port = process.env.PORT || 8888;
 const netlifyEnv = process.env.NETLIFY_ENV;
 const websiteUrl = process.env.URL || `http://${host}:${port}`;
 const isDevEnv = process.env.NETLIFY_ENV === 'development';
+const previewData = netlifyEnv === 'development' || netlifyEnv === 'preview';
 
 export default {
     // Target: https://go.nuxtjs.dev/config-target
     target: 'static',
+
+    generate: {
+        // To preview new pages that are not generated yet
+        fallback: previewData
+    },
 
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
@@ -50,8 +56,9 @@ export default {
 
     publicRuntimeConfig: {
         isDevEnv: process.env.NETLIFY_ENV === 'development',
+        preview: previewData,
         // On met le token qui si on est en local (pour pas qu'il soit injecté dans le JS en prod)
-        datoApiToken: isDevEnv ? process.env.DATOCMS_API_TOKEN : '',
+        datoApiToken: previewData ? process.env.DATOCMS_API_TOKEN : '',
         datoApiUrl: process.env.GRAPHQL_ENDPOINT
     },
 
@@ -63,7 +70,13 @@ export default {
     css: ['~/assets/scss/main.scss'],
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-    plugins: ['~/plugins/globals.js', '~/plugins/axios', '~/plugins/breakpoints', '~/plugins/stereorepo'],
+    plugins: [
+        '~/plugins/preview.client.js',
+        '~/plugins/globals.js',
+        '~/plugins/axios',
+        '~/plugins/breakpoints',
+        '~/plugins/stereorepo'
+    ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
     components: true,
