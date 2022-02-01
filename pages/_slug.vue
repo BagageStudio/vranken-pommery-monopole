@@ -15,7 +15,7 @@ import handleSeo from '~/app/seo';
 
 export default {
     async asyncData(context) {
-        const { $dato, error, route } = context;
+        const { $dato, error, route, app } = context;
         const finalData = {};
 
         // Getting the right locale iso
@@ -35,7 +35,11 @@ export default {
             finalData.seo = handleSeo({ route: route.fullPath, seo: finalData.data.seo, lang });
             finalData.template = pascalize(finalData.template);
         } catch (e) {
-            return error({ statusCode: 404, message: e });
+            return error({
+                statusCode: 404,
+                title: app.i18n.t('404.notFound.title'),
+                text: app.i18n.t('404.notFound.text')
+            });
         }
 
         // Getting raw slugs for the current page from Dato

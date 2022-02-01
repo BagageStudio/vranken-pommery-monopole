@@ -24,5 +24,17 @@
     },
     "search": {
         "title": "search results"
+    },
+    "404": {
+        "notFound":{
+            "title": "Page not found",
+            "text": "Unfortunately, this page does not exist. Please explore all of our product lines online and feel free to contact our Customer Service Department for any additional information."
+        },
+        "noResults": {
+            "title": "No search results",
+            "text": "Unfortunately, your search did not yield any results. Please explore all of our product lines online and feel free to contact our Customer Service Department for any additional information."
+        },
+        "homeLabel" : "Back to the homepage",
+        "contactLabel" : "Contact us"
     }
 }

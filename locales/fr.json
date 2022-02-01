@@ -24,5 +24,17 @@
     },
     "search": {
         "title": "résulats de recherche"
+    },
+    "404": {
+        "notFound":{
+            "title": "Page non trouvée",
+            "text": "Malheureusement, cette page n'existe pas. Explorez toutes les gammes en ligne et n'hésitez pas à contacter notre Service Clients pour tout complément d'information."
+        },
+        "noResults": {
+            "title": "Aucun résultat de recherche",
+            "text": "Malheureusement, votre recherche n'a abouti à aucun résultat. Explorez toutes les gammes en ligne et n'hésitez pas à contacter notre Service Clients pour tout complément d'information."
+        },
+        "homeLabel" : "Retour à l'accueil",
+        "contactLabel" : "Contactez nous"
     }
 }

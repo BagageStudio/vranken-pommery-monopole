@@ -29,7 +29,7 @@ import handleSeo from '~/app/seo';
 
 export default {
     async asyncData(context) {
-        const { $dato, error, route } = context;
+        const { $dato, error, route, app } = context;
         const finalData = {};
 
         // Getting the right locale iso
@@ -65,8 +65,11 @@ export default {
             finalData.products = handleShopItem(products);
             finalData.seo = handleSeo({ route: route.fullPath, seo, lang });
         } catch (e) {
-            console.log(e);
-            return error({ statusCode: 404 });
+            return error({
+                statusCode: 404,
+                title: app.i18n.t('404.notFound.title'),
+                text: app.i18n.t('404.notFound.text')
+            });
         }
 
         return finalData;
@@ -93,10 +96,19 @@ export default {
         makeSearch() {
             if (!process.client) return;
             const term = this.$route.query.term;
-            if (!term) return this.$nuxt.error({ statusCode: 404 });
+            if (!term)
+                return this.$nuxt.error({
+                    statusCode: 404,
+                    title: this.$t('404.noResults.title'),
+                    text: this.$t('404.noResults.text')
+                });
             this.filteredProducts = this.filter(term);
             if (!this.filteredProducts.length)
-                return this.$nuxt.error({ statusCode: 404, message: 'Aucun résultat de recherche' });
+                return this.$nuxt.error({
+                    statusCode: 404,
+                    title: this.$t('404.noResults.title'),
+                    text: this.$t('404.noResults.text')
+                });
             this.loading = false;
         },
         filter(term) {

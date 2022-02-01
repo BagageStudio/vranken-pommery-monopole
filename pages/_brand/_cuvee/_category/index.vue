@@ -12,7 +12,7 @@ import { handleShopItem } from '~/api/dato/helpers/data';
 import handleSeo from '~/app/seo';
 export default {
     async asyncData(context) {
-        const { $dato, error, route } = context;
+        const { $dato, error, route, app } = context;
         const finalData = {};
 
         // Getting the right locale iso
@@ -57,11 +57,19 @@ export default {
             finalData.products = handleShopItem(products);
         } catch (e) {
             console.log(e);
-            return error({ statusCode: 404 });
+            return error({
+                statusCode: 404,
+                title: app.i18n.t('404.notFound.title'),
+                text: app.i18n.t('404.notFound.text')
+            });
         }
 
         if (!checkIfTaxonomiesMatch(category, taxonomies)) {
-            return error({ statusCode: 404 });
+            return error({
+                statusCode: 404,
+                title: app.i18n.t('404.notFound.title'),
+                text: app.i18n.t('404.notFound.text')
+            });
         }
 
         finalData.data = category;

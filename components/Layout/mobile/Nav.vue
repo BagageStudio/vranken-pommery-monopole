@@ -27,10 +27,12 @@
             >
                 <div class="container mobile-search">
                     <div class="content-pad">
-                        <div class="search-bar">
-                            <Icon name="search" />
-                            <input type="search" placeholder="Rechercher un produit" />
-                        </div>
+                        <form class="search-bar" @submit.prevent="submitSearch">
+                            <button type="submit" class="search-btn">
+                                <Icon name="search" />
+                            </button>
+                            <input v-model="searchInput" type="search" placeholder="Rechercher un produit" />
+                        </form>
                     </div>
                 </div>
                 <nav :class="{ show: showNav }" class="navigation">
@@ -93,7 +95,8 @@ export default {
             level: 1,
             secondLevelId: null,
             thirdLevelId: null,
-            bus: new Vue()
+            bus: new Vue(),
+            searchInput: ''
         };
     },
     computed: {
@@ -117,6 +120,17 @@ export default {
     },
     mounted() {},
     methods: {
+        submitSearch() {
+            if (!this.searchInput) return;
+            this.$router.push(
+                this.localePath({
+                    name: 'search',
+                    query: {
+                        term: this.searchInput
+                    }
+                })
+            );
+        },
         updateNoScroll() {
             if (this.showNav) {
                 this.scrollOffset = this.scrollTop;
@@ -286,13 +300,19 @@ export default {
         line-height: 20px;
         font-style: italic;
     }
+}
+
+.search-btn {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    z-index: 1;
     .icon {
-        position: absolute;
-        top: 12px;
-        left: 12px;
         width: 16px;
         height: 16px;
-        z-index: 1;
     }
 }
 
