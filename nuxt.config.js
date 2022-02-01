@@ -1,6 +1,8 @@
 import Sass from 'sass';
+import axios from 'axios';
 import { defaultLocale, locales, getPagesList } from './config/i18n';
 import { layoutQuery } from './api/dato/index';
+import { getExtendedRoutes } from './api/dato/helpers/data';
 
 import frTranslation from './locales/fr.json';
 import enTranslation from './locales/en.json';
@@ -31,7 +33,11 @@ export default {
 
     generate: {
         // To preview new pages that are not generated yet
-        fallback: previewData
+        fallback: previewData,
+        async routes(add) {
+            const routes = await getExtendedRoutes().catch(add);
+            add(null, routes);
+        }
     },
 
     // Global page headers: https://go.nuxtjs.dev/config-head

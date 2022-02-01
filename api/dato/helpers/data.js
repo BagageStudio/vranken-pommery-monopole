@@ -1,5 +1,7 @@
-import { getIso } from '~/api/dato/helpers';
-import { errorQuery, recordIdQuery } from '~/api/dato';
+import axios from 'axios';
+import { errorQuery, recordIdQuery, allProductsSlugsQuery, allProductsCountQuery } from '../index';
+import { defaultLocale } from '../../../config/i18n';
+import { getIso } from './index';
 
 export function getContextData(context) {
     return {
@@ -63,4 +65,63 @@ export function handleShopItem(item) {
     } else {
         return handleSingleShopItem(copy);
     }
+}
+
+export async function getExtendedRoutes() {
+    let routes = [];
+
+    const {
+        data: {
+            _allProductsMeta: { count }
+        }
+    } = await axios
+        .post(
+            process.env.GRAPHQL_ENDPOINT,
+            { query: allProductsCountQuery },
+            {
+                headers: { Authorization: `Bearer ${process.env.DATOCMS_API_TOKEN}` }
+            }
+        )
+        .then(({ data }) => data);
+
+    const numberOfAPICall = Math.ceil(count / 100);
+
+    let products = [];
+
+    for (let index = 0; index < numberOfAPICall; index++) {
+        const {
+            data: { allProducts }
+        } = await axios
+            .post(
+                process.env.GRAPHQL_ENDPOINT,
+                {
+                    query: allProductsSlugsQuery,
+                    variables: { skip: index * 100 }
+                },
+                {
+                    headers: { Authorization: `Bearer ${process.env.DATOCMS_API_TOKEN}` }
+                }
+            )
+            .then(({ data }) => data);
+
+        products = [...products, ...handleShopItem(allProducts)];
+    }
+
+    const productsSlugs = products.reduce((acc, cur) => {
+        cur._allSlugLocales.forEach(locale => {
+            const brandSlug = cur.brand._allSlugLocales.find(l => l.locale === locale.locale).value;
+            const cuveeSlug = cur.cuvee._allSlugLocales.find(l => l.locale === locale.locale).value;
+            const categorySlug = cur.category._allSlugLocales.find(l => l.locale === locale.locale).value;
+            const productSlug = locale.value;
+            const prefixLocale = defaultLocale === locale.locale ? '/' : `/${locale.locale}/`;
+            const route = `${prefixLocale}${brandSlug}/${cuveeSlug}/${categorySlug}/${productSlug}`;
+            acc.push(route);
+        });
+
+        return acc;
+    }, []);
+
+    routes = [...routes, ...productsSlugs];
+
+    return routes;
 }

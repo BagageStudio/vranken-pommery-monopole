@@ -613,6 +613,30 @@ export const allProductsCountQuery = `
     }
 `;
 
+export const allProductsSlugsQuery = `
+    query Slugs($skip: IntType) {
+        allProducts(skip: $skip, first: 100) {
+            _modelApiKey
+            ${locales}
+            category{
+                _modelApiKey
+                ${locales}
+                id
+                cuvee {
+                    _modelApiKey
+                    ${locales}
+                    id
+                    brand {
+                        _modelApiKey
+                        ${locales}
+                        id
+                    }
+                }
+            }
+        }
+    }
+`;
+
 export const allProductsQuery = `
     query Category($lang: SiteLocale, $skip: IntType) {
         allProducts(locale: $lang, skip: $skip, first: 100) {
