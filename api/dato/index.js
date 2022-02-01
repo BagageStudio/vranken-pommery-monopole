@@ -32,6 +32,7 @@ export const layoutQuery = `
             emailPlaceholder
             newsletterButtonLabel
             successMessage
+            successMessageOptin
             errorMessage
             footerLogo {
                 ${img}

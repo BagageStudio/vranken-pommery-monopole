@@ -13,11 +13,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="newsletter">
+                <div id="newsletter" class="newsletter">
                     <span class="footer-title">{{ data.newsletterTitle }}</span>
                     <div class="newsletter-content">
-                        <div v-if="!success" class="newsletter-intro" v-html="data.newsletterIntro" />
-                        <form v-if="!success" class="newsletter-form" @submit.prevent="sendForm">
+                        <div v-if="!success && !successOptin" class="newsletter-intro" v-html="data.newsletterIntro" />
+                        <form v-if="!success && !successOptin" class="newsletter-form" @submit.prevent="sendForm">
                             <div class="content-newsletter-form">
                                 <div :class="['wrapper-field', { error: emailError }]">
                                     <input
@@ -39,6 +39,7 @@
                             </div>
                         </form>
                         <div v-if="success" class="form-message" v-html="data.successMessage" />
+                        <div v-if="successOptin" class="form-message" v-html="data.successMessageOptin" />
                         <div v-if="formError" class="form-message error-message" v-html="data.errorMessage" />
                     </div>
                 </div>
@@ -79,13 +80,18 @@ export default {
             emailInput: '',
             emailError: '',
             formError: '',
-            success: false
+            success: false,
+            successOptin: false
         };
     },
     computed: {
         data() {
             return layoutData[this.$store.state.i18n.locale].footer;
         }
+    },
+    mounted() {
+        console.log(this.$route);
+        if (this.$route.query.optin === 'valid') this.successOptin = true;
     },
     methods: {
         sendForm() {

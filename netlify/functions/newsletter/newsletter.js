@@ -44,7 +44,7 @@ exports.handler = async function (event, context) {
     createDoiContact.email = datas.email;
     createDoiContact.includeListIds = [166];
     createDoiContact.templateId = 261;
-    createDoiContact.redirectionUrl = 'https://www.vrankenpommery.com/';
+    createDoiContact.redirectionUrl = 'https://shop.vrankenpommery.com/?optin=valid#newsletter';
 
     try {
         await createContact(createDoiContact, apiInstance);
