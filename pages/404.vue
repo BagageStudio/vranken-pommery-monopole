@@ -2,9 +2,9 @@
     <div class="wrapper-page">
         <div class="container">
             <div class="content-pad e404">
-                <h1 class="h1">{{ error.statusCode }}</h1>
-                <h2 class="h3">{{ error.title }}</h2>
-                <p>{{ error.text }}</p>
+                <h1 class="h1">404</h1>
+                <h2 class="h3">{{ $t('404.notFound.title') }}</h2>
+                <p>{{ $t('404.notFound.text') }}</p>
                 <div class="btns">
                     <nuxt-link class="btn-block grey" to="/"> {{ $t('404.homeLabel') }} </nuxt-link>
                     <nuxt-link class="btn-block grey contact" :to="contactLink">
