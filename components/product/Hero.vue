@@ -241,7 +241,7 @@ export default {
     }
     .product-image {
         width: percentage(math.div(6, 7));
-        // padding: 60px;
+        padding: 80px;
     }
     .wrapper-product-description {
         width: percentage(math.div(4, 12));
