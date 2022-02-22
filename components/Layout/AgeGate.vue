@@ -64,7 +64,7 @@ export default {
     align-items: stretch;
     justify-content: center;
     background: $beige;
-    z-index: 2;
+    z-index: 11;
 }
 .container-age-gate {
     display: flex;
