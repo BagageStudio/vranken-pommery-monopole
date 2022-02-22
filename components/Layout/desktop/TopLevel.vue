@@ -68,6 +68,9 @@ export default {
     computed: {
         show() {
             return this.selected === this.data.id;
+        },
+        wh() {
+            return this.$store.state.superWindow ? this.$store.state.superWindow.height : 667;
         }
     },
     created() {
@@ -77,7 +80,7 @@ export default {
         changeHeight(h) {
             const secondLevelHeight = this.$refs.secondLevel.offsetHeight;
             const biggerHeight = secondLevelHeight > h ? secondLevelHeight : h;
-            this.height = Math.max(biggerHeight, 500) + 'px';
+            this.height = biggerHeight + 'px';
         },
         changeTopLevel() {
             if (this.selected === this.data.id) {
@@ -149,8 +152,9 @@ export default {
 }
 
 .second-level-inner {
-    height: var(--height);
+    height: calc(100vh - var(--header-height) - 50px);
     transition: height 0.2s ease-out;
+    min-height: var(--height);
 }
 
 .second-menu-area {
@@ -195,6 +199,12 @@ export default {
         opacity: 0;
     }
 }
+
+.menu-big-image {
+    height: 100%;
+    width: 100%;
+}
+
 .close-btn {
     position: absolute;
     right: 0;
