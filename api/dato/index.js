@@ -507,7 +507,7 @@ export const flaconsExceptionQuery = `
             }
             collectionTitle
         }
-        allFlaconExceptions(locale: $lang) {
+        allFlaconExceptions(locale: $lang, first: 100) {
             _modelApiKey
             ${seo}
             ${locales}

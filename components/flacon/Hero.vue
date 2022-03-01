@@ -99,11 +99,11 @@ export default {
 }
 .product-image {
     // max-width: 500px;
-    max-height: 500px;
+    max-height: 650px;
     width: calc(100% + #{$grid-gutter-s * 2});
     margin-left: -#{$grid-gutter-s};
     margin-right: -#{$grid-gutter-s};
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1 / 2;
     .fast-image {
         width: 100%;
         height: 100%;
@@ -192,7 +192,7 @@ export default {
     .wrapper-product-image {
         width: percentage(math.div(6, 12));
         justify-content: flex-start;
-        aspect-ratio: 1 / 1;
+        // aspect-ratio: 1 / 1;
     }
     .btn-back {
         padding: 30px;
