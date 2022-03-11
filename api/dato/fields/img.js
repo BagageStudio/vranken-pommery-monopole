@@ -3,4 +3,8 @@ export default `
     height
     width
     alt
+    focalPoint {
+        x
+        y
+    }
 `;

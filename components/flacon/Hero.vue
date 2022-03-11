@@ -14,7 +14,7 @@
                 <span class="product-type">{{ data.productType }}</span>
                 <h1 class="product-title h2">{{ data.title }}</h1>
                 <div class="wrapper-price-availability">
-                    <span class="product-price">Tarif sur demande</span>
+                    <span class="product-price">{{ priceText }}</span>
                     <ProductAvailability :available="!data.unavailable" />
                     <nuxt-link :to="contactLink" class="btn-block bg-blue contact-btn">
                         {{ $t('flacon.contact') }}
@@ -103,7 +103,7 @@ export default {
     width: calc(100% + #{$grid-gutter-s * 2});
     margin-left: -#{$grid-gutter-s};
     margin-right: -#{$grid-gutter-s};
-    aspect-ratio: 1 / 2;
+    aspect-ratio: 1 / 1.5;
     .fast-image {
         width: 100%;
         height: 100%;
@@ -207,17 +207,17 @@ export default {
     }
 }
 @media (min-width: $desktop-large) {
-    .wrapper-product-image {
-        width: percentage(math.div(7, 12));
-        &::before {
-            right: percentage(math.div(1, 7));
-        }
-    }
-    .product-image {
-        width: percentage(math.div(6, 7));
-    }
-    .wrapper-product-description {
-        width: percentage(math.div(4, 12));
-    }
+    // .wrapper-product-image {
+    //     width: percentage(math.div(7, 12));
+    //     &::before {
+    //         right: percentage(math.div(1, 7));
+    //     }
+    // }
+    // .product-image {
+    //     width: percentage(math.div(6, 7));
+    // }
+    // .wrapper-product-description {
+    //     width: percentage(math.div(4, 12));
+    // }
 }
 </style>

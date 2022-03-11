@@ -10,6 +10,7 @@
                 :loading="loading"
                 :width="image.width"
                 :height="image.height"
+                :style="styles"
                 class="image"
             />
         </div>
@@ -52,6 +53,13 @@ export default {
         return {
             loaded: false
         };
+    },
+    computed: {
+        styles() {
+            return this.cover
+                ? { objectPosition: `${this.image.focalPoint.x * 100}% ${this.image.focalPoint.y * 100}%` }
+                : {};
+        }
     },
     mounted() {
         this.$refs.fitImage.addEventListener('load', this.loadedListener, false);

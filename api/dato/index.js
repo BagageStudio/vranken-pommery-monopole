@@ -541,6 +541,7 @@ export const flaconExceptionSingleQuery = `
             image {
                 ${img}
             }
+            priceText
             unavailable
             description
             about {
@@ -548,6 +549,7 @@ export const flaconExceptionSingleQuery = `
                 title
                 description
             }
+            aboutTitle
             sliderDate {
                 id
                 date

@@ -1,7 +1,7 @@
 <template>
     <div class="about container">
         <div class="content-pad">
-            <h5 class="h5">A propos de {{ year }}</h5>
+            <h5 class="h5">{{ aboutTitle }} {{ year }}</h5>
             <div class="columns">
                 <div v-for="col in data" :key="col.id" class="col">
                     <h3 class="h3">{{ col.title }}</h3>
