@@ -245,14 +245,23 @@ export const productQuery = `
             tasting{
                 id
                 title
+                displayTitle
                 eye
                 nose
                 palate
+                terroirs
+                accords
+                temperature
+                image{
+                    ${img}
+                }
+                imageCaption
             }
             relatedCategories {
                 _modelApiKey
                 id
                 title
+                textOnTop
                 categories {
                     _modelApiKey
                     ${locales}

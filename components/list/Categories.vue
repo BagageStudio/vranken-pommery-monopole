@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <h4 v-if="title" class="h4 content-pad align-center">{{ title }}</h4>
         <div class="products-list">
             <LinkTo
                 v-for="category in categories"
@@ -27,6 +28,11 @@ export default {
         categories: {
             type: Array,
             required: true
+        },
+        title: {
+            type: String,
+            required: false,
+            default: ''
         }
     },
     methods: {
@@ -66,6 +72,10 @@ export default {
     color: $grey-1;
 }
 
+.h4 {
+    margin-top: 0;
+}
+
 @media (min-width: $phone) {
     .products-list {
         flex-direction: row;
@@ -86,6 +96,9 @@ export default {
 @media (min-width: $desktop) {
     .product-image {
         padding: 45px;
+    }
+    .h4 {
+        margin-bottom: 30px;
     }
 }
 </style>

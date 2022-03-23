@@ -5,7 +5,7 @@
         <LayoutFooter />
         <LayoutAgeGate v-if="!ageValid" />
         <LayoutSvgs />
-        <LayoutGrid v-if="false" />
+        <LayoutGrid v-if="true" />
     </div>
 </template>
 

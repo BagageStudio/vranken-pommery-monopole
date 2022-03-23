@@ -3,7 +3,11 @@
         <!-- <LayoutBreadcrumbs :start="data.brand.title" :end="data.title" :links="[cuvee, category]" /> -->
         <ProductHero :data="data" :back-link="category" />
         <ProductTasting v-if="data.tasting" :data="data.tasting" />
-        <ListCategories v-if="data.relatedCategories" :categories="data.relatedCategories.categories" />
+        <ListCategories
+            v-if="data.relatedCategories"
+            :categories="data.relatedCategories.categories"
+            :title="data.relatedCategories.textOnTop"
+        />
     </div>
 </template>
 <script>
