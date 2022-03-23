@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper-page">
         <FlaconHero :data="data" :back-link="listLink" :global="global" />
-        <FlaconAbout :data="data.about" :year="data.year" />
+        <FlaconAbout :data="data.about" :title="`${data.aboutTitle} ${data.year}`" />
         <FlaconSlider v-if="data.sliderDate.length" :data="data.sliderDate" />
         <FlaconRelated v-if="data.relatedFlacons" :data="data.relatedFlacons" />
     </div>

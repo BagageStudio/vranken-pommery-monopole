@@ -1,6 +1,6 @@
 <template>
     <div class="related">
-        <div class="container">
+        <div class="container align-center">
             <h4 class="h4 content-pad">{{ data.displayTitle }}</h4>
         </div>
         <ListFlacons v-if="data.flacons" :flacons="data.flacons" />

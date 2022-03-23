@@ -14,7 +14,7 @@
                 <span class="product-type">{{ data.productType }}</span>
                 <h1 class="product-title h2">{{ data.title }}</h1>
                 <div class="wrapper-price-availability">
-                    <span class="product-price">{{ priceText }}</span>
+                    <span class="product-price">{{ data.priceText }}</span>
                     <ProductAvailability :available="!data.unavailable" />
                     <nuxt-link :to="contactLink" class="btn-block bg-blue contact-btn">
                         {{ $t('flacon.contact') }}
