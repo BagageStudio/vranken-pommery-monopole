@@ -26,7 +26,8 @@
         "message": "votre message"
     },
     "search": {
-        "title": "résulats de recherche"
+        "title": "résulats de recherche",
+        "input": "Rechercher un produit"
     },
     "404": {
         "notFound":{

@@ -11,9 +11,9 @@
         "eyeLabel": "Eye",
         "noseLabel": "Nose",
         "palateLabel": "Palate",
-        "terroirsLabel": "Terroirs",
-        "accordsLabel": "Accords",
-        "temperatureLabel": "Température de service",
+        "terroirsLabel": "Origin",
+        "accordsLabel": "Food Pairings",
+        "temperatureLabel": "Service temperature",
         "availableLabel": "Available",
         "unavailableLabel": "Unavailable",
         "quantityError": "Quantity not valid",
@@ -26,7 +26,8 @@
         "message": "your message"
     },
     "search": {
-        "title": "search results"
+        "title": "search results",
+        "input": "Search products"
     },
     "404": {
         "notFound":{

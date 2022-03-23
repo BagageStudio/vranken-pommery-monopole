@@ -27,7 +27,7 @@
                             <button type="submit" class="search-btn">
                                 <Icon name="search" />
                             </button>
-                            <input v-model="searchInput" type="search" placeholder="Rechercher un produit" />
+                            <input v-model="searchInput" type="search" :placeholder="$t('search.input')" />
                         </form>
                         <div class="snip-buttons">
                             <button class="snip-button snipcart-customer-signin"><Icon name="user" /></button>
