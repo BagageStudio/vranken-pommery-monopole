@@ -5,7 +5,7 @@
         <LayoutFooter />
         <LayoutAgeGate v-if="!ageValid" />
         <LayoutSvgs />
-        <LayoutGrid v-if="$config.isDevEnv" />
+        <LayoutGrid v-if="false" />
     </div>
 </template>
 
