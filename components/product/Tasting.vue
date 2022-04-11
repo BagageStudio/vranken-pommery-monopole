@@ -158,7 +158,7 @@ export default {
             width: 100%;
             .tasting-visual {
                 flex: 0 0 auto;
-                margin-bottom: 0;
+                margin: 0;
             }
         }
     }
@@ -173,7 +173,7 @@ export default {
     }
     .tasting-top {
         flex-direction: row;
-        align-items: stretch;
+        align-items: flex-start;
         justify-content: space-between;
         margin-bottom: 140px;
         margin-top: 100px;
@@ -192,14 +192,6 @@ export default {
         width: 40%;
         max-width: none;
         margin-bottom: 0;
-        .fast-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            aspect-ratio: auto;
-        }
     }
     .tasting-contents {
         &:not(.row) {
