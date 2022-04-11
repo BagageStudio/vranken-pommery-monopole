@@ -236,6 +236,9 @@ export const productQuery = `
             image{
                 ${img}
             }
+            secondImage{
+                ${img}
+            }
             productType
             description{
                 id

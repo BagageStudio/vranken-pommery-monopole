@@ -9,6 +9,13 @@
                 <div class="product-image">
                     <FastImage :image="data.image" contains />
                 </div>
+                <div v-if="data.secondImage" class="second-image" :class="{ show: showSecondImage }">
+                    <FastImage :image="data.secondImage" cover />
+                </div>
+                <div v-if="data.secondImage" class="arrows">
+                    <button class="arrow" @click="changeImage"><Icon name="arrow-left" /></button>
+                    <button class="arrow" @click="changeImage"><Icon name="arrow-right" /></button>
+                </div>
             </div>
             <div class="wrapper-product-description">
                 <span class="product-type">{{ data.productType }}</span>
@@ -53,6 +60,7 @@ export default {
     data: () => ({
         quantity: 1,
         availableInStock: true,
+        showSecondImage: false,
         maxStock: 100
     }),
     computed: {
@@ -82,7 +90,11 @@ export default {
             console.log('error');
         }
     },
-    methods: {}
+    methods: {
+        changeImage() {
+            this.showSecondImage = !this.showSecondImage;
+        }
+    }
 };
 </script>
 <style lang="scss" scoped>
@@ -131,6 +143,46 @@ export default {
         height: 100%;
     }
 }
+
+.second-image {
+    position: absolute;
+    top: 0;
+    left: -10px;
+    right: -10px;
+    bottom: 0;
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+    .fast-image {
+        height: 100%;
+        width: 100%;
+    }
+    &.show {
+        opacity: 1;
+    }
+}
+
+.arrows {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .icon {
+        width: 10px;
+    }
+}
+
+.arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
 .wrapper-product-description {
     padding: 50px $gutter;
 }
@@ -208,6 +260,14 @@ export default {
         width: 50%;
         padding-bottom: 0;
     }
+    .second-image {
+        right: $gutter;
+        left: $gutter;
+    }
+    .arrows {
+        right: $gutter;
+        left: $gutter;
+    }
 }
 @media (min-width: $desktop) {
     .wrapper-product-top {
@@ -239,9 +299,21 @@ export default {
             right: percentage(math.div(1, 7));
         }
     }
+
+    .second-image {
+        right: percentage(math.div(1, 7));
+    }
+
+    .arrows {
+        right: percentage(math.div(1, 7));
+    }
+    .arrow {
+        width: 60px;
+    }
+
     .product-image {
         width: percentage(math.div(6, 7));
-        padding: 80px;
+        padding: 80px 80px 80px 90px;
     }
     .wrapper-product-description {
         width: percentage(math.div(4, 12));
