@@ -6,6 +6,7 @@ import { getExtendedRoutes } from './api/dato/helpers/data';
 
 import frTranslation from './locales/fr.json';
 import enTranslation from './locales/en.json';
+import snipcartFr from './locales/snipcart/fr.json';
 
 const customSass = {
     implementation: Sass
@@ -102,7 +103,9 @@ export default {
 
     snipcart: {
         key: process.env.SNIPCART_PUBLIC_API_KEY,
-        locales: {} /* not required */
+        locales: {
+            fr: snipcartFr
+        } /* not required */
     },
 
     // Modules: https://go.nuxtjs.dev/config-modules

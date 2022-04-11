@@ -1,0 +1,14 @@
+{
+    "signin_form": {
+        "signin": "M'identifier",
+        "dont_have_an_account": "Nouveau client ?",
+        "forgot_your_password": "Mot de passe oublié ?"
+    },
+    "register_form": {
+        "register": "Créer mon compte",
+        "already_have_an_account": "Déjà client ?"
+    },
+    "payment": {
+        "continue_to_payment": "Procéder au paiement"
+    }
+}
