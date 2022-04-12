@@ -175,7 +175,7 @@ export default {
         flex-direction: row;
         align-items: flex-start;
         justify-content: space-between;
-        margin-bottom: 140px;
+        margin-bottom: 80px;
         margin-top: 100px;
         .tasting-detail {
             width: 50%;

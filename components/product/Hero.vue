@@ -16,6 +16,17 @@
                     <button class="arrow" @click="changeImage"><Icon name="arrow-left" /></button>
                     <button class="arrow" @click="changeImage"><Icon name="arrow-right" /></button>
                 </div>
+                <svg v-if="progressShow" class="progress" fill="none" viewBox="0 0 20 20">
+                    <circle
+                        ref="progress"
+                        class="progress-circle animated"
+                        cx="10"
+                        cy="10"
+                        r="9"
+                        stroke="#9e8858"
+                        stroke-width="2"
+                    />
+                </svg>
             </div>
             <div class="wrapper-product-description">
                 <span class="product-type">{{ data.productType }}</span>
@@ -46,6 +57,7 @@
 </template>
 
 <script>
+import { gsap } from 'gsap';
 export default {
     props: {
         data: {
@@ -61,6 +73,8 @@ export default {
         quantity: 1,
         availableInStock: true,
         showSecondImage: false,
+        timer: null,
+        progressShow: true,
         maxStock: 100
     }),
     computed: {
@@ -90,8 +104,19 @@ export default {
             console.log('error');
         }
     },
+    mounted() {
+        if (this.data.secondImage) {
+            this.timer = gsap.delayedCall(5, this.changeImage);
+        }
+    },
     methods: {
         changeImage() {
+            if (this.timer) this.timer.kill();
+            this.timer = gsap.delayedCall(5, this.changeImage);
+            this.progressShow = false;
+            gsap.delayedCall(0.01, () => {
+                this.progressShow = true;
+            });
             this.showSecondImage = !this.showSecondImage;
         }
     }
@@ -229,6 +254,32 @@ export default {
     border-top: 1px solid $grey-3;
 }
 
+.progress {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    transform: rotate(-90deg);
+}
+
+.progress-circle {
+    stroke-dasharray: 56px;
+    stroke-dashoffset: 56px;
+    &.animated {
+        animation: progress 5s infinite linear;
+    }
+}
+
+@keyframes progress {
+    0% {
+        stroke-dashoffset: 56px;
+    }
+    100% {
+        stroke-dashoffset: 0px;
+    }
+}
+
 @media (min-width: $phone-small) {
     .wrapper-quantity-order {
         flex-direction: row;
@@ -267,6 +318,9 @@ export default {
     .arrows {
         right: $gutter;
         left: $gutter;
+    }
+    .progress {
+        right: 30px;
     }
 }
 @media (min-width: $desktop) {
@@ -309,6 +363,10 @@ export default {
     }
     .arrow {
         width: 60px;
+    }
+
+    .progress {
+        right: calc(#{percentage(math.div(1, 7))} + 20px);
     }
 
     .product-image {
