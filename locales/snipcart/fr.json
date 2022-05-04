@@ -10,5 +10,18 @@
     },
     "payment": {
         "continue_to_payment": "Procéder au paiement"
+    },
+    "address_form": {
+        "address1": "Adresse"
+    },
+    "billing": {
+        "title": "Détails de livraison",
+        "continue_to_shipping": "Continuer : Livraison"
+    },
+    "shipping": {
+        "methods": {
+            "classic-shipping": "Livraison standard",
+            "free-shipping": "Livraison offerte"
+        }
     }
 }
