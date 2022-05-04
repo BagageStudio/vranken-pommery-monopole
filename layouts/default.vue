@@ -12,6 +12,7 @@
 <script>
 import Cookies from 'js-cookie';
 import { spotFF } from '@stereorepo/sac';
+import snipcartFr from '~/locales/snipcart/fr.json';
 
 export default {
     data() {
@@ -19,10 +20,18 @@ export default {
             ageValid: false
         };
     },
+    head() {
+        return this.$nuxtI18nHead({ addSeoAttributes: true });
+    },
     beforeMount() {
         spotFF();
     },
     mounted() {
+        document.addEventListener('snipcart.ready', () => {
+            const lang = this.$i18n.locale;
+            const translation = lang === 'fr' ? snipcartFr : {};
+            window.Snipcart.api.session.setLanguage(lang, translation);
+        });
         this.ageValid = Cookies.get('agevalid');
 
         // Init superWindow

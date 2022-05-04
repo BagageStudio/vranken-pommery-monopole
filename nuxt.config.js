@@ -6,7 +6,6 @@ import { getExtendedRoutes } from './api/dato/helpers/data';
 
 import frTranslation from './locales/fr.json';
 import enTranslation from './locales/en.json';
-import snipcartFr from './locales/snipcart/fr.json';
 
 const customSass = {
     implementation: Sass
@@ -102,10 +101,7 @@ export default {
     ],
 
     snipcart: {
-        key: process.env.SNIPCART_PUBLIC_API_KEY,
-        locales: {
-            fr: snipcartFr
-        } /* not required */
+        key: process.env.SNIPCART_PUBLIC_API_KEY
     },
 
     // Modules: https://go.nuxtjs.dev/config-modules
@@ -149,6 +145,7 @@ export default {
         defaultLocale,
         parsePages: false,
         pages: getPagesList(),
+        detectBrowserLanguage: false,
         vueI18n: {
             fallbackLocale: defaultLocale,
             messages: {
@@ -156,6 +153,7 @@ export default {
                 en: enTranslation || {}
             }
         },
+        baseUrl: websiteUrl,
         vuex: { syncLocale: true }
     },
 
