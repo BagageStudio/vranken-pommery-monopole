@@ -34,6 +34,9 @@ export const layoutQuery = `
             successMessage
             successMessageOptin
             errorMessage
+            evinImage {
+                ${img}
+            }
             footerLogo {
                 ${img}
             }

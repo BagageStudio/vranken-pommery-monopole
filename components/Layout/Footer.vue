@@ -57,6 +57,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="wrapper-evin">
+                        <FastImage :image="data.evinImage" class="evin" />
+                    </div>
                     <div class="wrapper-social-lang">
                         <LayoutSocial :data="data.social" />
                         <LayoutLangSwitcher class="light" />
@@ -226,6 +229,12 @@ export default {
         color: $white;
     }
 }
+.wrapper-evin {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 20px 0;
+}
 .wrapper-social-lang {
     display: flex;
     align-items: center;
@@ -336,6 +345,7 @@ export default {
     }
     .footer-col {
         width: 25%;
+        margin-bottom: 0;
     }
 }
 @media (min-width: $desktop-large) {
