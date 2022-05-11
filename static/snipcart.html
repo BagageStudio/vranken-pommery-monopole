@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Templates</title>
+    </head>
+
+    <body>
+        <div id="snipcart-templates">
+            <payment section="top">
+                <div>
+                    <div class="vpm-checkbox">
+                        <snipcart-checkbox name="privacy-policy-cookies" required></snipcart-checkbox>
+                        <snipcart-label for="privacy-policy-cookies" class="vpm-label">
+                            <span class="vpm-label-content"
+                                >{{ $localize('custom_fields.confirm_read') }}
+                                <a
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href="https://vpm-commerce-develop.netlify.app/en/personal-data/"
+                                    >{{ $localize('custom_fields.personal_data') }}</a
+                                >
+                                {{ $localize('custom_fields.and') }}
+                                <a
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href="https://vpm-commerce-develop.netlify.app/en/use-of-cookies/"
+                                    >{{ $localize('custom_fields.cookies') }}</a
+                                >.</span
+                            ></snipcart-label
+                        >
+                    </div>
+                    <div class="vpm-checkbox">
+                        <snipcart-checkbox name="terms-conditions-legal-age" required></snipcart-checkbox>
+                        <snipcart-label for="terms-conditions-legal-age" class="vpm-label"
+                            ><span class="vpm-label-content"
+                                >{{ $localize('custom_fields.agree') }}
+                                <a
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    href="https://vpm-commerce-develop.netlify.app/en/personal-data/"
+                                    >{{ $localize('custom_fields.terms_conditions') }}</a
+                                >{{ $localize('custom_fields.legal_age') }}</span
+                            ></snipcart-label
+                        >
+                    </div>
+                </div>
+            </payment>
+            <address-fields section="top">
+                <div>
+                    <snipcart-label for="phone">{{ $localize('custom_fields.phone_number') }}</snipcart-label>
+                    <snipcart-input name="phone"></snipcart-input>
+                </div>
+            </address-fields>
+        </div>
+    </body>
+</html>

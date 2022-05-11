@@ -6,6 +6,7 @@
         <LayoutAgeGate v-if="!ageValid" />
         <LayoutSvgs />
         <LayoutGrid v-if="false" />
+        <div id="snipcart" hidden :data-api-key="$config.snipcartApiKey"></div>
     </div>
 </template>
 
@@ -13,6 +14,7 @@
 import Cookies from 'js-cookie';
 import { spotFF } from '@stereorepo/sac';
 import snipcartFr from '~/locales/snipcart/fr.json';
+import snipcartEn from '~/locales/snipcart/en.json';
 
 export default {
     data() {
@@ -29,7 +31,7 @@ export default {
     mounted() {
         document.addEventListener('snipcart.ready', () => {
             const lang = this.$i18n.locale;
-            const translation = lang === 'fr' ? snipcartFr : {};
+            const translation = lang === 'fr' ? snipcartFr : snipcartEn;
             window.Snipcart.api.session.setLanguage(lang, translation);
         });
         this.ageValid = Cookies.get('agevalid');

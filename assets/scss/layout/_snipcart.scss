@@ -573,8 +573,14 @@
 .snipcart-billing-completed__title {
     margin-bottom: 0;
 }
+.snipcart-summary-fees {
+    display: grid;
+}
 .snipcart-summary-fees__item {
     color: $grey-1;
+    &:nth-child(3) {
+        grid-row: 2/3;
+    }
     .snipcart-summary-fees__title,
     .snipcart-summary-fees__amount {
         font-family: $plex-sans;
@@ -590,6 +596,9 @@
             line-height: 25px;
         }
     }
+}
+.snipcart-summary-fees__tax-notice {
+    display: none;
 }
 
 /* Account */
@@ -703,6 +712,34 @@
     color: $grey-1;
     > * {
         line-height: 18px;
+    }
+}
+
+/* Custom */
+// .vpm-checkbox {
+//     display: flex;
+//     input {
+//         flex: 0 0 auto;
+//     }
+//     label {
+//         flex: 1 1 auto;
+//     }
+// }
+
+.vpm-label,
+.snipcart-checkbox + .vpm-label {
+    align-items: flex-start;
+    white-space: normal;
+    &::before {
+        flex: 0 0 auto;
+    }
+}
+.vpm-label-content {
+    display: inline;
+    margin-top: 1px;
+    line-height: 1.3;
+    * {
+        display: inline;
     }
 }
 

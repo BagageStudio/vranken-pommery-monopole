@@ -57,7 +57,8 @@ export default {
                 rel: 'stylesheet',
                 href: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Serif:ital@0;1&display=swap'
             }
-        ]
+        ],
+        script: [{ src: '/snipcart.js' }]
     },
 
     publicRuntimeConfig: {
@@ -65,7 +66,8 @@ export default {
         preview: previewData,
         // On met le token qui si on est en local (pour pas qu'il soit injecté dans le JS en prod)
         datoApiToken: previewData ? process.env.DATOCMS_API_TOKEN : '',
-        datoApiUrl: process.env.GRAPHQL_ENDPOINT
+        datoApiUrl: process.env.GRAPHQL_ENDPOINT,
+        snipcartApiKey: process.env.SNIPCART_PUBLIC_API_KEY
     },
 
     privateRuntimeConfig: {
@@ -95,14 +97,9 @@ export default {
         '@nuxtjs/style-resources',
         '@nuxtjs/robots',
         'nuxt-i18n',
-        '@nuxtjs/snipcart',
         '~/modules/slugToModelApiKey',
         '~/modules/initLayoutData'
     ],
-
-    snipcart: {
-        key: process.env.SNIPCART_PUBLIC_API_KEY
-    },
 
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
