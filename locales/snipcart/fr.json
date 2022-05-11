@@ -30,11 +30,14 @@
     },
     "custom_fields": {
         "confirm_read": "Je confirme avoir pris connaissance de la",
+        "personnal_data_link": "https://vpm-commerce-develop.netlify.app/donnees-personnelles/",
         "personal_data": "Charte d'utilisation des données personnelles",
         "and": "&",
+        "cookies_link": "https://vpm-commerce-develop.netlify.app/utilisation-des-cookies/",
         "cookies": "Cookies",
         "phone_number": "Téléphone",
         "agree": "J'accepte les",
+        "terms_conditions_link": "https://vpm-commerce-develop.netlify.app/donnees-personnelles/",
         "terms_conditions": "conditions générales de ventes de VPM",
         "legal_age": ", et affirme avoir l'âge légal autorisé pour acheter ou consommer de l'alcool."
     }
