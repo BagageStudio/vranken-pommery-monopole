@@ -23,5 +23,19 @@
             "classic-shipping": "Livraison standard",
             "free-shipping": "Livraison offerte"
         }
+    },
+    "cart_summary": {
+        "taxes": "TVA incluse",
+        "taxes_included_in_price": "Certains articles comprennent des taxes."
+    },
+    "custom_fields": {
+        "confirm_read": "Je confirme avoir pris connaissance de la",
+        "personal_data": "Charte d'utilisation des données personnelles",
+        "and": "&",
+        "cookies": "Cookies",
+        "phone_number": "Téléphone",
+        "agree": "J'accepte les",
+        "terms_conditions": "conditions générales de ventes de VPM",
+        "legal_age": ", et affirme avoir l'âge légal autorisé pour acheter ou consommer de l'alcool."
     }
 }
