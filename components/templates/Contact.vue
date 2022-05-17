@@ -179,9 +179,7 @@ export default {
             const brandExists = this.data.brandOptions.some(s => s.valueAttribute === brand);
             if (brandExists) this.brandInput = brand;
 
-            this.messageInput = `${this.$t('flacon.tarif')} - ${this.$route.query.flacon}\n\n[[${this.$t(
-                'flacon.message'
-            )}]]
+            this.messageInput = `${this.$route.query.flacon}\n\n[[${this.$t('flacon.message')}]]
             `;
         }
     }

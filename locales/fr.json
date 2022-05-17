@@ -23,7 +23,8 @@
         "price": "Tarif sur demande",
         "contact": "Nous contacter",
         "tarif": "Demande de tarif",
-        "message": "votre message"
+        "message": "votre message",
+        "order": "Commande grand flacon"
     },
     "search": {
         "title": "résulats de recherche",

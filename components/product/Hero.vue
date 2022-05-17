@@ -35,7 +35,7 @@
                     <span class="product-price h3">{{ $options.filters.formatNumber(data.price, $store.$i18n) }}</span>
                     <ProductAvailability :available="available" />
                 </div>
-                <div v-if="available" class="wrapper-quantity-order">
+                <div v-if="available && !data.contactToBuy" class="wrapper-quantity-order">
                     <ProductQuantity v-model="quantity" :max="maxStock" />
                     <button
                         class="btn-block bg-blue btn-order snipcart-add-item"
@@ -50,6 +50,13 @@
                         <Icon name="cart-add" />
                     </button>
                 </div>
+                <nuxt-link
+                    v-else-if="available && data.contactToBuy"
+                    :to="contactLink"
+                    class="btn-block bg-blue contact-btn"
+                >
+                    {{ $t('flacon.contact') }}
+                </nuxt-link>
                 <div class="product-description wysiwyg" v-html="data.description.description" />
             </div>
         </div>
@@ -58,6 +65,8 @@
 
 <script>
 import { gsap } from 'gsap';
+import { routeByApiModels } from '~/app/crawler/routes';
+
 export default {
     props: {
         data: {
@@ -80,6 +89,17 @@ export default {
     computed: {
         available() {
             return this.availableInStock && !this.data.forceUnavailable;
+        },
+        contactLink() {
+            return this.localePath({
+                name: routeByApiModels.contact.routerFormat,
+                params: { slug: 'contact' },
+                query: {
+                    subject: this.$t('flacon.order'),
+                    brand: this.data.brand.title,
+                    flacon: this.data.title
+                }
+            });
         }
     },
     async created() {
@@ -247,6 +267,10 @@ export default {
 }
 .btn-order {
     flex: 1 1 auto;
+}
+.contact-btn {
+    width: 100%;
+    margin-top: 30px;
 }
 .product-description {
     margin: 50px 0 0;

@@ -23,7 +23,8 @@
         "price": "Price on request",
         "contact": "Contact us",
         "tarif": "Price request",
-        "message": "your message"
+        "message": "your message",
+        "order": "Large bottle order"
     },
     "search": {
         "title": "search results",

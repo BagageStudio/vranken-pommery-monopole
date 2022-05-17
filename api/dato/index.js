@@ -294,6 +294,7 @@ export const productQuery = `
                 }
             }
             forceUnavailable
+            contactToBuy
             category{
                 _modelApiKey
                 ${locales}
