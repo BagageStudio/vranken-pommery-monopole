@@ -190,6 +190,8 @@ export const homeQuery = `
             image{
                 ${img}
             }
+            forceUnavailable
+            contactToBuy
             category{
                 _modelApiKey
                 ${locales}
@@ -393,6 +395,8 @@ export const productsInCategoryQuery = `
             }
             price
             productType
+            forceUnavailable
+            contactToBuy
             category{
                 _modelApiKey
                 ${locales}
@@ -433,6 +437,8 @@ export const productsInCuveeQuery = `
             }
             price
             productType
+            forceUnavailable
+            contactToBuy
             category{
                 _modelApiKey
                 ${locales}
@@ -671,6 +677,8 @@ export const allProductsQuery = `
             }
             price
             productType
+            forceUnavailable
+            contactToBuy
             category{
                 _modelApiKey
                 ${locales}

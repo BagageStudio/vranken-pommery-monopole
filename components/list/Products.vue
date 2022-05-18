@@ -11,6 +11,7 @@
                     <div class="product-image">
                         <FastImage class="product-thumbnail" :image="product.image" contains />
                         <button
+                            v-if="!product.forceUnavailable && !product.contactToBuy"
                             class="quick-add snipcart-add-item"
                             :data-item-id="product.uuid"
                             :data-item-price="product.price"
