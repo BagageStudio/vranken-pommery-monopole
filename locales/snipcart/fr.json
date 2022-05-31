@@ -24,6 +24,9 @@
             "free-shipping": "Livraison offerte"
         }
     },
+    "shipping_rates": {
+        "guaranteed_delivery_days": "Garanti d'être livré en %{guaranteedDaysToDelivery} jours ouvrés."
+    },
     "cart_summary": {
         "taxes": "TVA incluse",
         "taxes_included_in_price": "Certains articles comprennent des taxes."
