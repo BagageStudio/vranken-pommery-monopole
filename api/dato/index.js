@@ -601,6 +601,7 @@ export const contactQuery = `
             _modelApiKey
             slug
             ${seo}
+            ${locales}
             id
             title
             image {

@@ -91,9 +91,10 @@ export default {
             return this.availableInStock && !this.data.forceUnavailable;
         },
         contactLink() {
+            const contactSlug = this.$i18n.locale === 'fr' ? 'contact' : 'contact-us';
             return this.localePath({
                 name: routeByApiModels.contact.routerFormat,
-                params: { slug: 'contact' },
+                params: { slug: contactSlug },
                 query: {
                     subject: this.$t('flacon.order'),
                     brand: this.data.brand.title,
