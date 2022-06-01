@@ -1,10 +1,10 @@
 {
     "custom_fields": {
-        "confirm_read": "I confirm that I have read the",
+        "confirm_read": "I confirm that I have read and accept the",
         "personnal_data_link": "https://vpm-commerce-develop.netlify.app/en/personal-data/",
         "personal_data": "Personal Data treatment Charter & Cookies Policy.",
         "phone_number": "Phone number",
-        "agree": "I accept the",
+        "agree": "I confirm that I have read and accept the",
         "terms_conditions_link": "https://vpm-commerce-develop.netlify.app/en/general-terms-and-conditions-for-online-sales/",
         "terms_conditions": "General terms and conditions for online sales",
         "legal_age": " and claims to be of legal age to purchase or consume alcohol."
