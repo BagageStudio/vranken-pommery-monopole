@@ -1,0 +1,45 @@
+{
+    "global": {
+        "orderLabel": "Commander",
+        "backLabel": "Retour"
+    },
+    "list": {
+        "moreLabel": "Découvrez plus",
+        "allCategories": "Toute la gamme"
+    },
+    "product": {
+        "eyeLabel": "Œil",
+        "noseLabel": "Nez",
+        "palateLabel": "Bouche",
+        "terroirsLabel": "Terroirs",
+        "accordsLabel": "Accords",
+        "temperatureLabel": "Température de service",
+        "availableLabel": "Disponible",
+        "unavailableLabel": "Indisponible",
+        "quantityError": "Quantité invalide",
+        "quantityMax": "Quantité maximum dépassée"
+    },
+    "flacon": {
+        "price": "Tarif sur demande",
+        "contact": "Nous contacter",
+        "tarif": "Demande de tarif",
+        "message": "votre message",
+        "order": "Commander un grand flacon"
+    },
+    "search": {
+        "title": "résulats de recherche",
+        "input": "Rechercher un produit"
+    },
+    "404": {
+        "notFound":{
+            "title": "Page non trouvée",
+            "text": "Malheureusement, cette page n'existe pas. Explorez toutes les gammes en ligne et n'hésitez pas à contacter notre Service Clients pour tout complément d'information."
+        },
+        "noResults": {
+            "title": "Aucun résultat de recherche",
+            "text": "Malheureusement, votre recherche n'a abouti à aucun résultat. Explorez toutes les gammes en ligne et n'hésitez pas à contacter notre Service Clients pour tout complément d'information."
+        },
+        "homeLabel" : "Retour à l'accueil",
+        "contactLabel" : "Contactez nous"
+    }
+}

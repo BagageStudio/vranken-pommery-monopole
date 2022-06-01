@@ -1,3 +1,9 @@
+# This file is generated on netlify or on local dev
+
+/api/dato/helpers/slugToModelApiKey.json
+/cms/data
+/static/medias
+
 # Created by .ignore support plugin (hsz.mobi)
 ### Node template
 # Logs
@@ -43,6 +49,9 @@ typings/
 
 # Optional npm cache directory
 .npm
+
+# NVM Version
+.nvmrc
 
 # Optional eslint cache
 .eslintcache

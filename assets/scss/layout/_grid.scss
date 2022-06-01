@@ -1,0 +1,36 @@
+/* Grid */
+
+.wrapper {
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: $desktop-xxl;
+    padding: 0 $grid-gutter-s;
+    margin: 0 auto;
+}
+
+.content-pad {
+    padding-left: $gutter;
+    padding-right: $gutter;
+}
+
+@media (min-width: $desktop-small) {
+    .container-xs {
+        width: percentage(math.div(4, 6));
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: $desktop) {
+    .container {
+        padding: 0 $grid-gutter-l;
+    }
+    .container-s {
+        width: percentage(math.div(10, 12));
+        margin: 0 auto;
+    }
+    .container-xs {
+        width: percentage(math.div(8, 12));
+    }
+}

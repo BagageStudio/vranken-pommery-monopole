@@ -1,0 +1,31 @@
+/* Buttons */
+.btn-block {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 25px;
+    font-family: $plex-sans;
+    font-weight: 400;
+    font-size: 1.2rem;
+    line-height: 16px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid $white;
+    color: $white;
+    &.grey {
+        border-color: $grey-1;
+        color: $grey-1;
+    }
+    &.bg-blue {
+        color: $white;
+        background: $blue;
+    }
+    .icon {
+        width: 18px;
+        height: 17px;
+        margin-left: 10px;
+    }
+}

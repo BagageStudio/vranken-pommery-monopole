@@ -1,0 +1,394 @@
+/******* GÉNÉRAL *******/
+
+// DEBUG
+// * {
+//     outline: 1px solid red;
+// }
+
+::-moz-selection {
+    background: rgba($black, 0.99);
+    color: $white;
+    text-shadow: none;
+}
+::selection {
+    background: rgba($black, 0.99);
+    color: $white;
+    text-shadow: none;
+}
+
+:root {
+    --header-height: 164px;
+    --mobile-top-header-height: 82px;
+    --mobile-search-header-height: 82px;
+    --scroll-top: 0px;
+}
+@media (min-width: $desktop-small) {
+    :root {
+        --header-height: 191px;
+    }
+}
+
+html {
+    font-size: 62.5%; /* sets the base font to 10px for easier math */
+    background: var(--bg);
+    &.no-scroll {
+        position: fixed;
+        overflow: hidden;
+        width: 100%;
+        left: 0;
+        right: 0;
+        top: var(--scroll-top);
+    }
+}
+
+body {
+    font: 1.6em / 1.63 $plex-sans;
+    color: $grey-1;
+    font-kerning: normal;
+    font-weight: 400;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.wysiwyg h1,
+.h1,
+.wysiwyg h2,
+.h2,
+.wysiwyg h3,
+.h3 {
+    font-family: $plex-serif;
+    font-weight: 400;
+}
+
+.wysiwyg h1,
+.h1 {
+    font-size: 5.5rem;
+    line-height: 72px;
+    letter-spacing: 0.02em;
+    margin: 0 0 80px;
+    color: $gold;
+}
+
+.wysiwyg h2,
+.h2 {
+    font-size: 4.2rem;
+    line-height: 55px;
+    margin: 80px 0;
+    color: $blue;
+}
+
+.wysiwyg h3,
+.h3 {
+    font-size: 2.8rem;
+    line-height: 36px;
+    margin: 60px 0 30px;
+    color: $blue;
+}
+
+.wysiwyg h4,
+.h4 {
+    font-size: 2.2rem;
+    line-height: 29px;
+    font-weight: 400;
+    margin: 30px 0 20px;
+    color: $blue;
+}
+
+.wysiwyg h5,
+.h5,
+.wysiwyg h6,
+.h6 {
+    font-size: 1.5rem;
+    line-height: 19px;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin: 20px 0 10px;
+    color: $blue;
+}
+
+.wysiwyg ul {
+    margin: 20px 0;
+    padding: 0;
+    li {
+        position: relative;
+        margin: 10px 0;
+        padding: 0 0 0 48px;
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0.6em;
+            left: 20px;
+            display: block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: $gold;
+        }
+    }
+    ul {
+        margin: 10px 0;
+        li {
+            padding-left: 20px;
+            &::before {
+                left: -8px;
+                background: none;
+                border: 1px solid $gold;
+            }
+        }
+    }
+}
+
+.wysiwyg ol {
+    margin: 40px 0;
+    padding: 0;
+    li {
+        position: relative;
+        margin: 5px 0;
+        padding: 0 0 0 25px;
+        &::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: $black;
+        }
+    }
+}
+
+.wysiwyg a {
+    font-weight: 400;
+    color: $gold;
+}
+
+p {
+    margin: 10px 0;
+    line-height: 25px;
+}
+
+strong {
+    font-weight: 700;
+}
+
+blockquote {
+    font-family: $plex-serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 2.2rem;
+    line-height: 29px;
+    margin: 40px 0;
+    padding: 0 0 0 20px;
+    border-left: 1px solid $gold;
+    color: $gold;
+}
+
+ol,
+ul {
+    padding: 0;
+    margin: 1em 0;
+    list-style-type: none;
+}
+ul {
+    ul {
+        padding: 0 0 0 25px;
+        margin: 1em 0;
+    }
+}
+ol {
+    counter-reset: ol-counter;
+    > li {
+        counter-increment: ol-counter;
+        &::before {
+            content: counter(ol-counter) '.';
+        }
+    }
+    ol {
+        padding: 0 0 0 25px;
+        margin: 1em 0;
+    }
+}
+
+// COMBAK: Remove if not used
+dt,
+dd {
+    display: inline;
+    margin: 0;
+}
+dt {
+    &::after {
+        content: ': ';
+    }
+}
+dd {
+    + dt {
+        &::before {
+            content: '\A';
+            white-space: pre;
+        }
+    }
+    + dd {
+        &::before {
+            content: ', ';
+            margin: 0 0 0 -0.25em;
+        }
+    }
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+svg {
+    max-width: 100%;
+}
+
+// COMBAK: Remove if not used
+code,
+pre {
+    display: block;
+    padding: 10px 15px;
+    margin: 1em 0;
+    background: grey;
+}
+
+// COMBAK: Remove if not used
+hr {
+    position: relative;
+    width: 5px;
+    height: 5px;
+    border: 0;
+    margin: 100px auto;
+    border-radius: 50%;
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        display: block;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+    }
+    &::before {
+        left: -20px;
+    }
+    &::after {
+        right: -20px;
+    }
+}
+
+/******* LIENS / BOUTONS *******/
+
+a {
+    color: inherit;
+}
+
+/******* CLASSES GENERALES  *******/
+
+.wrapper-page {
+    padding-top: var(--header-height);
+}
+.wrapper-classic {
+    padding: calc(var(--header-height) + 50px) 0 50px;
+}
+
+.align-center {
+    text-align: center;
+}
+.align-left {
+    text-align: left;
+}
+.align-right {
+    text-align: right;
+}
+
+.inline-b {
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateY(-0.1em);
+}
+
+.full-width {
+    width: 100%;
+}
+
+.no-transition {
+    transition: none !important;
+    &::after,
+    &::before {
+        transition: none !important;
+    }
+}
+
+.small-title {
+    font-family: $plex-sans;
+    font-size: 1.5rem;
+    font-style: normal;
+    line-height: 19px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: $gold;
+}
+
+.visually-hidden {
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    position: absolute !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+}
+
+.page-enter,
+.page-leave-to {
+    .loading-overlay {
+        opacity: 1 !important;
+    }
+}
+
+.layout-enter-active,
+.layout-leave-active {
+    transition: opacity 0.4s;
+}
+
+.layout-enter,
+.layout-leave-to {
+    .loading-overlay.layout-overlay {
+        opacity: 1 !important;
+    }
+}
+
+.icon {
+    fill: currentColor;
+}
+
+@media (min-width: $desktop-small) {
+    .wrapper-classic {
+        padding: calc(var(--header-height) + 80px) 0 80px;
+    }
+}
+
+@media (min-width: $desktop) {
+    .wysiwyg ul {
+        width: calc(100% + #{2 * $gutter});
+        margin-left: -$gutter;
+        li {
+            padding: 0 $gutter 0 calc(#{percentage(math.div(1, 8))} + #{$gutter} + 28px);
+            &::before {
+                left: calc(#{percentage(math.div(1, 8))} + #{$gutter});
+            }
+        }
+        ul {
+            width: calc(100% + #{2 * $gutter} + 28px);
+            margin-left: calc(#{-$gutter} - 28px);
+            li {
+                padding: 0 $gutter 0 calc(#{percentage(math.div(1, 7))} + #{$gutter} + 28px);
+                &::before {
+                    left: calc(#{percentage(math.div(1, 7))} + #{$gutter});
+                }
+            }
+        }
+    }
+}

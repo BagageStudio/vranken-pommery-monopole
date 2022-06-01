@@ -1,0 +1,171 @@
+/* Forms */
+
+input,
+textarea,
+select,
+button {
+    &:focus {
+        outline: 0;
+    }
+}
+
+input,
+textarea {
+    &:-webkit-autofill {
+        box-shadow: 0 0 0 1000px #fff inset;
+    }
+    &:invalid {
+        // FF red borders
+        box-shadow: none;
+    }
+}
+
+input {
+    display: block;
+    position: relative;
+    font-size: 1.3rem;
+    line-height: 20px;
+    padding: 9px;
+    border: 0;
+    background: $beige;
+    border: 1px solid $beige;
+    // hide the symbols of input search
+    &[type='search'] {
+        &::-webkit-search-cancel-button,
+        &::-webkit-search-decoration {
+            display: none;
+        }
+    }
+}
+
+textarea {
+    min-height: 135px;
+    font-size: 1.3rem;
+    line-height: 25px;
+    padding: 10px;
+    border: 0;
+    background: $beige;
+    border: 1px solid $beige;
+}
+
+select {
+    // hide the arrow on edge + ie
+    &::-ms-expand {
+        display: none;
+    }
+}
+.select {
+    position: relative;
+    select {
+        width: 100%;
+        padding: 9px;
+        border: 0;
+        font-size: 1.3rem;
+        line-height: 20px;
+        background: $beige;
+        color: $grey-1;
+        border: 1px solid $beige;
+        appearance: none;
+    }
+    .icon {
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        width: 11px;
+        height: 6px;
+        margin-top: -1px;
+        fill: $grey-1;
+    }
+}
+
+button {
+    border: 0;
+}
+
+.wrapper-field {
+    position: relative;
+    width: 100%;
+    .label {
+        font-size: 1.3rem;
+        line-height: 20px;
+        padding: 9px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: $grey-1;
+        user-select: none;
+        pointer-events: none;
+    }
+    input,
+    textarea {
+        width: 100%;
+        &:focus,
+        &.on {
+            + .label {
+                opacity: 0;
+            }
+        }
+    }
+    &.error {
+        input,
+        textarea,
+        select {
+            border-color: $error;
+            + .label {
+                color: $error;
+            }
+        }
+        select {
+            border-color: $error;
+            color: $error;
+        }
+    }
+}
+.btn-next {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px 0 20px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $grey-2;
+    > span {
+        margin-right: 10px;
+    }
+    .icon {
+        flex: 0 0 auto;
+        width: 5px;
+        height: 9px;
+        fill: currentColor;
+    }
+}
+
+.form-line {
+    margin-bottom: 20px;
+    &.split-half {
+        .wrapper-field {
+            margin-bottom: 20px;
+        }
+    }
+}
+
+.error-message {
+    color: $error;
+}
+
+@media (min-width: $phone) {
+    .form-line {
+        margin-bottom: 20px;
+        &.split-half {
+            display: flex;
+            width: calc(100% + #{$gutter * 2});
+            margin-left: -#{$gutter};
+            .wrapper-field {
+                margin: 0 #{$gutter};
+            }
+        }
+    }
+}

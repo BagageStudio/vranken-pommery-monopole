@@ -1,0 +1,44 @@
+{
+    "signin_form": {
+        "signin": "M'identifier",
+        "dont_have_an_account": "Nouveau client ?",
+        "forgot_your_password": "Mot de passe oublié ?"
+    },
+    "register_form": {
+        "register": "Créer mon compte",
+        "already_have_an_account": "Déjà client ?"
+    },
+    "payment": {
+        "continue_to_payment": "Procéder au paiement"
+    },
+    "address_form": {
+        "address1": "Adresse"
+    },
+    "billing": {
+        "title": "Détails de livraison",
+        "continue_to_shipping": "Continuer : Livraison"
+    },
+    "shipping": {
+        "methods": {
+            "classic-shipping": "Livraison standard",
+            "free-shipping": "Livraison offerte"
+        }
+    },
+    "shipping_rates": {
+        "guaranteed_delivery_days": "Garanti d'être livré en %{guaranteedDaysToDelivery} jours ouvrés."
+    },
+    "cart_summary": {
+        "taxes": "TVA incluse",
+        "taxes_included_in_price": "Certains articles comprennent des taxes."
+    },
+    "custom_fields": {
+        "confirm_read": "Je confirme avoir pris connaissance et j'accepte la",
+        "personnal_data_link": "https://vpm-commerce-develop.netlify.app/donnees-personnelles/",
+        "personal_data": "Charte de traitement des Données Personnelles & utilisation des Cookies.",
+        "phone_number": "Téléphone",
+        "agree": "Je confirme avoir pris connaissance et j'accepte les",
+        "terms_conditions_link": "https://vpm-commerce-develop.netlify.app/conditions-generales-de-vente-en-ligne/",
+        "terms_conditions": "Conditions générales de vente en ligne",
+        "legal_age": " et affirme avoir l'âge légal autorisé pour acheter ou consommer de l'alcool."
+    }
+}
