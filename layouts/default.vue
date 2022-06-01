@@ -6,7 +6,6 @@
         <LayoutAgeGate v-if="!ageValid" />
         <LayoutSvgs />
         <LayoutGrid v-if="false" />
-        <div id="snipcart" hidden :data-api-key="$config.snipcartApiKey"></div>
     </div>
 </template>
 

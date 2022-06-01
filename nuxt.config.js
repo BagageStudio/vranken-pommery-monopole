@@ -60,8 +60,7 @@ export default {
                 rel: 'stylesheet',
                 href: 'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Serif:ital@0;1&display=swap'
             }
-        ],
-        script: [{ src: '/snipcart.js' }]
+        ]
     },
 
     publicRuntimeConfig: {
@@ -83,6 +82,7 @@ export default {
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [
         '~/plugins/preview.client.js',
+        '~/plugins/snipcart.client.js',
         '~/plugins/globals.js',
         '~/plugins/axios',
         '~/plugins/breakpoints',
