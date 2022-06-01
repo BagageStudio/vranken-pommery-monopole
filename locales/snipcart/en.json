@@ -2,14 +2,11 @@
     "custom_fields": {
         "confirm_read": "I confirm that I have read the",
         "personnal_data_link": "https://vpm-commerce-develop.netlify.app/en/personal-data/",
-        "personal_data": "Privacy policy",
-        "and": "&",
-        "cookies_link": "https://vpm-commerce-develop.netlify.app/en/use-of-cookies/",
-        "cookies": "Cookies",
+        "personal_data": "Personal Data treatment Charter & Cookies Policy.",
         "phone_number": "Phone number",
-        "agree": "I agree to VPM's",
-        "terms_conditions_link": "https://vpm-commerce-develop.netlify.app/en/personal-data/",
-        "terms_conditions": "terms and conditions",
-        "legal_age": ", and claims to be of legal age to purchase or consume alcohol."
+        "agree": "I accept the",
+        "terms_conditions_link": "https://vpm-commerce-develop.netlify.app/en/general-terms-and-conditions-for-online-sales/",
+        "terms_conditions": "General terms and conditions for online sales",
+        "legal_age": " and claims to be of legal age to purchase or consume alcohol."
     }
 }
