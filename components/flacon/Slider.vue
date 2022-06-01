@@ -237,6 +237,8 @@ export default {
     align-items: center;
     position: absolute;
     bottom: -25px;
+    left: 0;
+    right: 0;
 }
 
 .progress-ring {
@@ -271,6 +273,8 @@ export default {
         margin-top: -25px;
         position: relative;
         bottom: auto;
+        left: auto;
+        right: auto;
     }
     .controls {
         margin-top: 0;
