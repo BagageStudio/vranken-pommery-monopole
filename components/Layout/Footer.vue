@@ -93,7 +93,6 @@ export default {
         }
     },
     mounted() {
-        console.log(this.$route);
         if (this.$route.query.optin === 'valid') this.successOptin = true;
     },
     methods: {

@@ -7,8 +7,8 @@
                 </div>
                 <div class="hero-content container">
                     <div class="content-pad">
-                        <h1 class="hero-title h1">{{ data.heroTitle }}</h1>
-                        <LinkTo class="btn-block" :link="data.heroLink" />
+                        <h1 v-if="data.heroTitle" class="hero-title h1">{{ data.heroTitle }}</h1>
+                        <LinkTo v-if="data.heroLink" class="btn-block" :link="data.heroLink" />
                     </div>
                 </div>
             </div>

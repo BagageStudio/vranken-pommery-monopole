@@ -127,7 +127,6 @@ export default {
             let height = 0;
             this.$refs.slide.forEach(f => (height = Math.max(f.clientHeight, height)));
             this.biggerHeight = height;
-            console.log(this.biggerHeight);
         }
     }
 };
