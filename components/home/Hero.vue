@@ -37,7 +37,7 @@ export default {
     &::before {
         content: '';
         display: block;
-        aspect-ratio: 1440 / 630;
+        aspect-ratio: 1.3 / 1;
     }
 }
 .content-hero {
