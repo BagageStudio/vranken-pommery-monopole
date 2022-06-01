@@ -1,13 +1,15 @@
 <template>
     <div class="wrapper-hero">
         <div class="hero">
-            <div class="hero-cover">
-                <FastImage :image="data.heroCover" cover />
-            </div>
-            <div class="hero-content container">
-                <div class="content-pad">
-                    <h1 class="hero-title h1">{{ data.heroTitle }}</h1>
-                    <LinkTo class="btn-block" :link="data.heroLink" />
+            <div class="content-hero">
+                <div class="hero-cover">
+                    <FastImage :image="data.heroCover" cover />
+                </div>
+                <div class="hero-content container">
+                    <div class="content-pad">
+                        <h1 class="hero-title h1">{{ data.heroTitle }}</h1>
+                        <LinkTo class="btn-block" :link="data.heroLink" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -30,7 +32,20 @@ export default {
 }
 .hero {
     position: relative;
-    height: 630px;
+    width: 100%;
+    max-height: 630px;
+    &::before {
+        content: '';
+        display: block;
+        aspect-ratio: 1440 / 630;
+    }
+}
+.content-hero {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     padding: 40px 0 40px;
     display: flex;
     justify-content: flex-start;
