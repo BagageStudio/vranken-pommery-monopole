@@ -1,7 +1,7 @@
 <template>
     <div class="slider">
         <div class="container">
-            <div class="slider-inner">
+            <div class="slider-inner" :style="{ height: `${biggerHeight}px` }">
                 <div
                     v-for="(slide, index) in data"
                     :key="slide.id"
@@ -53,13 +53,27 @@ export default {
         activeSlide: 0,
         slideClasses: [],
         autoplay: true,
-        autoplayTween: null
+        autoplayTween: null,
+        biggerHeight: 730
     }),
+    computed: {
+        ww() {
+            return this.$store.state.superWindow ? this.$store.state.superWindow.width : 320;
+        }
+    },
+    watch: {
+        ww(w) {
+            this.computeBiggerHeight();
+        }
+    },
     created() {
         this.slideClasses = this.calculateSlidePosition(0);
     },
     mounted() {
         this.startAutoplay();
+        this.$nextTick(() => {
+            this.computeBiggerHeight();
+        });
     },
     methods: {
         startAutoplay() {
@@ -108,6 +122,12 @@ export default {
                     return 'back';
                 }
             });
+        },
+        computeBiggerHeight() {
+            let height = 0;
+            this.$refs.slide.forEach(f => (height = Math.max(f.clientHeight, height)));
+            this.biggerHeight = height;
+            console.log(this.biggerHeight);
         }
     }
 };
@@ -119,7 +139,7 @@ export default {
 }
 .slider {
     padding-top: 50px;
-    padding-bottom: 50px;
+    padding-bottom: 75px;
     background-color: $beige;
 }
 .h5 {
@@ -215,7 +235,8 @@ export default {
 .controls-wrapper {
     display: flex;
     align-items: center;
-    margin-top: 40px;
+    position: absolute;
+    bottom: -25px;
 }
 
 .progress-ring {
@@ -248,6 +269,8 @@ export default {
         width: 50%;
         margin-left: auto;
         margin-top: -25px;
+        position: relative;
+        bottom: auto;
     }
     .controls {
         margin-top: 0;
