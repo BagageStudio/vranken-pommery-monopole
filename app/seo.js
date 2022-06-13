@@ -1,4 +1,4 @@
-const TITLE_PREFIX = 'Vranken Pommery Monopole • ';
+const TITLE_PREFIX = '"Vranken-Pommery E-shop • ';
 
 const handleSeo = ({ route, seo, lang }) => {
     const head = { meta: [] };
