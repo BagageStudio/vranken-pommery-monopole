@@ -1,4 +1,5 @@
 const TITLE_PREFIX = 'Vranken-Pommery E-shop • ';
+const DEFAULT_TITLE = 'Vranken-Pommery E-shop';
 
 const handleSeo = ({ route, seo, lang }) => {
     const head = { meta: [] };
@@ -13,6 +14,13 @@ const handleSeo = ({ route, seo, lang }) => {
             }
         ];
     }
+
+    head.title = DEFAULT_TITLE;
+    head.meta = [
+        ...head.meta,
+        { hid: 'og:title', property: 'og:title', content: DEFAULT_TITLE },
+        { hid: 'twitter:title', name: 'twitter:title', content: DEFAULT_TITLE }
+    ];
 
     if (!seo) return head;
 
