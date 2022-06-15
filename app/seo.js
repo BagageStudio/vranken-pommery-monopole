@@ -19,6 +19,17 @@ const handleSeo = ({ route, seo, lang }) => {
     head.meta = [
         ...head.meta,
         { hid: 'og:title', property: 'og:title', content: DEFAULT_TITLE },
+        { hid: 'og:site_name', property: 'og:site_name', content: DEFAULT_TITLE },
+        {
+            hid: 'og:description',
+            property: 'og:description',
+            content: ''
+        },
+        {
+            hid: 'apple-mobile-web-app-title',
+            property: 'apple-mobile-web-app-title',
+            content: DEFAULT_TITLE
+        },
         { hid: 'twitter:title', name: 'twitter:title', content: DEFAULT_TITLE }
     ];
 
@@ -30,7 +41,13 @@ const handleSeo = ({ route, seo, lang }) => {
         head.meta = [
             ...head.meta,
             { hid: 'og:title', property: 'og:title', content: seo.title },
-            { hid: 'twitter:title', name: 'twitter:title', content: seo.title }
+            { hid: 'og:site_name', property: 'og:site_name', content: seo.title },
+            { hid: 'twitter:title', name: 'twitter:title', content: seo.title },
+            {
+                hid: 'apple-mobile-web-app-title',
+                property: 'apple-mobile-web-app-title',
+                content: seo.title
+            }
         ];
     }
 
