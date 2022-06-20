@@ -94,8 +94,8 @@ export default {
     }
 }
 .tasting-visual {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     padding-left: 10px;
     padding-right: 10px;
     margin: 0 auto 20px;
@@ -114,7 +114,7 @@ export default {
     > span {
         font-family: $plex-sans;
         font-weight: 500;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         line-height: 16px;
         letter-spacing: 0.1em;
         text-transform: uppercase;

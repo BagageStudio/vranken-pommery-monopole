@@ -1,4 +1,5 @@
-const TITLE_PREFIX = 'Vranken Pommery Monopole • ';
+const TITLE_PREFIX = 'Vranken-Pommery E-shop • ';
+const DEFAULT_TITLE = 'Vranken-Pommery E-shop';
 
 const handleSeo = ({ route, seo, lang }) => {
     const head = { meta: [] };
@@ -14,6 +15,24 @@ const handleSeo = ({ route, seo, lang }) => {
         ];
     }
 
+    head.title = DEFAULT_TITLE;
+    head.meta = [
+        ...head.meta,
+        { hid: 'og:title', property: 'og:title', content: DEFAULT_TITLE },
+        { hid: 'og:site_name', property: 'og:site_name', content: DEFAULT_TITLE },
+        {
+            hid: 'og:description',
+            property: 'og:description',
+            content: ''
+        },
+        {
+            hid: 'apple-mobile-web-app-title',
+            property: 'apple-mobile-web-app-title',
+            content: DEFAULT_TITLE
+        },
+        { hid: 'twitter:title', name: 'twitter:title', content: DEFAULT_TITLE }
+    ];
+
     if (!seo) return head;
 
     if (seo.title) {
@@ -22,7 +41,13 @@ const handleSeo = ({ route, seo, lang }) => {
         head.meta = [
             ...head.meta,
             { hid: 'og:title', property: 'og:title', content: seo.title },
-            { hid: 'twitter:title', name: 'twitter:title', content: seo.title }
+            { hid: 'og:site_name', property: 'og:site_name', content: seo.title },
+            { hid: 'twitter:title', name: 'twitter:title', content: seo.title },
+            {
+                hid: 'apple-mobile-web-app-title',
+                property: 'apple-mobile-web-app-title',
+                content: seo.title
+            }
         ];
     }
 
