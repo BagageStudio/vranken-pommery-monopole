@@ -39,6 +39,10 @@ export default {
             type: Object,
             required: true
         },
+        contact: {
+            type: Object,
+            required: true
+        },
         backLink: {
             type: String,
             required: true
@@ -47,10 +51,9 @@ export default {
     data: () => ({}),
     computed: {
         contactLink() {
-            const contactSlug = this.$i18n.locale === 'fr' ? 'contact' : 'contact-us';
             return this.localePath({
                 name: routeByApiModels.contact.routerFormat,
-                params: { slug: contactSlug },
+                params: { slug: this.contact.slug },
                 query: {
                     subject: this.global.contactSubject,
                     brand: this.global.contactBrand,

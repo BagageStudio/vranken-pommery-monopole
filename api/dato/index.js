@@ -319,6 +319,10 @@ export const productQuery = `
                 }
             }
         }
+        contact(locale: $lang) {
+            _modelApiKey
+            slug
+        }
     }`;
 
 export const siblingsCategoryQuery = `
@@ -592,6 +596,10 @@ export const flaconExceptionSingleQuery = `
                     
                 }
             }
+        }
+        contact(locale: $lang) {
+            _modelApiKey
+            slug
         }
     }`;
 

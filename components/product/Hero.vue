@@ -73,6 +73,10 @@ export default {
             type: Object,
             required: true
         },
+        contact: {
+            type: Object,
+            required: true
+        },
         backLink: {
             type: Object,
             required: true
@@ -91,10 +95,9 @@ export default {
             return this.availableInStock && !this.data.forceUnavailable;
         },
         contactLink() {
-            const contactSlug = this.$i18n.locale === 'fr' ? 'contact' : 'contact-us';
             return this.localePath({
                 name: routeByApiModels.contact.routerFormat,
-                params: { slug: contactSlug },
+                params: { slug: this.contact.slug },
                 query: {
                     subject: this.$t('flacon.order'),
                     brand: this.data.brand.title,
