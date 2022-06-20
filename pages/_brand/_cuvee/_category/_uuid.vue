@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper-page">
         <!-- <LayoutBreadcrumbs :start="data.brand.title" :end="data.title" :links="[cuvee, category]" /> -->
-        <ProductHero :data="data" :back-link="category" />
+        <ProductHero :data="data" :back-link="category" :contact="contact" />
         <ProductTasting v-if="data.tasting" :data="data.tasting" />
         <ListCategories
             v-if="data.relatedCategories"
@@ -39,14 +39,16 @@ export default {
         let product = {};
         let categoryData = {};
         let cuveeData = {};
+        let contactData = {};
 
         try {
             const {
-                data: { product: data }
+                data: { product: data, contact }
             } = await $dato.post('/', { query: productQuery, variables: { lang, slug } }).then(({ data }) => data);
             product = handleShopItem(data);
             categoryData = handleShopItem(data.category);
             cuveeData = handleShopItem(data.category.cuvee);
+            contactData = contact;
         } catch (e) {
             console.log(e);
             return error({
@@ -68,6 +70,7 @@ export default {
         finalData.data = product;
         finalData.category = categoryData;
         finalData.cuvee = cuveeData;
+        finalData.contact = contactData;
 
         // Handling SEO
         finalData.seo = handleSeo({ route: route.fullPath, seo: finalData.data.seo, lang });

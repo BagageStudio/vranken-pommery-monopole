@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper-page">
-        <FlaconHero :data="data" :back-link="listLink" :global="global" />
+        <FlaconHero :data="data" :back-link="listLink" :global="global" :contact="contact" />
         <FlaconAbout :data="data.about" :title="`${data.aboutTitle} ${data.year}`" />
         <FlaconSlider v-if="data.sliderDate.length" :data="data.sliderDate" />
         <FlaconRelated v-if="data.relatedFlacons" :data="data.relatedFlacons" />
@@ -25,12 +25,13 @@ export default {
 
         try {
             const {
-                data: { flaconException: data, flaconsException: global }
+                data: { flaconException: data, flaconsException: global, contact }
             } = await $dato
                 .post('/', { query: flaconExceptionSingleQuery, variables: { lang, slug } })
                 .then(({ data }) => data);
             finalData.data = data;
             finalData.global = global;
+            finalData.contact = contact;
         } catch (e) {
             console.log(e);
             return error({

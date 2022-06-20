@@ -34,7 +34,7 @@ export default {
     },
     computed: {
         contactLink() {
-            const contactSlug = this.$i18n.locale === 'fr' ? 'contact' : 'contact-us';
+            const contactSlug = this.$i18n.locale === 'fr' ? 'contactez-nous' : 'contact-us';
             return this.localePath({
                 name: routeByApiModels.contact.routerFormat,
                 params: { slug: contactSlug }
