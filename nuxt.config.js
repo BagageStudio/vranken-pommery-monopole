@@ -32,6 +32,7 @@ export default {
     target: 'static',
 
     generate: {
+        interval: 100,
         // To preview new pages that are not generated yet
         fallback: previewData,
         async routes(add) {
