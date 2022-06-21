@@ -54,7 +54,8 @@ export default {
             return error({
                 statusCode: 404,
                 title: app.i18n.t('404.notFound.title'),
-                text: app.i18n.t('404.notFound.text')
+                text: app.i18n.t('404.notFound.text'),
+                error: e
             });
         }
 
