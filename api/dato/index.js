@@ -643,6 +643,9 @@ export const allProductsCountQuery = `
         _allProductsMeta(locale: $lang) {
             count
         }
+        _allFlaconExceptionsMeta(locale: $lang) {
+            count
+        }
     }
 `;
 
@@ -666,6 +669,15 @@ export const allProductsSlugsQuery = `
                     }
                 }
             }
+        }
+    }
+`;
+
+export const allFlaconsSlugsQuery = `
+    query Slugs($skip: IntType) {
+        allFlaconExceptions(skip: $skip, first: 100) {
+            _modelApiKey
+            ${locales}
         }
     }
 `;
