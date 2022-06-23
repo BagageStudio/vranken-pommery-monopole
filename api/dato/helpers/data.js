@@ -1,6 +1,12 @@
 import axios from 'axios';
-import { errorQuery, recordIdQuery, allProductsSlugsQuery, allProductsCountQuery } from '../index';
-import { defaultLocale } from '../../../config/i18n';
+import {
+    errorQuery,
+    recordIdQuery,
+    allProductsSlugsQuery,
+    allProductsCountQuery,
+    allFlaconsSlugsQuery
+} from '../index';
+import { defaultLocale, getPagesList } from '../../../config/i18n';
 import { getIso } from './index';
 
 export function getContextData(context) {
@@ -72,7 +78,8 @@ export async function getExtendedRoutes() {
 
     const {
         data: {
-            _allProductsMeta: { count }
+            _allProductsMeta: { count: productsCount },
+            _allFlaconExceptionsMeta: { count: flaconsCount }
         }
     } = await axios
         .post(
@@ -84,11 +91,11 @@ export async function getExtendedRoutes() {
         )
         .then(({ data }) => data);
 
-    const numberOfAPICall = Math.ceil(count / 100);
-
+    /**     PRODUCTS     **/
+    const numberOfAPICallProduct = Math.ceil(productsCount / 100);
     let products = [];
 
-    for (let index = 0; index < numberOfAPICall; index++) {
+    for (let index = 0; index < numberOfAPICallProduct; index++) {
         const {
             data: { allProducts }
         } = await axios
@@ -121,7 +128,42 @@ export async function getExtendedRoutes() {
         return acc;
     }, []);
 
-    routes = [...routes, ...productsSlugs];
+    /**     FLACONS D'EXCEPTIONS     **/
+    const numberOfAPICallFlacon = Math.ceil(flaconsCount / 100);
+    let flacons = [];
+
+    for (let index = 0; index < numberOfAPICallFlacon; index++) {
+        const {
+            data: { allFlaconExceptions }
+        } = await axios
+            .post(
+                process.env.GRAPHQL_ENDPOINT,
+                {
+                    query: allFlaconsSlugsQuery,
+                    variables: { skip: index * 100 }
+                },
+                {
+                    headers: { Authorization: `Bearer ${process.env.DATOCMS_API_TOKEN}` }
+                }
+            )
+            .then(({ data }) => data);
+
+        flacons = [...flacons, ...allFlaconExceptions];
+    }
+
+    const flaconsSlugs = flacons.reduce((acc, cur) => {
+        cur._allSlugLocales.forEach(locale => {
+            const slug = locale.value;
+            const prefixLocale = defaultLocale === locale.locale ? '' : `/${locale.locale}`;
+            const routePrefix = getPagesList()['flacons-exception/index'][locale.locale];
+            const route = `${prefixLocale}${routePrefix}/${slug}`;
+            acc.push(route);
+        });
+
+        return acc;
+    }, []);
+
+    routes = [...routes, ...productsSlugs, ...flaconsSlugs];
 
     return routes;
 }
