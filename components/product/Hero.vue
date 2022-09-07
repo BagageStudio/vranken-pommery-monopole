@@ -88,7 +88,7 @@ export default {
         showSecondImage: false,
         timer: null,
         progressShow: true,
-        maxStock: 100
+        maxStock: 500
     }),
     computed: {
         available() {
@@ -123,7 +123,7 @@ export default {
 
             if (stock === 0) this.availableInStock = false;
 
-            if (stock && stock < 100) this.maxStock = stock;
+            if (stock && stock < 500) this.maxStock = stock;
         } catch (error) {
             console.log('error');
         }
