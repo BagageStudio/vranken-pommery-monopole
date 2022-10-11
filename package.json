@@ -17,6 +17,7 @@
     "*.{js,vue}": "eslint"
   },
   "dependencies": {
+    "@datocms/cma-client-node": "^1.1.5",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/pwa": "^3.3.5",
     "@stereorepo/sac": "^3.2.5",
