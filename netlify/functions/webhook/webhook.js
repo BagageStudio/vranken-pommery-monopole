@@ -5,7 +5,7 @@ const buildBlockRecord = require('@datocms/cma-client-node').buildBlockRecord;
 const handler = async event => {
     if (!event.body) {
         return {
-            statusCode: 404
+            statusCode: 400
         };
     }
 
@@ -13,7 +13,8 @@ const handler = async event => {
 
     if (body.eventName !== 'order.completed' || body.mode !== process.env.SNIPCART_MODE) {
         return {
-            statusCode: 404
+            statusCode: 200,
+            body: 'Wrong event or mode'
         };
     }
 
@@ -40,7 +41,7 @@ const handler = async event => {
         };
     } catch (error) {
         console.log(error);
-        return { statusCode: 404 };
+        return { statusCode: 500, body: 'Issue in updating Dato, check the Netlify function logs' };
     }
 };
 
