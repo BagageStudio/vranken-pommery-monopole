@@ -6,3 +6,9 @@
 [build.environment]
   NODE_VERSION = "18"
   NODE_OPTIONS = "--openssl-legacy-provider"
+
+[functions]
+  node_bundler = "esbuild"
+  
+[[functions]]
+  node_version = "18"
