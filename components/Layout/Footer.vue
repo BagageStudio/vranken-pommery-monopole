@@ -200,7 +200,7 @@ export default {
     }
 }
 .footer-logo {
-    width: 210px;
+    width: 100px;
     margin: 0 auto;
 }
 .footer-menu {
@@ -287,7 +287,7 @@ export default {
 }
 @media (min-width: $tablet) {
     .footer-logo {
-        width: 380px;
+        width: 130px;
     }
     .footer-menu {
         width: percentage(math.div(4, 6));
@@ -308,7 +308,7 @@ export default {
         margin-bottom: 0;
     }
     .footer-bottom {
-        padding-top: 100px;
+        padding-top: 70px;
     }
     .wrapper-copy-warning {
         flex-direction: row;
