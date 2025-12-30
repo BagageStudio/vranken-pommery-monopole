@@ -75,7 +75,10 @@ export default {
     overflow: auto;
 }
 .age-gate-logo {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+    max-width: 130px;
+    margin-left: auto;
+    margin-right: auto;
 }
 .age-gate-title {
     display: block;
@@ -126,11 +129,6 @@ export default {
 @media (min-width: $phone) {
     .container-age-gate {
         max-width: 465px;
-    }
-}
-@media (min-width: $desktop) {
-    .age-gate-logo {
-        margin-bottom: 80px;
     }
 }
 </style>
