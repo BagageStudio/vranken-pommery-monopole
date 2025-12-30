@@ -9,7 +9,13 @@
                     <span></span>
                 </button>
                 <nuxt-link to="/" class="logo">
-                    <Icon name="logo-blue" />
+                    <img
+                        width="359"
+                        height="505"
+                        loading="eager"
+                        src="~static/img/maison-pommery.png"
+                        alt="Maison Pommery & associés"
+                    />
                 </nuxt-link>
                 <div class="snip-buttons">
                     <button class="snip-button snipcart-customer-signin"><Icon name="user" /></button>
@@ -242,9 +248,8 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    .icon {
-        height: 42px;
-        width: 157px;
+    img {
+        width: 80px;
     }
 }
 .mobile-bar {

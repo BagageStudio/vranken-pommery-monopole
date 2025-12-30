@@ -17,14 +17,14 @@
 }
 
 :root {
-    --header-height: 164px;
-    --mobile-top-header-height: 82px;
+    --header-height: 214px;
+    --mobile-top-header-height: 132px;
     --mobile-search-header-height: 82px;
     --scroll-top: 0px;
 }
 @media (min-width: $desktop-small) {
     :root {
-        --header-height: 191px;
+        --header-height: 231px;
     }
 }
 

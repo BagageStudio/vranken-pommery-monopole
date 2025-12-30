@@ -20,7 +20,13 @@
                         <LayoutLangSwitcher />
                     </div>
                     <nuxt-link to="/" class="logo">
-                        <Icon name="logo-blue" />
+                        <img
+                            width="359"
+                            height="505"
+                            loading="eager"
+                            src="~static/img/maison-pommery.png"
+                            alt="Maison Pommery & associés"
+                        />
                     </nuxt-link>
                     <div class="top-right">
                         <form class="search-bar" @submit.prevent="submitSearch">
@@ -143,9 +149,12 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 110px;
-    padding-top: 25px;
-    padding-bottom: 15px;
+    // height: 110px;
+    // padding-top: 25px;
+    // padding-bottom: 15px;
+    height: 150px;
+    padding-top: 45px;
+    padding-bottom: 35px;
 }
 .top-left {
     display: flex;
@@ -163,9 +172,8 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    .icon {
-        height: 70px;
-        width: 268px;
+    img {
+        width: 80px;
     }
 }
 
