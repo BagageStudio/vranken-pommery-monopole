@@ -50,9 +50,6 @@ typings/
 # Optional npm cache directory
 .npm
 
-# NVM Version
-.nvmrc
-
 # Optional eslint cache
 .eslintcache
 

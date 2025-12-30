@@ -2,3 +2,7 @@
 	package = "@netlify/plugin-sitemap"
         [plugins.inputs]
         trailingSlash = true
+
+[build.environment]
+  NODE_VERSION = "18"
+  NODE_OPTIONS = "--openssl-legacy-provider"
