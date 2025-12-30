@@ -33,11 +33,11 @@
     },
     "custom_fields": {
         "confirm_read": "Je confirme avoir pris connaissance et j'accepte la",
-        "personnal_data_link": "https://shop.vrankenpommery.com/donnees-personnelles/",
+        "personnal_data_link": "https://shop.maisonpommery.com/donnees-personnelles/",
         "personal_data": "Charte de traitement des Données Personnelles & utilisation des Cookies.",
         "phone_number": "Téléphone",
         "agree": "Je confirme avoir pris connaissance et j'accepte les",
-        "terms_conditions_link": "https://shop.vrankenpommery.com/conditions-generales-de-vente-en-ligne/",
+        "terms_conditions_link": "https://shop.maisonpommery.com/conditions-generales-de-vente-en-ligne/",
         "terms_conditions": "Conditions générales de vente en ligne",
         "legal_age": " et affirme avoir l'âge légal autorisé pour acheter ou consommer de l'alcool."
     }
