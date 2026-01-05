@@ -6,9 +6,4 @@
 [build.environment]
   NODE_VERSION = "18"
   NODE_OPTIONS = "--openssl-legacy-provider"
-
-[[redirects]]
-  from = "https://shop.vrankenpommery.com/*"
-  to = "https://shop.maisonpommery.com/:splat"
-  status = 301
-  force = true
+  
